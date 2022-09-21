@@ -1,19 +1,10 @@
-import { getUserData, UserData } from '@decentraland/Identity'
-import {
-  getCurrentRealm,
-  isPreviewMode,
-  Realm,
-} from '@decentraland/EnvironmentAPI'
-import {
-  IN_PREVIEW,
-  setInPreview,
-  TESTDATA_ENABLED,
-  TESTQUESTSTATE,
-} from '../config'
-import { HalloweenState, initialQuestUI, quest } from './quest'
-import * as ui from '../../node_modules/@dcl/ui-utils/index'
-import utils from '../../node_modules/decentraland-ecs-utils/index'
-import { PlayCloseSound } from '../../node_modules/@dcl/ui-utils/utils/default-ui-components'
+import {getUserData, UserData} from '@decentraland/Identity'
+import {getCurrentRealm, isPreviewMode, Realm,} from '@decentraland/EnvironmentAPI'
+import {IN_PREVIEW, setInPreview, TESTDATA_ENABLED, TESTQUESTSTATE,} from '../config'
+import {HalloweenState, initialQuestUI, quest} from './quest'
+import * as ui from '@dcl/ui-scene-utils'
+import * as utils from '@dcl/ecs-scene-utils'
+// import {PlayCloseSound} from '@dcl/ui-scene-utils'
 
 export let progression: HalloweenState
 
@@ -21,7 +12,8 @@ export let userData: UserData
 export let playerRealm: Realm
 
 export let fireBaseServer =
-  'https://us-central1-decentraland-halloween.cloudfunctions.net/app/'
+  'https://us-central1-halloween-361612.cloudfunctions.net/app/'
+//To DO Check local sever
 //`http://localhost:5001/decentraland-halloween/us-central1/app/`
 
 export async function setUserData() {
@@ -38,11 +30,11 @@ export async function setRealm() {
 }
 
 export async function checkProgression() {
-  //setInPreview(await isPreviewMode())
-  //if (TESTDATA_ENABLED && IN_PREVIEW) {
-  progression = TESTQUESTSTATE
-  return TESTQUESTSTATE
-  //}
+  setInPreview(await isPreviewMode())
+  if (TESTDATA_ENABLED && IN_PREVIEW) {
+    progression = TESTQUESTSTATE
+    return TESTQUESTSTATE
+  }
 
   if (!userData) {
     await setUserData()
@@ -60,10 +52,10 @@ export async function checkProgression() {
 }
 
 export async function updateProgression(stage: string, onlyLocal?: boolean) {
-  //if (onlyLocal || (TESTDATA_ENABLED && IN_PREVIEW)) {
-  progression.data[stage] = true
-  return true
-  //}
+  if (onlyLocal || (TESTDATA_ENABLED && IN_PREVIEW)) {
+    progression.data[stage] = true
+    return true
+  }
 
   if (!userData) {
     await setUserData()
@@ -85,7 +77,7 @@ export async function updateProgression(stage: string, onlyLocal?: boolean) {
   try {
     let response = await fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(body),
     })
     let data = await response.json()
@@ -102,68 +94,63 @@ export async function updateProgression(stage: string, onlyLocal?: boolean) {
 export async function nextDay(nextDay: number) {
   PlayEndJingle()
 
-  //   let congrats = new ui.CenterImage(
-  //     'images/finishedDay' + (nextDay - 1) + '.png',
-  //     7,
-  //     false,
-  //     0,
-  //     0,
-  //     512,
-  //     512
-  //   )
-
-  ui.displayAnnouncement(
-    'Congratulations\nYou won!',
-    5,
-    true,
-    Color4.FromHexString('#8DFF34FF')
+  let congrats = new ui.CenterImage(
+    'images/finishedDay' + (nextDay - 1) + '.png',
+    7,
+    false,
+    0,
+    0,
+    512,
+    512
   )
 
-  //   if (!userData) {
-  //     await setUserData()
-  //   }
+  if (!userData) {
+    await setUserData()
+  }
 
-  //   if (userData.hasConnectedWeb3 || IN_PREVIEW) {
-  //     let dummyEnt = new Entity()
-  //     dummyEnt.addComponent(
-  //       new utils.Delay(6000, async () => {
-  //         let poap = await sendpoap('w' + (nextDay - 1))
+  if (userData.hasConnectedWeb3 || IN_PREVIEW) {
+    let dummyEnt = new Entity()
+    dummyEnt.addComponent(
+      new utils.Delay(6000, async () => {
+        let poap = await sendpoap('w' + (nextDay - 1))
 
-  //         if (!poap) {
-  //           let p = new ui.OkPrompt(
-  //             'We ran out of POAP tokens for this event, sorry.',
-  //             () => {
-  //               p.close()
-  //               PlayCloseSound()
-  //             },
-  //             'Ok',
-  //             true
-  //           )
-  //         } else {
-  //           let p = new ui.OkPrompt(
-  //             "A POAP token for today's event will arrive to your account very soon!",
-  //             () => {
-  //               p.close()
-  //               PlayCloseSound()
-  //             },
-  //             'Ok',
-  //             true
-  //           )
-  //         }
-  //       })
-  //     )
+        if (!poap) {
+          let p = new ui.OkPrompt(
+            'We ran out of POAP tokens for this event, sorry.',
+            () => {
+              p.close()
+              //TODO: Check
+              // PlayCloseSound()
+            },
+            'Ok',
+            true
+          )
+        } else {
+          let p = new ui.OkPrompt(
+            "A POAP token for today's event will arrive to your account very soon!",
+            () => {
+              p.close()
+              //TODO: Check
+              // PlayCloseSound()
+            },
+            'Ok',
+            true
+          )
+        }
+      })
+    )
 
-  //     engine.addEntity(dummyEnt)
-  //   }
+    engine.addEntity(dummyEnt)
+  }
 
-  //   if (nextDay > progression.day) {
-  //     return false
-  //   }
-  //   let currentCoords = quest.currentCoords
+  if (nextDay > progression.day) {
+    return false
+  }
+  let currentCoords = quest.currentCoords
 
   quest.close()
 
-  //initialQuestUI(progression.data, progression.day, currentCoords)
+  initialQuestUI(progression.data, progression.day, currentCoords)
 
   return true
 }
@@ -208,7 +195,7 @@ export async function sendpoap(stage: string) {
   try {
     let response = await fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(body),
     })
     let data = await response.json()

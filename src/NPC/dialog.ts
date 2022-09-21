@@ -1,242 +1,239 @@
-import { Dialog } from '../../node_modules/@dcl/ui-utils/utils/types'
-import { updateProgression } from '../halloweenQuests/progression'
-import utils from '../../node_modules/decentraland-ecs-utils/index'
-import { Reward } from '../halloweenQuests/loot'
-import { quest } from '../halloweenQuests/quest'
-import {
-  catLover,
-  doorHouse1,
-  doorHouse10,
-  doorHouse4,
-  doorHouse6,
-  doorHouse7,
-  farmer,
-  ghostControlGuy,
-  mayorGhost,
-  templeGirl,
-} from '../trickOrTreat'
-
-import { ghostCounter, ghostUIBck, ghostsArray, mainGhost } from './ghost'
-import { getKey } from '../hauntedHouse'
+import {updateProgression} from '../halloweenQuests/progression';
+import {Dialog, NPC} from '@dcl/npc-scene-utils';
+import * as utils from '@dcl/ecs-scene-utils';
+import {Reward} from '../halloweenQuests/loot';
+import {quest} from '../halloweenQuests/quest';
+import * as ui from '@dcl/ui-scene-utils';
+import {Ghost} from './ghost';
+import {getKey} from '../hauntedHouse';
+import {TTHouse} from "../house";
 
 ///// Trick or treat
 
 // Cat lover
+export function catLoverDialog(npc: NPC, doorHouse: TTHouse) {
+  return [
+    {
+      text: `Hey there, I'm a cat guy!`,
+      triggeredByNext: () => {
+        npc.playAnimation(`HeadShake_No`, true, 1.83)
+      },
+    },
+    {
+      text: `To be honest, I don't really have a personality beyond that. Cats are my thing. And that's about it.`,
+      triggeredByNext: () => {
+        npc.playAnimation(`Lengthy`, true, 1.77)
+      },
+    },
+    {
+      text: `The guy writing my lines is kind of stuck. So my character is not very well rounded. ...beyond the fact that I like cats.`,
+      triggeredByNext: () => {
+        npc.playAnimation(`Cocky`, true, 1.83)
+      },
+    },
+    {
+      text: `I love cats. I love every kind of cat`,
+      triggeredByNext: () => {
+        npc.playAnimation(`HeadShake_No`, true, 1.83)
+      },
+    },
+    {
+      text: `I just want to hug them all. But I can't hug every cat.`,
+      triggeredByNext: () => {
+        npc.playAnimation(`Annoyed_HeadShake`, true, 2.6)
+      },
+    },
+    {
+      text: `Can't hug every cat.`,
+      triggeredByNext: () => {
+        npc.playAnimation(`Dismissing`, true, 3.3)
+      },
+    },
+    {
+      text: `I should maybe say something that is more relevant to the story somehow. But anyway, you're not a cat so... see you around`,
+      triggeredByNext: () => {
+        doorHouse.close()
+      },
+      isEndOfDialog: true,
+    },
+  ]
+}
 
-export let catGuyDialog: Dialog[] = [
-  {
-    text: `Hey there, I'm a cat guy!`,
-    triggeredByNext: () => {
-      catLover.playAnimation(`HeadShake_No`, true, 1.83)
-    },
-  },
-  {
-    text: `To be honest, I don't really have a personality beyond that. Cats are my thing. And that's about it.`,
-    triggeredByNext: () => {
-      catLover.playAnimation(`Lengthy`, true, 1.77)
-    },
-  },
-  {
-    text: `The guy writing my lines is kind of stuck. So my character is not very well rounded. ...beyond the fact that I like cats.`,
-    triggeredByNext: () => {
-      catLover.playAnimation(`Cocky`, true, 1.83)
-    },
-  },
-  {
-    text: `I love cats. I love every kind of cat`,
-    triggeredByNext: () => {
-      catLover.playAnimation(`HeadShake_No`, true, 1.83)
-    },
-  },
-  {
-    text: `I just want to hug them all. But I can't hug every cat.`,
-    triggeredByNext: () => {
-      catLover.playAnimation(`Annoyed_HeadShake`, true, 2.6)
-    },
-  },
-  {
-    text: `Can't hug every cat.`,
-    triggeredByNext: () => {
-      catLover.playAnimation(`Dismissing`, true, 3.3)
-    },
-  },
-  {
-    text: `I should maybe say something that is more relevant to the story somehow. But anyway, you're not a cat so... see you around`,
-    triggeredByNext: () => {
-      doorHouse1.close()
-    },
-    isEndOfDialog: true,
-  },
-]
 
 // second dialog if you are a cat
 
 // Farmer
+export function farmerDialog(npc: NPC, doorHouse: TTHouse) {
+  return [
+    {
+      text: `Howdy there! What brings you over to my old shack here?`,
+      triggeredByNext: () => {
+        npc.playAnimation(`HeadShake_No`, true, 1.83)
+      },
+    },
+    {
+      text: `I real don't like these parties... people scambling around wearing this, wearing that`,
+      triggeredByNext: () => {
+        npc.playAnimation(`Annoyed_HeadShake`, true, 2.6)
+      },
+    },
+    {
+      text: `This girl a while back I was hearing... she be crazy yelling her lungs out like they was killing her or something. Chill out, man!`,
+      triggeredByNext: () => {
+        npc.playAnimation(`Hard Head`, true, 1.67)
+      },
+    },
+    {
+      text: `Anyway, thanks for sticking around while I ramble on about stuff. Here, take this little something as a token of my appreciationing.`,
+      triggeredByNext: () => {
+        doorHouse.close()
+        let r = new Reward(npc, 'house1', {
+          position: new Vector3(0, 1.5, 2.5),
+        })
+      },
+      isEndOfDialog: true,
+    },
+  ]
+}
 
-export let farmerDialog: Dialog[] = [
-  {
-    text: `Howdy there! What brings you over to my old shack here?`,
-    triggeredByNext: () => {
-      farmer.playAnimation(`HeadShake_No`, true, 1.83)
-    },
-  },
-  {
-    text: `I real don't like these parties... people scambling around wearing this, wearing that`,
-    triggeredByNext: () => {
-      farmer.playAnimation(`Annoyed_HeadShake`, true, 2.6)
-    },
-  },
-  {
-    text: `This girl a while back I was hearing... she be crazy yelling her lungs out like they was killing her or something. Chill out, man!`,
-    triggeredByNext: () => {
-      farmer.playAnimation(`Hard Head`, true, 1.67)
-    },
-  },
-  {
-    text: `Anyway, thanks for sticking around while I ramble on about stuff. Here, take this little something as a token of my appreciationing.`,
-    triggeredByNext: () => {
-      doorHouse7.close()
-      let r = new Reward(farmer, 'house1', {
-        position: new Vector3(0, 1.5, 2.5),
-      })
-    },
-    isEndOfDialog: true,
-  },
-]
 
 // Mayor's Ghost
+export function mayorGhostDialog(npc: NPC, doorHouse: TTHouse) {
+  return [
+    {
+      text: `Hey! What's the matter, you look like you just saw a ghost!`,
+      triggeredByNext: () => {
+        npc.playAnimation(`talk2`, true, 10.3)
+      },
+    },
+    {
+      text: `To you this is a pretend fun night of dressing up... me, this is just who I am.`,
+      triggeredByNext: () => {
+        npc.playAnimation(`deny2`, true, 1.67)
+      },
+    },
+    {
+      text: `I've lived ...or rather been here for a very long time, this place is my home.`,
+      triggeredByNext: () => {
+        npc.playAnimation(`deny3`, true, 4.97)
+      },
+    },
 
-export let ghostDialog: Dialog[] = [
-  {
-    text: `Hey! What's the matter, you look like you just saw a ghost!`,
-    triggeredByNext: () => {
-      mayorGhost.playAnimation(`talk2`, true, 10.3)
+    {
+      text: `And nothing, or no one is going to get in the way of that. No matter how hard they try.`,
+      triggeredByNext: () => {
+        npc.playAnimation(`talk2`, true, 3.97)
+      },
     },
-  },
-  {
-    text: `To you this is a pretend fun night of dressing up... me, this is just who I am.`,
-    triggeredByNext: () => {
-      mayorGhost.playAnimation(`deny2`, true, 1.67)
-    },
-  },
-  {
-    text: `I've lived ...or rather been here for a very long time, this place is my home.`,
-    triggeredByNext: () => {
-      mayorGhost.playAnimation(`deny3`, true, 4.97)
-    },
-  },
 
-  {
-    text: `And nothing, or no one is going to get in the way of that. No matter how hard they try.`,
-    triggeredByNext: () => {
-      mayorGhost.playAnimation(`talk2`, true, 3.97)
+    {
+      text: `You want something to dress up like the other guys? Sure why not. Take this and have fun, see ya.`,
+      triggeredByNext: () => {
+        // give wearable
+        let r = new Reward(npc, 'house2', {
+          position: new Vector3(0, 1.5, 2.5),
+        })
+        doorHouse.close()
+      },
+      isEndOfDialog: true,
     },
-  },
+  ]
+}
 
-  {
-    text: `You want something to dress up like the other guys? Sure why not. Take this and have fun, see ya.`,
-    triggeredByNext: () => {
-      // give wearable
-      let r = new Reward(mayorGhost, 'house2', {
-        position: new Vector3(0, 1.5, 2.5),
-      })
-      doorHouse4.close()
-    },
-    isEndOfDialog: true,
-  },
-]
 
 // GhostControl
 
-export let ghostControlDialog: Dialog[] = [
-  {
-    text: `What, what is it!`,
-    triggeredByNext: () => {
-      ghostControlGuy.playAnimation(`Lengthy`, true, 1.77)
+export function ghostControlDialog(npc: NPC, doorHouse: TTHouse) {
+  return [
+    {
+      text: `What, what is it!`,
+      triggeredByNext: () => {
+        npc.playAnimation(`Lengthy`, true, 1.77)
+      },
     },
-  },
-  {
-    text: `Oh... you're one of those. Messing around collecting junk. Listen, I don't have time for this now.`,
-    triggeredByNext: () => {
-      ghostControlGuy.playAnimation(`Annoyed_HeadShake`, true, 2.6)
+    {
+      text: `Oh... you're one of those. Messing around collecting junk. Listen, I don't have time for this now.`,
+      triggeredByNext: () => {
+        npc.playAnimation(`Annoyed_HeadShake`, true, 2.6)
+      },
     },
-  },
-  {
-    text: `And to be honest, I don't really care much for all of this. My neighbors started organizing this event, calling crowds of people in to visit.`,
-    triggeredByNext: () => {
-      ghostControlGuy.playAnimation(`Dismissing`, true, 3.3)
+    {
+      text: `And to be honest, I don't really care much for all of this. My neighbors started organizing this event, calling crowds of people in to visit.`,
+      triggeredByNext: () => {
+        npc.playAnimation(`Dismissing`, true, 3.3)
+      },
     },
-  },
-  {
-    text: `I don't like it one bit. They're weird, so oddly friendly with everyone... it's creepy, that's what it is.`,
-    triggeredByNext: () => {
-      ghostControlGuy.playAnimation(`Sarcastic`, true, 2.37)
+    {
+      text: `I don't like it one bit. They're weird, so oddly friendly with everyone... it's creepy, that's what it is.`,
+      triggeredByNext: () => {
+        npc.playAnimation(`Sarcastic`, true, 2.37)
+      },
     },
-  },
-  {
-    text: `I don't know you, you don't know me. So what the hell are you doing banging on my door asking me for things.`,
-    triggeredByNext: () => {
-      ghostControlGuy.playAnimation(`Angry`, true, 2.23)
+    {
+      text: `I don't know you, you don't know me. So what the hell are you doing banging on my door asking me for things.`,
+      triggeredByNext: () => {
+        npc.playAnimation(`Angry`, true, 2.23)
 
-      let dummyEnt = new Entity()
-      dummyEnt.addComponent(
-        new utils.Delay(1000, () => {
-          doorHouse6.close()
-        })
-      )
-      engine.addEntity(dummyEnt)
+        let dummyEnt = new Entity()
+        dummyEnt.addComponent(
+          new utils.Delay(1000, () => {
+            doorHouse.close()
+          })
+        )
+        engine.addEntity(dummyEnt)
+      },
     },
-  },
-  {
-    text: `Quit wasting our time.`,
+    {
+      text: `Quit wasting our time.`,
 
-    isEndOfDialog: true,
-  },
-]
+      isEndOfDialog: true,
+    },
+  ]
+}
 
 // Castle guy
-
-export let templeGirlDialog: Dialog[] = [
-  {
-    text: `Hey there. So you're trick or treating, are you?`,
-    triggeredByNext: () => {
-      templeGirl.playAnimation(`Happy Hand Gesture`, true, 2.97)
+export function castleGuyDialog(npc: NPC, doorHouse: TTHouse) {
+  return [
+    {
+      text: `Hey there. So you're trick or treating, are you?`,
+      triggeredByNext: () => {
+        npc.playAnimation(`Happy Hand Gesture`, true, 2.97)
+      },
     },
-  },
-  {
-    text: `Are you even aware of the true origins of all this? The celtic pagan ritual of Samhaim, also known as "all hallows eve"?`,
-    triggeredByNext: () => {
-      templeGirl.playAnimation(`Angry`, true, 2.23)
+    {
+      text: `Are you even aware of the true origins of all this? The celtic pagan ritual of Samhaim, also known as "all hallows eve"?`,
+      triggeredByNext: () => {
+        npc.playAnimation(`Angry`, true, 2.23)
+      },
     },
-  },
-  {
-    text: `The blurring of the lines between the world of the living and the dead as otherwordly spirits seep into our world, the prophecies and the sacrificial rituals and all that must happen as we enter the start of a cold and dark winter?`,
-    triggeredByNext: () => {
-      templeGirl.playAnimation(`Cocky`, true, 2.93)
+    {
+      text: `The blurring of the lines between the world of the living and the dead as otherwordly spirits seep into our world, the prophecies and the sacrificial rituals and all that must happen as we enter the start of a cold and dark winter?`,
+      triggeredByNext: () => {
+        npc.playAnimation(`Cocky`, true, 2.93)
+      },
     },
-  },
-  {
-    text: `Or are you just here to stuff your face with candy?`,
-    triggeredByNext: () => {
-      templeGirl.playAnimation(`Lengthy`, true, 1.77)
+    {
+      text: `Or are you just here to stuff your face with candy?`,
+      triggeredByNext: () => {
+        npc.playAnimation(`Lengthy`, true, 1.77)
+      },
     },
-  },
-  {
-    text: `Well... fine. Each to his own. Take this.`,
-    triggeredByNext: () => {
-      doorHouse10.close()
-      // give wearable
-      let r = new Reward(templeGirl, 'house3', {
-        position: new Vector3(0, 1.5, 2.5),
-      })
+    {
+      text: `Well... fine. Each to his own. Take this.`,
+      triggeredByNext: () => {
+        doorHouse.close()
+        // give wearable
+        let r = new Reward(npc, 'house3', {
+          position: new Vector3(0, 1.5, 2.5),
+        })
+      },
+      isEndOfDialog: true,
     },
-    isEndOfDialog: true,
-  },
-]
+  ]
+}
 
 // Locked house
-
-export let lockedHouse: Dialog[] = [
+export const lockedHouse: Dialog[] = [
   {
     text: `Go away, busy here!`,
     isEndOfDialog: true,
@@ -252,8 +249,7 @@ export let lockedHouse: Dialog[] = [
 ]
 
 // Phone ringing
-
-export let phoneVoice: Dialog[] = [
+export const phoneVoice: Dialog[] = [
   {
     text: `Listen up, I want to keep this short because there could be people listening in.`,
   },
@@ -278,46 +274,47 @@ export let phoneVoice: Dialog[] = [
 
 // Start of mission
 
-export let missionBrief: Dialog[] = [
-  {
-    text: `Hey there!`,
-  },
-  {
-    text: `Overheard you yesterday, I think ** gah **`,
-  },
-  {
-    text: `I might be able help, maybe`,
-  },
-  {
-    text: `can't concentrate... someone made a mess here, undug some graves`,
-  },
-  {
-    text: `Could you... could you please help us out?`,
-  },
-  {
-    text: `All these loose ghosts, they need to find their resting place. Please guide them back`,
-  },
-  {
-    text: `Then we can have a proper talk`,
-    triggeredByNext: () => {
-      quest.checkBox(1)
-      quest.showCheckBox(2)
-      quest.showCheckBox(3)
-      //updateProgression('ghostIntro')
-      ghostUIBck.image.visible = true
-      ghostCounter.uiText.visible = true
-      for (let ghost of ghostsArray) {
-        ghost.getComponent(OnPointerDown).showFeedback = true
-      }
-      mainGhost.endInteraction()
+export function missionBrief(ghostCounter: ui.UICounter, ghostUIBck: ui.LargeIcon, ghostsArray: Ghost[]) {
+  return [
+    {
+      text: `Hey there!`,
     },
-    isEndOfDialog: true,
-  },
-]
+    {
+      text: `Overheard you yesterday, I think ** gah **`,
+    },
+    {
+      text: `I might be able help, maybe`,
+    },
+    {
+      text: `can't concentrate... someone made a mess here, undug some graves`,
+    },
+    {
+      text: `Could you... could you please help us out?`,
+    },
+    {
+      text: `All these loose ghosts, they need to find their resting place. Please guide them back`,
+    },
+    {
+      text: `Then we can have a proper talk`,
+      triggeredByNext: () => {
+        quest.checkBox(1)
+        quest.showCheckBox(2)
+        quest.showCheckBox(3)
+        //updateProgression('ghostIntro')
+        ghostUIBck.image.visible = true
+        ghostCounter.uiText.visible = true
+        for (let ghost of ghostsArray) {
+          ghost.getComponent(OnPointerDown).showFeedback = true
+        }
+      },
+      isEndOfDialog: true,
+    },
+  ]
+}
+
 
 // When all ghosts are returned
-
-export let missionEnd: Dialog[] = [
+export const missionEnd: Dialog[] = [
   {
     text: `Thank you! Things are so much calmer now.`,
   },
@@ -343,21 +340,15 @@ export let missionEnd: Dialog[] = [
 ]
 
 // Thanks
-
 export let thanks: Dialog[] = [
   {
     text: `So much better now, thanks for your help!`,
     isEndOfDialog: true,
-
-    triggeredByNext: () => {
-      mainGhost.endInteraction()
-    },
   },
 ]
 
 ////// Other Ghosts
-
-export let ghost1Talk: Dialog[] = [
+export const ghost1Talk: Dialog[] = [
   {
     text: `Ooooh where are my sons!`,
     isEndOfDialog: true,
@@ -390,7 +381,7 @@ export let ghost1Talk: Dialog[] = [
   },
 ]
 
-export let ghost2Talk: Dialog[] = [
+export const ghost2Talk: Dialog[] = [
   {
     text: `Good heavens! Have gentlemen stopped wearing their ties? Scandalous`,
     isEndOfDialog: true,
@@ -423,7 +414,7 @@ export let ghost2Talk: Dialog[] = [
   },
 ]
 
-export let ghost3Talk: Dialog[] = [
+export const ghost3Talk: Dialog[] = [
   {
     text: `Flying is totally groovy man, I'm not even high.`,
     isEndOfDialog: true,
@@ -456,7 +447,7 @@ export let ghost3Talk: Dialog[] = [
   },
 ]
 
-export let ghost4Talk: Dialog[] = [
+export const ghost4Talk: Dialog[] = [
   {
     text: `Je suis tres confus, je ne suis pas mort.`,
     isEndOfDialog: true,
@@ -489,7 +480,7 @@ export let ghost4Talk: Dialog[] = [
   },
 ]
 
-export let ghost5Talk: Dialog[] = [
+export const ghost5Talk: Dialog[] = [
   {
     text: `I must meet my lover again, I can't bare a world without him.`,
     isEndOfDialog: true,
@@ -522,7 +513,7 @@ export let ghost5Talk: Dialog[] = [
   },
 ]
 
-export let ghost6Talk: Dialog[] = [
+export const ghost6Talk: Dialog[] = [
   {
     text: `This notion of being a disembodied spirit is perplexing.`,
     isEndOfDialog: true,

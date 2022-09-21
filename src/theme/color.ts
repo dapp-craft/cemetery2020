@@ -1,0 +1,1 @@
+export const COLOR_GREEN = "#8DFF34FF";

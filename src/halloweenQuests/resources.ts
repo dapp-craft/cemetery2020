@@ -1,5 +1,3 @@
-import { ImageSection } from '../../node_modules/@dcl/ui-utils/utils/types'
-
 export default {
   buttons: {
     buttonE: {
@@ -293,7 +291,8 @@ export default {
   },
 }
 
-export function setSection(UIImage: UIImage, section: ImageSection) {
+//TO DO: Add section type
+export function setSection(UIImage: UIImage, section: any) {
   UIImage.sourceWidth = section.sourceWidth
   UIImage.sourceHeight = section.sourceHeight
   UIImage.sourceLeft = section.sourceLeft ? section.sourceLeft : 0

@@ -1,29 +1,18 @@
-import utils from '../../node_modules/decentraland-ecs-utils/index'
-import * as ui from '../../node_modules/@dcl/ui-utils/index'
-import {
-  fireBaseServer,
-  playerRealm,
-  setRealm,
-  setUserData,
-  updateProgression,
-  userData,
-} from './progression'
+import * as utils from '@dcl/ecs-scene-utils'
+import * as ui from '@dcl/ui-scene-utils'
+import {fireBaseServer, playerRealm, setRealm, setUserData, updateProgression, userData,} from './progression'
+import {IN_PREVIEW} from '../config'
+import {COLOR_GREEN} from '../theme/color'
+import {getProvider} from '@decentraland/web3-provider'
+import * as EthConnect from 'eth-connect'
 
-import { IN_PREVIEW } from '../config'
-
-import { getProvider } from '@decentraland/web3-provider'
-
-import * as eth from '../../node_modules/eth-connect/esm'
-import {
-  ButtonStyles,
-  PromptStyles,
-} from '../../node_modules/@dcl/ui-utils/utils/types'
 
 let particleGLTF = new GLTFShape('models/Particles.glb')
 let starGLTF = new GLTFShape('models/star.glb')
 
 @Component('alreadyFoundLoot')
-export class AlreadyFoundLoot {}
+export class AlreadyFoundLoot {
+}
 
 export class Reward extends Entity {
   progressionStep: string
@@ -53,9 +42,9 @@ export class Reward extends Entity {
         offset
           ? offset
           : {
-              position: new Vector3(0, 1.7, 0),
-              scale: new Vector3(1.8, 1.8, 1.8),
-            }
+            position: new Vector3(0, 1.7, 0),
+            scale: new Vector3(1.8, 1.8, 1.8),
+          }
       )
     )
     this.getComponent(Transform).scale.x *= 0.3
@@ -81,9 +70,8 @@ export class Reward extends Entity {
     this.addComponent(
       new OnPointerDown(
         () => {
-          //   if (this.openUi) return
-          //   this.activate()
-          this.vanish()
+          if (this.openUi) return
+          this.activate()
         },
         {
           hoverText: 'Claim',
@@ -105,10 +93,10 @@ export class Reward extends Entity {
         offset
           ? offset
           : {
-              position: new Vector3(0, 1.7, 0),
-              scale: new Vector3(1.3, 1.3, 1.3),
-              rotation: Quaternion.Euler(0, 0, 0),
-            }
+            position: new Vector3(0, 1.7, 0),
+            scale: new Vector3(1.3, 1.3, 1.3),
+            rotation: Quaternion.Euler(0, 0, 0),
+          }
       )
     )
 
@@ -122,17 +110,19 @@ export class Reward extends Entity {
     playAnim.play()
     engine.addEntity(this.particles)
 
-    const spawnSource = new AudioSource(new AudioClip('sounds/star-spawn.mp3'))
-    this.particles.addComponentOrReplace(spawnSource)
-    spawnSource.loop = false
-    spawnSource.playing = true
+    if (!onlyActivateWhenClicked) {
+      this.activate()
+      const spawnSource = new AudioSource(
+        new AudioClip('sounds/star-spawn.mp3')
+      )
+      this.particles.addComponentOrReplace(spawnSource)
+      spawnSource.loop = false
+      spawnSource.playing = true
 
-    // if (!onlyActivateWhenClicked) {
-    //   this.activate()
-
-    //   this.openUi = false
-    // }
+      this.openUi = false
+    }
   }
+
   async activate() {
     this.openUi = true
     let data = await claimToken(
@@ -160,6 +150,7 @@ export class Reward extends Entity {
     }
     PlayCoinSound()
   }
+
   runOnFinished() {
     if (this.onFinished) {
       this.onFinished()
@@ -412,7 +403,7 @@ export async function checkServer(
   try {
     let response = await fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(body),
     })
     let json = await response.json()
@@ -452,7 +443,7 @@ export async function makeClaim(
   try {
     let response = await fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(body),
     })
     let json = await response.json()
@@ -481,17 +472,17 @@ export function openClaimUI(
   PlayOpenSound()
 
   if (claimUI && claimUI.background.visible) {
-    claimUI.close()
+    claimUI.hide()
   }
 
-  claimUI = new ui.CustomPrompt(PromptStyles.DARKLARGE)
+  claimUI = new ui.CustomPrompt(ui.PromptStyles.DARKLARGE)
   claimUI.addText(
     failedTransaction
       ? 'Retry failed transaction'
       : 'You have a reward to claim!',
     0,
     170,
-    Color4.FromHexString('#8DFF34FF'),
+    Color4.FromHexString(COLOR_GREEN),
     26
   )
   claimUI.addText(
@@ -522,13 +513,13 @@ export function openClaimUI(
   if (data.length > 1) {
     claimUI.addText(
       '+ ' +
-        (data.length - 1) +
-        ' other wearable' +
-        (data.length > 2 ? 's ' : ' ') +
-        'pending',
+      (data.length - 1) +
+      ' other wearable' +
+      (data.length > 2 ? 's ' : ' ') +
+      'pending',
       0,
       -60,
-      Color4.FromHexString('#8DFF34FF')
+      Color4.FromHexString(COLOR_GREEN)
     )
   }
 
@@ -537,12 +528,12 @@ export function openClaimUI(
     -100,
     -130,
     () => {
-      claimUI.close()
+      claimUI.hide()
       PlayCloseSound()
       representation.runOnFinished()
       representation.openUi = false
     },
-    ButtonStyles.F
+    ui.ButtonStyles.F
   )
   rejectButton.label.positionX = 40
 
@@ -551,7 +542,7 @@ export function openClaimUI(
     100,
     -130,
     async () => {
-      claimUI.close()
+      claimUI.hide()
       representation.openUi = false
 
       let claimData = await makeClaim(stage, testUser ? testUser : null)
@@ -563,7 +554,7 @@ export function openClaimUI(
         makeTransaction(claimData)
       }
     },
-    ButtonStyles.E
+    ui.ButtonStyles.E
   )
 
   if (data.length > 1) {
@@ -594,7 +585,7 @@ export async function makeTransaction(claimData: ClaimData) {
 
   //PlayOpenSound()
   const provider = await getProvider()
-  const rm = new eth.RequestManager(provider)
+  const rm = new EthConnect.RequestManager(provider)
 
   const res = rm.eth_sendTransaction({
     data: claimData.transaction_payload,
@@ -651,7 +642,7 @@ export async function makeTestTransaction(claimData: any) {
   }
 
   const provider = await getProvider()
-  const rm = new eth.RequestManager(provider)
+  const rm = new EthConnect.RequestManager(provider)
 
   const res = rm.eth_sendTransaction({
     data: claimData.transaction_payload,

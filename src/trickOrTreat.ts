@@ -1,161 +1,22 @@
 import {
-  templeGirlDialog,
-  catGuyDialog,
+  castleGuyDialog,
+  catLoverDialog,
   farmerDialog,
   ghostControlDialog,
-  ghostDialog,
   lockedHouse,
+  mayorGhostDialog,
   phoneVoice,
 } from './NPC/dialog'
-import { NPC } from './NPC/npc'
-import { HalloweenState, halloweenTheme, quest } from './halloweenQuests/quest'
-import * as ui from '../node_modules/@dcl/ui-utils/index'
-import { updateProgression } from './halloweenQuests/progression'
-import utils from '../node_modules/decentraland-ecs-utils/index'
-import { Phone } from './phone'
-import { Reward } from './halloweenQuests/loot'
+import {COLOR_GREEN} from './theme/color'
+import * as NPCUtils from '@dcl/npc-scene-utils'
+import {NPC} from '@dcl/npc-scene-utils'
+import {HalloweenState, halloweenTheme, quest} from './halloweenQuests/quest'
+import {TTHouse} from './house'
+import * as ui from '@dcl/ui-scene-utils'
+import * as utils from '@dcl/ecs-scene-utils'
+import {Phone} from './phone'
+import {Reward} from './halloweenQuests/loot'
 
-export class TTHouse extends Entity {
-  onActivate: () => void
-  openAnim: AnimationState
-  closeAnim: AnimationState
-  openClip = new AudioClip('sounds/open.mp3')
-  closeClip = new AudioClip('sounds/close.mp3')
-  knockClip = new AudioClip('sounds/knock.mp3')
-  locked: boolean = true
-  npc: NPC
-  firstTime: boolean = true
-  isOpen: boolean = false
-  inCooldown: boolean = false
-  coolDownDuration: number = 10000
-  coolDownTimer: Entity
-
-  constructor(
-    position: TranformConstructorArgs,
-    model: GLTFShape,
-    openAnim?: string,
-    closeAnim?: string,
-    onActivate?: () => void,
-    npc?: NPC,
-    locked?: boolean
-  ) {
-    super()
-    this.addComponent(model)
-    this.addComponent(new Transform(position))
-    engine.addEntity(this)
-    if (onActivate) {
-      this.onActivate = onActivate
-    }
-
-    this.coolDownTimer = new Entity()
-    this.coolDownTimer.setParent(this)
-
-    this.addComponent(new Animator())
-
-    if (openAnim) {
-      this.openAnim = new AnimationState(openAnim, { looping: false })
-      this.getComponent(Animator).addClip(this.openAnim)
-      this.openAnim.stop()
-    }
-
-    if (closeAnim) {
-      this.closeAnim = new AnimationState(closeAnim, { looping: false })
-      this.getComponent(Animator).addClip(this.closeAnim)
-      //this.closeAnim.play()
-    }
-
-    if (locked) {
-      this.locked = locked
-    }
-
-    if (npc) {
-      this.npc = npc
-      npc.setParent(this)
-    }
-
-    this.addComponent(
-      new OnPointerDown(
-        (e) => {
-          if (this.inCooldown) return
-          const source = new AudioSource(this.knockClip)
-          this.addComponentOrReplace(source)
-          source.playing = true
-          ui.displayAnnouncement(
-            'Nobody Home',
-            1,
-            true,
-            Color4.FromHexString('#8DFF34FF')
-          )
-        },
-        { hoverText: 'Knock' }
-      )
-    )
-  }
-  unlock() {
-    this.locked = false
-
-    this.addComponentOrReplace(
-      new OnPointerDown(
-        (e) => {
-          if (this.inCooldown) return
-          this.activate()
-        },
-        { hoverText: 'Knock' }
-      )
-    )
-  }
-  activate() {
-    if (this.isOpen || this.inCooldown) {
-      return
-    }
-    this.closeAnim.stop()
-    this.openAnim.stop()
-    this.openAnim.play()
-
-    const source = new AudioSource(this.openClip)
-    this.addComponentOrReplace(source)
-    source.playing = true
-
-    this.isOpen = true
-    this.addComponentOrReplace(
-      new utils.Delay(500, () => {
-        if (this.onActivate) {
-          this.onActivate()
-        }
-      })
-    )
-    if (this.firstTime) {
-      this.firstTime = false
-      doorCounter += 1
-      log('doors opened ', doorCounter)
-      if (doorCounter >= 6) {
-        quest.checkBox(0)
-        updateProgression('allHouses')
-      }
-    }
-  }
-  close() {
-    if (!this.isOpen) {
-      return
-    }
-    log('closing door')
-    this.openAnim.stop()
-    this.closeAnim.stop()
-    this.closeAnim.play()
-    this.isOpen = false
-    this.inCooldown = true
-
-    const source = new AudioSource(this.closeClip)
-    this.addComponentOrReplace(source)
-    source.playing = true
-
-    this.coolDownTimer.addComponentOrReplace(
-      new utils.Delay(this.coolDownDuration, () => {
-        this.inCooldown = false
-      })
-    )
-  }
-}
 
 export let catLover: NPC
 export let farmer: NPC
@@ -174,12 +35,13 @@ export let doorHouse8: TTHouse
 export let doorHouse9: TTHouse
 export let doorHouse10: TTHouse
 
-export let doorCounter = 0
+
 export let bigReveal: boolean = false
 
 export let funMusic1: Entity
 export let funMusic2: Entity
 export let dramaticMusic: Entity
+
 
 export function addClosedDoors() {
   doorHouse1 = new TTHouse(
@@ -326,36 +188,41 @@ export function addHouses(progression: HalloweenState) {
         position: new Vector3(-1, 0, 0.8),
         rotation: Quaternion.Euler(0, 90, 0),
       },
-      new GLTFShape('models/NPCs/NPC Cat Lover.glb'),
+      'models/NPCs/NPC Cat Lover.glb',
       () => {
         // check for cat wearables
-        catLover.talk(catGuyDialog, 0)
+        catLover.talk(catLoverDialog(catLover, doorHouse1), 0)
         catLover.playAnimation(`Cocky`, true, 1.83)
       },
-      { path: 'images/portraits/catguy.png', height: 128, width: 128 },
-      12,
-      `Weight_Shift`,
-      false,
-      true,
-      () => {
-        if (catLover.dialog.isDialogOpen) {
-          catLover.dialog.closeDialogWindow()
+      {
+        portrait: {path: 'images/portraits/catguy.png', height: 128, width: 128},
+        reactDistance: 12,
+        idleAnim: `Weight_Shift`,
+        faceUser: false,
+        onlyExternalTrigger: true,
+        onWalkAway: () => {
+          if (catLover.dialog.isDialogOpen) {
+            catLover.dialog.closeDialogWindow()
+          }
+          if (doorHouse1.isOpen) {
+            doorHouse1.close()
+          }
         }
-        if (doorHouse1.isOpen) {
-          doorHouse1.close()
-        }
-      }
+      },
     )
+
+
     catLover.removeComponent(OnPointerDown)
-    catLover.dialog = new ui.DialogWindow(
+    catLover.dialog = new NPCUtils.DialogWindow(
       {
         path: 'images/portraits/catguy.png',
       },
       true,
+      '',
       halloweenTheme
     )
     catLover.dialog.leftClickIcon.positionX = 340 - 60
-    catLover.dialog.text.color = Color4.FromHexString('#8DFF34FF')
+    catLover.dialog.text.color = Color4.FromHexString(COLOR_GREEN)
 
     // farmer
     farmer = new NPC(
@@ -363,28 +230,32 @@ export function addHouses(progression: HalloweenState) {
         position: new Vector3(-1, 0, 0.8),
         rotation: Quaternion.Euler(0, 90, 0),
       },
-      new GLTFShape('models/NPCs/farmer.glb'),
+      'models/NPCs/farmer.glb',
       () => {
-        farmer.talk(farmerDialog, 0)
+        farmer.talk(farmerDialog(farmer, doorHouse7), 0)
         farmer.playAnimation(`Head_Yes`, true, 2.63)
       },
-      { path: 'images/portraits/farmer.png', height: 128, width: 128 },
-      12,
-      `Weight_Shift`,
-      false,
-      true,
-      () => {
-        doorHouse7.close()
+      {
+        portrait: {path: 'images/portraits/farmer.png', height: 128, width: 128},
+        reactDistance: 12,
+        idleAnim: `Weight_Shift`,
+        faceUser: false,
+        onlyExternalTrigger: true,
+
+        onWalkAway: () => {
+          doorHouse7.close()
+        }
       }
     )
     farmer.removeComponent(OnPointerDown)
-    farmer.dialog = new ui.DialogWindow(
-      { path: 'images/portraits/farmer.png' },
+    farmer.dialog = new NPCUtils.DialogWindow(
+      {path: 'images/portraits/farmer.png'},
       true,
+      '',
       halloweenTheme
     )
     farmer.dialog.leftClickIcon.positionX = 340 - 60
-    farmer.dialog.text.color = Color4.FromHexString('#8DFF34FF')
+    farmer.dialog.text.color = Color4.FromHexString(COLOR_GREEN)
 
     // ghost control guy
     ghostControlGuy = new NPC(
@@ -392,33 +263,38 @@ export function addHouses(progression: HalloweenState) {
         position: new Vector3(-1, 0.05, 0.7),
         rotation: Quaternion.Euler(0, 90, 0),
       },
-      new GLTFShape('models/NPCs/ghostblaster_civil.glb'),
+      'models/NPCs/ghostblaster_civil.glb',
       () => {
-        ghostControlGuy.talk(ghostControlDialog, 0)
+        ghostControlGuy.talk(ghostControlDialog(ghostControlGuy, doorHouse6), 0)
         ghostControlGuy.playAnimation(`Relieved`, true, 3.03)
       },
-      { path: 'images/portraits/ghostblaster.png' },
-      12,
-      `Idle`,
-      false,
-      true,
-      () => {
-        if (ghostControlGuy.dialog.isDialogOpen) {
-          ghostControlGuy.dialog.closeDialogWindow()
-        }
-        if (doorHouse6.isOpen) {
-          doorHouse6.close()
+
+      {
+        portrait: {path: 'images/portraits/ghostblaster.png'},
+        reactDistance: 12,
+        idleAnim: `Idle`,
+        faceUser: false,
+        onlyExternalTrigger: true,
+
+        onWalkAway: () => {
+          if (ghostControlGuy.dialog.isDialogOpen) {
+            ghostControlGuy.dialog.closeDialogWindow()
+          }
+          if (doorHouse6.isOpen) {
+            doorHouse6.close()
+          }
         }
       }
     )
     ghostControlGuy.removeComponent(OnPointerDown)
-    ghostControlGuy.dialog = new ui.DialogWindow(
-      { path: 'images/portraits/ghostblaster.png' },
+    ghostControlGuy.dialog = new NPCUtils.DialogWindow(
+      {path: 'images/portraits/ghostblaster.png'},
       true,
+      '',
       halloweenTheme
     )
     ghostControlGuy.dialog.leftClickIcon.positionX = 340 - 60
-    ghostControlGuy.dialog.text.color = Color4.FromHexString('#8DFF34FF')
+    ghostControlGuy.dialog.text.color = Color4.FromHexString(COLOR_GREEN)
 
     // ghost trick or treat
     mayorGhost = new NPC(
@@ -426,33 +302,38 @@ export function addHouses(progression: HalloweenState) {
         position: new Vector3(-1, 0, 0.75),
         rotation: Quaternion.Euler(0, 90, 0),
       },
-      new GLTFShape('models/NPCs/ghost1.glb'),
+      'models/NPCs/ghost1.glb',
       () => {
-        mayorGhost.talk(ghostDialog, 0)
+        mayorGhost.talk(mayorGhostDialog(mayorGhost, doorHouse4), 0)
         mayorGhost.playAnimation(`idle1`, true, 9.8)
       },
-      { path: 'images/portraits/main-ghost.png' },
-      12,
-      `idle1`,
-      false,
-      true,
-      () => {
-        if (mayorGhost.dialog.isDialogOpen) {
-          mayorGhost.dialog.closeDialogWindow()
-        }
-        if (doorHouse4.isOpen) {
-          doorHouse4.close()
+
+      {
+        portrait: {path: 'images/portraits/main-ghost.png'},
+        reactDistance: 12,
+        idleAnim: `Idle`,
+        faceUser: false,
+        onlyExternalTrigger: true,
+
+        onWalkAway: () => {
+          if (mayorGhost.dialog.isDialogOpen) {
+            mayorGhost.dialog.closeDialogWindow()
+          }
+          if (doorHouse4.isOpen) {
+            doorHouse4.close()
+          }
         }
       }
     )
     mayorGhost.removeComponent(OnPointerDown)
-    mayorGhost.dialog = new ui.DialogWindow(
-      { path: 'images/portraits/main-ghost.png' },
+    mayorGhost.dialog = new NPCUtils.DialogWindow(
+      {path: 'images/portraits/main-ghost.png'},
       true,
+      '',
       halloweenTheme
     )
     mayorGhost.dialog.leftClickIcon.positionX = 340 - 60
-    mayorGhost.dialog.text.color = Color4.FromHexString('#8DFF34FF')
+    mayorGhost.dialog.text.color = Color4.FromHexString(COLOR_GREEN)
 
     // castle guy
     templeGirl = new NPC(
@@ -460,33 +341,37 @@ export function addHouses(progression: HalloweenState) {
         position: new Vector3(-1, 0, 0.85),
         rotation: Quaternion.Euler(0, 90, 0),
       },
-      new GLTFShape('models/NPCs/girl.glb'),
+      'models/NPCs/girl.glb',
       () => {
-        templeGirl.talk(templeGirlDialog, 0)
+        templeGirl.talk(castleGuyDialog(templeGirl, doorHouse10), 0)
         templeGirl.playAnimation(`Acknowledging`, true, 1.97)
       },
-      { path: 'images/portraits/girl.png' },
-      12,
-      `Weight_Shift`,
-      false,
-      true,
-      () => {
-        if (templeGirl.dialog.isDialogOpen) {
-          templeGirl.dialog.closeDialogWindow()
-        }
-        if (doorHouse10.isOpen) {
-          doorHouse10.close()
+      {
+        portrait: {path: 'images/portraits/girl.png'},
+        reactDistance: 12,
+        idleAnim: `Weight_Shift`,
+        faceUser: false,
+        onlyExternalTrigger: true,
+
+        onWalkAway: () => {
+          if (templeGirl.dialog.isDialogOpen) {
+            templeGirl.dialog.closeDialogWindow()
+          }
+          if (doorHouse10.isOpen) {
+            doorHouse10.close()
+          }
         }
       }
     )
     templeGirl.removeComponent(OnPointerDown)
-    templeGirl.dialog = new ui.DialogWindow(
-      { path: 'images/portraits/girl.png' },
+    templeGirl.dialog = new NPCUtils.DialogWindow(
+      {path: 'images/portraits/girl.png'},
       true,
+      '',
       halloweenTheme
     )
     templeGirl.dialog.leftClickIcon.positionX = 340 - 60
-    templeGirl.dialog.text.color = Color4.FromHexString('#8DFF34FF')
+    templeGirl.dialog.text.color = Color4.FromHexString(COLOR_GREEN)
   }
 
   /// Doors to open
@@ -503,15 +388,16 @@ export function addHouses(progression: HalloweenState) {
 
     doorHouse3.onActivate = () => {
       // TODO sound of locked door
-      let lockDialog = new ui.DialogWindow(
+      let lockDialog = new NPCUtils.DialogWindow(
         {
           path: 'images/portraits/closedHouseCharacter.png',
         },
         true,
+        '',
         halloweenTheme
       )
       lockDialog.leftClickIcon.positionX = 340 - 60
-      lockDialog.text.color = Color4.FromHexString('#8DFF34FF')
+      lockDialog.text.color = Color4.FromHexString(COLOR_GREEN)
 
       // path to portrait
       let randomIndex = Math.floor(Math.random() * 3)
@@ -589,7 +475,6 @@ export function addHouses(progression: HalloweenState) {
           ui.displayAnnouncement(
             'Metaverse Murder Mystery',
             10,
-            true,
             Color4.Red(),
             70
           )
@@ -607,22 +492,23 @@ export function addHouses(progression: HalloweenState) {
           rotation: Quaternion.Euler(0, 0, 0),
         },
         () => {
-          let phoneDialog = new ui.DialogWindow(
-            { path: 'images/portraits/phoneCharacter.png' },
+          let phoneDialog = new NPCUtils.DialogWindow(
+            {path: 'images/portraits/phoneCharacter.png'},
             true,
+            '',
             halloweenTheme
           ) // + path to portrait
           phoneDialog.openDialogWindow(phoneVoice, 0)
 
           phoneDialog.leftClickIcon.positionX = 340 - 60
-          phoneDialog.text.color = Color4.FromHexString('#8DFF34FF')
+          phoneDialog.text.color = Color4.FromHexString(COLOR_GREEN)
         }
       )
 
       let easterEgg = new Reward(
         phone,
         'egg2',
-        { position: new Vector3(14 - 10, 4.2, 40 - 36) },
+        {position: new Vector3(14 - 10, 4.2, 40 - 36)},
         true
       )
     }
@@ -641,7 +527,7 @@ export function addHouses(progression: HalloweenState) {
       let easterEgg3 = new Reward(
         doorHouse3,
         'egg3',
-        { position: new Vector3(-8, 1.5, 0) },
+        {position: new Vector3(-8, 1.5, 0)},
         true
       )
     }

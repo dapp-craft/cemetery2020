@@ -1,9 +1,8 @@
-import { nextDay, updateProgression } from './halloweenQuests/progression'
-import { quest } from './halloweenQuests/quest'
-import * as ui from '../node_modules/@dcl/ui-utils/index'
-import { canvas } from '../node_modules/@dcl/ui-utils/index'
-import { Reward } from './halloweenQuests/loot'
-import { Grave } from './grave'
+import {nextDay, updateProgression} from './halloweenQuests/progression'
+import {quest} from './halloweenQuests/quest'
+import * as ui from '@dcl/ui-scene-utils'
+import {Reward} from './halloweenQuests/loot'
+import {Grave} from './grave'
 
 export let hasKey = false
 export let keyUI
@@ -41,7 +40,7 @@ export function doorHauntedHouse() {
 
         coffin.openAnim.stop()
       },
-      { distance: 6, hoverText: 'Open' }
+      {distance: 6, hoverText: 'Open'}
     )
   )
 
@@ -99,7 +98,7 @@ export function getKey() {
   let keyTexture = new Texture('images/Key.png')
 
   hasKey = true
-  keyUI = new UIImage(canvas, keyTexture)
+  keyUI = new UIImage(ui.canvas, keyTexture)
   keyUI.hAlign = 'right'
   //keyUI.positionX = -120
   keyUI.vAlign = 'bottom'

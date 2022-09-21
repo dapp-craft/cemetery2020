@@ -1,4 +1,4 @@
-export let textOffset = new Transform({
+export const textOffset = new Transform({
   position: new Vector3(0, 2.5, 0),
 })
 
@@ -9,8 +9,8 @@ export function addLabel(text: string, parent: IEntity, height?: number) {
   label.addComponent(
     height
       ? new Transform({
-          position: new Vector3(0, height, 0),
-        })
+        position: new Vector3(0, height, 0),
+      })
       : textOffset
   )
   label.addComponent(new TextShape(text))

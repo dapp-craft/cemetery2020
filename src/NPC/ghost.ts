@@ -1,8 +1,13 @@
-import * as ui from '../../node_modules/@dcl/ui-utils/index'
-import utils from '../../node_modules/decentraland-ecs-utils/index'
-import { TriggerSphereShape } from '../../node_modules/decentraland-ecs-utils/triggers/triggerSystem'
-import { Dialog } from '../../node_modules/@dcl/ui-utils/utils/types'
+import * as ui from '@dcl/ui-scene-utils'
+import * as utils from '@dcl/ecs-scene-utils'
+import { TriggerSphereShape } from '@dcl/ecs-scene-utils'
+import * as NPCUtils from '@dcl/npc-scene-utils'
+import { Dialog } from '@dcl/npc-scene-utils'
+
+import { COLOR_GREEN } from '../theme/color'
+
 import { Grave } from '../grave'
+
 import {
   ghost1Talk,
   ghost2Talk,
@@ -14,9 +19,12 @@ import {
   missionEnd,
   thanks,
 } from './dialog'
-import { NPC } from './npc'
+import { ghostPaths } from './ghost/paths'
+
 import { HalloweenState, halloweenTheme, quest } from '../halloweenQuests/quest'
 import { updateProgression } from '../halloweenQuests/progression'
+
+
 
 export enum GhostState {
   Wondering,
@@ -35,6 +43,7 @@ export class LerpData {
   fraction: number = 0
   lastPos: Vector3
   nextPos: Vector3
+
   constructor(path: Vector3[]) {
     this.path = path
   }
@@ -52,7 +61,7 @@ engine.addEntity(sharedVanishTimerEntity)
 let sharedDialogTimerEntity = new Entity()
 engine.addEntity(sharedDialogTimerEntity)
 
-let sharedDialog = new ui.DialogWindow(
+let sharedDialog = new NPCUtils.DialogWindow(
   { path: 'images/portraits/main-ghost.png' },
   true
 )
@@ -63,11 +72,12 @@ export class Ghost extends Entity {
   hasDialogOpen: boolean
   inCooldown: boolean
   public home: Grave
+  state: GhostState = GhostState.Wondering
   private idleAnim: AnimationState
   private vanishAnim: AnimationState
   private lastPlayedAnim: AnimationState
   private endAnimTimer: Entity
-  state: GhostState = GhostState.Wondering
+
   constructor(
     position: TranformConstructorArgs,
     model: GLTFShape,
@@ -124,24 +134,23 @@ export class Ghost extends Entity {
           reactDistance ? reactDistance : 6,
           Vector3.Zero()
         ),
-        1,
-        1,
-        null,
-        null,
-        () => {
-          if (
-            this.inCooldown ||
-            sharedDialog.isDialogOpen ||
-            followingGhost != null
-          ) {
-            return
+        {
+          layer: 0,
+          onCameraEnter: () => {
+            if (
+              this.inCooldown ||
+              sharedDialog.isDialogOpen ||
+              followingGhost != null
+            ) {
+              return
+            }
+            this.talk(this.script, 0, 2)
           }
-
-          this.talk(this.script, 0, 2)
-        }
+        },
       )
     )
   }
+
   talk(script: Dialog[], startIndex: number, duration?: number) {
     this.inCooldown = true
     sharedDialog.openDialogWindow(script, startIndex)
@@ -162,6 +171,7 @@ export class Ghost extends Entity {
       )
     }
   }
+
   playAnimation(animationName: string, noLoop?: boolean, duration?: number) {
     this.lastPlayedAnim.stop()
     if (this.endAnimTimer.hasComponent(utils.Delay)) {
@@ -190,6 +200,7 @@ export class Ghost extends Entity {
     newAnim.play()
     this.lastPlayedAnim = newAnim
   }
+
   startFollowing() {
     this.state = GhostState.Following
     this.getComponent(utils.TriggerComponent).enabled = false
@@ -211,6 +222,7 @@ export class Ghost extends Entity {
 
     OpenAllGraves()
   }
+
   stopFollowing() {
     let path = this.getComponent(LerpData)
     followingGhost = null
@@ -230,6 +242,7 @@ export class Ghost extends Entity {
 
     CloseAllGraves()
   }
+
   goHome(destination: Grave) {
     log('FOUND HOME')
     // say something
@@ -263,6 +276,7 @@ export class Ghost extends Entity {
 
     this.home = destination
   }
+
   vanish() {
     this.state = GhostState.Gone
     followingGhost = null
@@ -288,6 +302,7 @@ export class Ghost extends Entity {
       })
     )
   }
+
   refusePlace() {
     this.talk(this.script, 2, 2)
 
@@ -311,49 +326,6 @@ const MOVE_SPEED = 3
 
 const player = Camera.instance
 
-const ghostPaths = [
-  [
-    new Vector3(10, 1, 10),
-    new Vector3(35, 1, 10),
-    new Vector3(10, 1, 35),
-    new Vector3(35, 1, 35),
-    new Vector3(30, 1, 40),
-    new Vector3(50, 1, 15),
-  ],
-  [
-    new Vector3(36.86669921875, 1.3, 19.005111694335938),
-    new Vector3(81.7373046875, 1.3, 19.419326782226562),
-    new Vector3(79.082763671875, 1.3, 29.23333740234375),
-    new Vector3(69.2646484375, 1.3, 45.42523193359375),
-    new Vector3(52.8699951171875, 1.3, 75.66563415527344),
-    new Vector3(32.208740234375, 1.3, 50.01548767089844),
-  ],
-  [
-    new Vector3(39.551513671875, 1.3, 44.1265869140625),
-    new Vector3(68.6109619140625, 1.3, 37.26177978515625),
-    new Vector3(109.7174072265625, 1.3, 50.99623107910156),
-    new Vector3(92.7772216796875, 1.3, 68.10420227050781),
-    new Vector3(66.876953125, 1.3, 54.42950439453125),
-  ],
-  [
-    new Vector3(89.4342041015625, 1.3, 8.731460571289062),
-    new Vector3(87.6187744140625, 1.3, 31.036895751953125),
-    new Vector3(60.4107666015625, 1.3, 31.164169311523438),
-  ],
-  [
-    new Vector3(108.52978515625, 1.3, 9.524887084960938),
-    new Vector3(90.803955078125, 1.3, 16.572250366210938),
-    new Vector3(52.53955078125, 1.3, 5.392143249511719),
-    new Vector3(50.767822265625, 1.3, 37.85466003417969),
-    new Vector3(17.159423828125, 1.3, 39.723907470703125),
-  ],
-  [
-    new Vector3(84.9725341796875, 1.3, 37.562164306640625),
-    new Vector3(63.8221435546875, 1.3, 15.966148376464844),
-    new Vector3(20.00726318359375, 1.3, 11.857383728027344),
-    new Vector3(20.757568359375, 1.3, 40.708709716796875),
-  ],
-]
 
 // Walk System
 export class GhostMove {
@@ -427,43 +399,45 @@ export class GhostMove {
   }
 }
 
-export let mainGhost: NPC
+export let mainGhost: NPCUtils.NPC
 
 export function addMainGhostNPC(progression: HalloweenState) {
-  mainGhost = new NPC(
+  mainGhost = new NPCUtils.NPC(
     {
       position: new Vector3(26, 1.7, 40),
       rotation: Quaternion.Euler(0, 270, 0),
     },
-    new GLTFShape('models/NPCs/ghost1.glb'),
+    'models/NPCs/ghost1.glb',
     () => {
       if (mainGhost.dialog.isDialogOpen) return
 
       if (!quest.isChecked(1)) {
-        mainGhost.talk(missionBrief, 0)
+        mainGhost.talk(missionBrief(ghostCounter, ghostUIBck, ghostsArray), 0)
       } else if (progression.data.ghostsDone) {
         mainGhost.talk(thanks, 0, 3)
       }
       //mainGhost.playAnimation(`Head_Yes`, true, 2.63)
     },
     {
-      path: 'images/portraits/main-ghost.png',
+      portrait: { path: 'images/portraits/main-ghost.png' },
+      reactDistance: 10,
+      faceUser: true,
+      idleAnim: `idle1`
     },
-    10,
-    `idle1`,
-    true
+
   )
 
-  mainGhost.dialog = new ui.DialogWindow(
+  mainGhost.dialog = new NPCUtils.DialogWindow(
     { path: 'images/portraits/main-ghost.png' },
     true,
+    '',
     halloweenTheme
   )
   mainGhost.dialog.leftClickIcon.positionX = 340 - 60
-  mainGhost.dialog.text.color = Color4.FromHexString('#8DFF34FF')
+  mainGhost.dialog.text.color = Color4.FromHexString(COLOR_GREEN)
 }
 
-export let ghostUIBck = new ui.LargeIcon(
+export const ghostUIBck = new ui.LargeIcon(
   'images/ghost-ui.png',
   0,
   0,
@@ -479,7 +453,7 @@ export let ghostCounter = new ui.UICounter(
   0,
   -55,
   180,
-  Color4.FromHexString('#8DFF34FF'),
+  Color4.FromHexString(COLOR_GREEN),
   50
 )
 

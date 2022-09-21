@@ -1,4 +1,4 @@
-import { canvas, SFFont } from '../../node_modules/@dcl/ui-utils/index'
+import {canvas ,SFFont} from '@dcl/ui-scene-utils'
 
 import resources, { setSection } from './resources'
 
@@ -46,30 +46,30 @@ export class QuestUI extends Entity {
 
     this.currentCoords = currentCoords
 
-    // this.title = new UIImage(this.background, halloweenTheme)
-    // this.title.vAlign = 'top'
-    // this.title.positionX = 0
-    // this.title.positionY = -12
-    // this.title.width = 58
-    // this.title.height = 24
+    this.title = new UIImage(this.background, halloweenTheme)
+    this.title.vAlign = 'top'
+    this.title.positionX = 0
+    this.title.positionY = -12
+    this.title.width = 58
+    this.title.height = 24
 
-    // switch (day) {
-    //   case 1:
-    //     setSection(this.title, resources.dayLabels[1])
-    //     break
-    //   case 2:
-    //     setSection(this.title, resources.dayLabels[2])
-    //     break
-    //   case 3:
-    //     setSection(this.title, resources.dayLabels[3])
-    //     break
-    //   case 4:
-    //     setSection(this.title, resources.dayLabels[4])
-    //     break
-    //   case 5:
-    //     setSection(this.title, resources.dayLabels[5])
-    //     break
-    // }
+    switch (day) {
+      case 1:
+        setSection(this.title, resources.dayLabels[1])
+        break
+      case 2:
+        setSection(this.title, resources.dayLabels[2])
+        break
+      case 3:
+        setSection(this.title, resources.dayLabels[3])
+        break
+      case 4:
+        setSection(this.title, resources.dayLabels[4])
+        break
+      case 5:
+        setSection(this.title, resources.dayLabels[5])
+        break
+    }
 
     for (let i = 0; i < list.length; i++) {
       this.elements.push(list[i])

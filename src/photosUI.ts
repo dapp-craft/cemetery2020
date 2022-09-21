@@ -1,4 +1,4 @@
-import * as ui from '../node_modules/@dcl/ui-utils/index'
+import * as ui from '@dcl/ui-scene-utils'
 
 export function openPhotosUI() {
   let p = new ui.CenterImage(

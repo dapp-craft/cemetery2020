@@ -65,6 +65,9 @@
   },
   "main": "bin/game.js",
   "tags": [],
+  "requiredPermissions": [
+    "USE_FETCH"
+  ],
   "spawnPoints": [
     {
       "name": "spawn1",
