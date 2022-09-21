@@ -1,31 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7107564a-8b8b-43e2-95b4-8ebc545f26a4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/NPC/ghost/paths.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/house.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/theme/color.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/bin/game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/game.js.lib" beforeDir="false" afterPath="$PROJECT_DIR$/bin/game.js.lib" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scene.json" beforeDir="false" afterPath="$PROJECT_DIR$/scene.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NPC/dialog.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/NPC/dialog.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NPC/faceUserSystem.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NPC/ghost.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/NPC/ghost.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NPC/npc.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/halloweenQuests/loot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/halloweenQuests/loot.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/halloweenQuests/progression.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/halloweenQuests/progression.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/halloweenQuests/quest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/halloweenQuests/quest.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/halloweenQuests/resources.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/halloweenQuests/resources.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hauntedHouse.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hauntedHouse.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/photosUI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/photosUI.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sceneUtils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/sceneUtils.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/staticDecorations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/staticDecorations.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/trickOrTreat.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/trickOrTreat.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+    <list default="true" id="7107564a-8b8b-43e2-95b4-8ebc545f26a4" name="Changes" comment="Update">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +12,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2F4tmam96B2aWP1dr7MCwk0TyOi" />
   <component name="ProjectViewState">
@@ -68,7 +49,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1663763343837</updated>
-      <workItem from="1663763345773" duration="272000" />
+      <workItem from="1663763345773" duration="757000" />
     </task>
     <servers />
   </component>
@@ -85,5 +66,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update" />
   </component>
 </project>
