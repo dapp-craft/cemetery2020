@@ -359,11 +359,15 @@ export class GhostMove {
           new Vector3(player.position.x, 0, player.position.z)
         ) // Check distance squared as it's more optimized
         if (distance >= 5) {
+          ghost.getComponent(Animator).getClip('idle1').play()
           let forwardVector = Vector3.Forward().rotate(transform.rotation)
           let increment = forwardVector.scale(dt * (MOVE_SPEED + distance / 10))
           transform.translate(increment)
+        } else {
+          ghost.getComponent(Animator).getClip('idle2').play()
         }
       } else if (ghost.state == GhostState.Returning) {
+        ghost.getComponent(Animator).getClip('idle1').play()
         path.fraction += dt / 3
         transform.position = Vector3.Lerp(
           path.lastPos,
