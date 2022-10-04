@@ -54,12 +54,12 @@ export class Grave extends Entity {
             if (
               this.resident &&
               followingGhost &&
-              followingGhost == this.resident
+              followingGhost[0] == this.resident
             ) {
               this.resident.goHome(this)
             } else if (this.resident && followingGhost) {
               log('Not my home')
-              followingGhost.refusePlace()
+              followingGhost[0].refusePlace()
             }
           },
           {

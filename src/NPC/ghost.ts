@@ -49,7 +49,7 @@ export class LerpData {
   }
 }
 
-export let followingGhost: Ghost = null
+export let followingGhost: Ghost[] = []
 
 export let ghostsArray: Ghost[] = []
 
@@ -69,14 +69,15 @@ sharedDialog.panel.height = 150
 
 export class Ghost extends Entity {
   public script: Dialog[]
-  hasDialogOpen: boolean
-  inCooldown: boolean
+  public hasDialogOpen: boolean
+  public inCooldown: boolean
   public home: Grave
-  state: GhostState = GhostState.Wondering
+  public state: GhostState = GhostState.Wondering
   private idleAnim: AnimationState
   private vanishAnim: AnimationState
   private lastPlayedAnim: AnimationState
   private endAnimTimer: Entity
+  public followingPoint: Vector3
 
   constructor(
     position: TranformConstructorArgs,
@@ -112,10 +113,9 @@ export class Ghost extends Entity {
       new OnPointerDown(
         (e) => {
           if (!quest.isChecked(1)) return
-
-          if (this.state == GhostState.Wondering && !followingGhost) {
+          if (this.state == GhostState.Wondering) {
             this.startFollowing()
-          } else if (followingGhost == this) {
+          } else if (this.state == GhostState.Following) {
             this.stopFollowing()
           }
         },
@@ -140,7 +140,7 @@ export class Ghost extends Entity {
             if (
               this.inCooldown ||
               sharedDialog.isDialogOpen ||
-              followingGhost != null
+              followingGhost == []
             ) {
               return
             }
@@ -164,7 +164,7 @@ export class Ghost extends Entity {
     if (duration) {
       sharedDialogTimerEntity.addComponentOrReplace(
         new utils.Delay(duration * 1000, () => {
-          if (followingGhost != null || !this.hasDialogOpen) return
+          if (followingGhost.length != 0 || !this.hasDialogOpen) return
           this.hasDialogOpen = false
           sharedDialog.closeDialogWindow()
         })
@@ -205,7 +205,16 @@ export class Ghost extends Entity {
     this.state = GhostState.Following
     this.getComponent(utils.TriggerComponent).enabled = false
     this.getComponent(OnPointerDown).hoverText = 'Stop Following'
-    followingGhost = this
+
+
+    if (followingGhost.length == 0) {
+      this.followingPoint = player.position
+    } else {
+      this.followingPoint = followingGhost[followingGhost.length - 1].getComponent(Transform).position
+    }
+    followingGhost.push(this)
+    log("FOLLOWING POSITION: " + this.followingPoint)
+
     this.talk(this.script, 0, 2)
 
     this.lastPlayedAnim.stop()
@@ -224,23 +233,29 @@ export class Ghost extends Entity {
   }
 
   stopFollowing() {
-    let path = this.getComponent(LerpData)
-    followingGhost = null
-    this.state = GhostState.Returning
-    path.fraction = 0
-    path.lastPos = this.getComponent(Transform).position.clone()
-    path.nextPos = path.path[1] // get closest path point
 
-    this.getComponent(Transform).lookAt(path.nextPos)
-    this.getComponent(utils.TriggerComponent).enabled = true
-    this.getComponent(OnPointerDown).hoverText = 'Follow You'
-    sharedDialog.closeDialogWindow()
-    this.hasDialogOpen = false
+    for (const gst of followingGhost) {
+      gst.followingPoint = null
+      let path = gst.getComponent(LerpData)
+      gst.state = GhostState.Returning
+      path.fraction = 0
+      path.lastPos = gst.getComponent(Transform).position.clone()
+      path.nextPos = path.path[1] // get closest path point
 
-    this.lastPlayedAnim.stop()
-    this.idleAnim.play()
+      gst.getComponent(Transform).lookAt(path.nextPos)
+      gst.getComponent(utils.TriggerComponent).enabled = true
+      gst.getComponent(OnPointerDown).hoverText = 'Follow You'
+      sharedDialog.closeDialogWindow()
+      gst.hasDialogOpen = false
 
-    CloseAllGraves()
+      gst.lastPlayedAnim.stop()
+      gst.idleAnim.play()
+
+      CloseAllGraves()
+    }
+
+    followingGhost = []
+
   }
 
   goHome(destination: Grave) {
@@ -259,9 +274,7 @@ export class Ghost extends Entity {
       Transform
     ).position.clone()
 
-    // this.getComponent(LerpData).nextPos = this.getComponent(
-    //   Transform
-    // ).position.clone()
+
 
     this.getComponent(LerpData).nextPos = destination
       .getComponent(Transform)
@@ -275,11 +288,13 @@ export class Ghost extends Entity {
     this.getComponent(AudioSource).playOnce()
 
     this.home = destination
+
+    followingGhost.shift()
+    followingGhost[0].followingPoint = player.position
   }
 
   vanish() {
     this.state = GhostState.Gone
-    followingGhost = null
 
     this.lastPlayedAnim.stop()
     this.vanishAnim.play()
@@ -308,7 +323,7 @@ export class Ghost extends Entity {
 
     this.endAnimTimer.addComponentOrReplace(
       new utils.Delay(2000, () => {
-        if (followingGhost != this) return
+        if (this.state == GhostState.Following) return
         this.talk(this.script, 0)
       })
     )
@@ -351,14 +366,14 @@ export class GhostMove {
           transform.lookAt(path.path[path.target])
         }
       } else if (ghost.state == GhostState.Following) {
-        transform.lookAt(new Vector3(player.position.x, 0, player.position.z))
+        transform.lookAt(new Vector3(ghost.followingPoint.x, 0, ghost.followingPoint.z))
         //ghost.dialog.container.visible = true
         // Continue to move towards the player until it is within 2m away
         let distance = Vector3.DistanceSquared(
           transform.position,
-          new Vector3(player.position.x, 0, player.position.z)
+          new Vector3(ghost.followingPoint.x, 0, ghost.followingPoint.z)
         ) // Check distance squared as it's more optimized
-        if (distance >= 5) {
+        if (distance >= 3) {
           ghost.getComponent(Animator).getClip('idle1').play()
           let forwardVector = Vector3.Forward().rotate(transform.rotation)
           let increment = forwardVector.scale(dt * (MOVE_SPEED + distance / 10))
