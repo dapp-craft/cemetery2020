@@ -140,7 +140,7 @@ export class Ghost extends Entity {
             if (
               this.inCooldown ||
               sharedDialog.isDialogOpen ||
-              followingGhost == []
+              followingGhost.length == 0
             ) {
               return
             }
