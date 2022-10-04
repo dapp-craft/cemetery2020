@@ -351,13 +351,12 @@ export class GhostMove {
           transform.lookAt(path.path[path.target])
         }
       } else if (ghost.state == GhostState.Following) {
-        transform.lookAt(player.position)
+        transform.lookAt(new Vector3(player.position.x, 0, player.position.z))
         //ghost.dialog.container.visible = true
-
         // Continue to move towards the player until it is within 2m away
         let distance = Vector3.DistanceSquared(
           transform.position,
-          player.position
+          new Vector3(player.position.x, 0, player.position.z)
         ) // Check distance squared as it's more optimized
         if (distance >= 5) {
           let forwardVector = Vector3.Forward().rotate(transform.rotation)
