@@ -1,12 +1,12 @@
-import {updateProgression} from '../halloweenQuests/progression';
+import {updateProgression} from '../../halloweenQuests/progression';
 import {Dialog, NPC} from '@dcl/npc-scene-utils';
 import * as utils from '@dcl/ecs-scene-utils';
-import {Reward} from '../halloweenQuests/loot';
-import {quest} from '../halloweenQuests/quest';
+import {Reward} from '../../halloweenQuests/loot';
+import {quest} from '../../halloweenQuests/quest';
 import * as ui from '@dcl/ui-scene-utils';
 import {Ghost} from './ghost';
-import {getKey} from '../hauntedHouse';
-import {TTHouse} from "../house";
+import {getKey} from '../../hauntedHouse';
+import {TTHouse} from "../../house";
 
 ///// Trick or treat
 

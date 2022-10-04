@@ -1,6 +1,6 @@
 import {HalloweenState} from './halloweenQuests/quest'
 
-export const TESTDATA_ENABLED = false
+export const TESTDATA_ENABLED = true
 export let IN_PREVIEW: boolean = false
 
 export function setInPreview(val: boolean) {
@@ -11,12 +11,12 @@ export const TESTQUESTSTATE: HalloweenState = {
   data: {
     // day 1
     allHouses: true,
-    phone: false,
-    pumpkinDone: false,
-    w1Found: false,
+    phone: true,
+    pumpkinDone: true,
+    w1Found: true,
 
     // day 2
-    NPCIntroDay2: false,
+    NPCIntroDay2: true,
     ghostsDone: false,
     w2Found: false,
 

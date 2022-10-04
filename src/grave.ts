@@ -1,4 +1,4 @@
-import { followingGhost, Ghost } from './NPC/ghost'
+import { followingGhost, Ghost } from './NPC/ghost/ghost'
 
 export class Grave extends Entity {
   onActivate: () => void

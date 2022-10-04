@@ -4,9 +4,9 @@ import { TriggerSphereShape } from '@dcl/ecs-scene-utils'
 import * as NPCUtils from '@dcl/npc-scene-utils'
 import { Dialog } from '@dcl/npc-scene-utils'
 
-import { COLOR_GREEN } from '../theme/color'
+import { COLOR_GREEN } from '../../theme/color'
 
-import { Grave } from '../grave'
+import { Grave } from '../../grave'
 
 import {
   ghost1Talk,
@@ -19,10 +19,10 @@ import {
   missionEnd,
   thanks,
 } from './dialog'
-import { ghostPaths } from './ghost/paths'
+import { npc_data } from './npc_data'
 
-import { HalloweenState, halloweenTheme, quest } from '../halloweenQuests/quest'
-import { updateProgression } from '../halloweenQuests/progression'
+import { HalloweenState, halloweenTheme, quest } from '../../halloweenQuests/quest'
+import { updateProgression } from '../../halloweenQuests/progression'
 
 
 
@@ -499,8 +499,8 @@ export function addGhostsAndCrypts() {
       position: new Vector3(40, 1.7, 40),
       rotation: Quaternion.Euler(0, 90, 0),
     },
-    new GLTFShape('models/NPCs/ghost3.glb'),
-    ghostPaths[0],
+    new GLTFShape(npc_data[0].modelPath),
+    npc_data[0].patrolPath,
     ghost1Talk,
     'Swirl.001',
     4
@@ -512,8 +512,8 @@ export function addGhostsAndCrypts() {
       position: new Vector3(60, 1.7, 40),
       rotation: Quaternion.Euler(0, 90, 0),
     },
-    new GLTFShape('models/NPCs/ghost5.glb'),
-    ghostPaths[1],
+    new GLTFShape(npc_data[1].modelPath),
+    npc_data[1].patrolPath,
     ghost2Talk,
     'Swirl.001',
     4
@@ -525,8 +525,8 @@ export function addGhostsAndCrypts() {
       position: new Vector3(80, 1.7, 40),
       rotation: Quaternion.Euler(0, 90, 0),
     },
-    new GLTFShape('models/NPCs/ghost4.glb'),
-    ghostPaths[2],
+    new GLTFShape(npc_data[2].modelPath),
+    npc_data[2].patrolPath,
     ghost3Talk,
     'Swirl.001',
     4
@@ -538,8 +538,8 @@ export function addGhostsAndCrypts() {
       position: new Vector3(80, 1.7, 40),
       rotation: Quaternion.Euler(0, 90, 0),
     },
-    new GLTFShape('models/NPCs/ghost6.glb'),
-    ghostPaths[3],
+    new GLTFShape(npc_data[3].modelPath),
+    npc_data[3].patrolPath,
     ghost4Talk,
     'Swirl.001',
     4
@@ -551,8 +551,8 @@ export function addGhostsAndCrypts() {
       position: new Vector3(80, 1.7, 40),
       rotation: Quaternion.Euler(0, 90, 0),
     },
-    new GLTFShape('models/NPCs/ghost2.glb'),
-    ghostPaths[4],
+    new GLTFShape(npc_data[4].modelPath),
+    npc_data[4].patrolPath,
     ghost5Talk,
     'swirl',
     4
@@ -564,8 +564,8 @@ export function addGhostsAndCrypts() {
       position: new Vector3(80, 1.7, 40),
       rotation: Quaternion.Euler(0, 90, 0),
     },
-    new GLTFShape('models/NPCs/ghost7.glb'),
-    ghostPaths[5],
+    new GLTFShape(npc_data[5].modelPath),
+    npc_data[5].patrolPath,
     ghost6Talk,
     'Swirl.001',
     4

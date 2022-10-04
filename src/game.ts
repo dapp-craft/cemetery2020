@@ -1,4 +1,4 @@
-import { addGhostsAndCrypts, addMainGhostNPC } from './NPC/ghost'
+import { addGhostsAndCrypts, addMainGhostNPC } from './NPC/ghost/ghost'
 import { addClosedDoors, addHouses } from './trickOrTreat'
 import { checkProgression, progression } from './halloweenQuests/progression'
 import { addStaticStuff } from './staticDecorations'

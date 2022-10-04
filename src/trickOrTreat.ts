@@ -6,7 +6,7 @@ import {
   lockedHouse,
   mayorGhostDialog,
   phoneVoice,
-} from './NPC/dialog'
+} from './NPC/ghost/dialog'
 import {COLOR_GREEN} from './theme/color'
 import * as NPCUtils from '@dcl/npc-scene-utils'
 import {NPC} from '@dcl/npc-scene-utils'
