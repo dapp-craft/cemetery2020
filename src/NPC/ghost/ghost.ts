@@ -234,27 +234,48 @@ export class Ghost extends Entity {
 
   stopFollowing() {
 
-    for (const gst of followingGhost) {
-      gst.followingPoint = null
-      let path = gst.getComponent(LerpData)
-      gst.state = GhostState.Returning
-      path.fraction = 0
-      path.lastPos = gst.getComponent(Transform).position.clone()
-      path.nextPos = path.path[1] // get closest path point
 
-      gst.getComponent(Transform).lookAt(path.nextPos)
-      gst.getComponent(utils.TriggerComponent).enabled = true
-      gst.getComponent(OnPointerDown).hoverText = 'Follow You'
-      sharedDialog.closeDialogWindow()
-      gst.hasDialogOpen = false
+    this.followingPoint = null
+    let path = this.getComponent(LerpData)
+    this.state = GhostState.Returning
+    path.fraction = 0
+    path.lastPos = this.getComponent(Transform).position.clone()
+    path.nextPos = path.path[1] // get closest path point
 
-      gst.lastPlayedAnim.stop()
-      gst.idleAnim.play()
+    this.getComponent(Transform).lookAt(path.nextPos)
+    this.getComponent(utils.TriggerComponent).enabled = true
+    this.getComponent(OnPointerDown).hoverText = 'Follow You'
+    sharedDialog.closeDialogWindow()
+    this.hasDialogOpen = false
 
-      CloseAllGraves()
+    this.lastPlayedAnim.stop()
+    this.idleAnim.play()
+
+
+    const index = followingGhost.indexOf(this)
+    log("INDEX: " + index)
+    const last = followingGhost.length - 1
+    switch (index) {
+      case 0:
+        followingGhost.splice(index, 1)
+
+        if (followingGhost.length == 0) {
+          CloseAllGraves()
+        } else {
+          followingGhost[0].followingPoint = player.position
+        }
+        break;
+
+      case last:
+        followingGhost.splice(index, 1)
+        break;
+
+      default:
+        followingGhost.splice(index, 1)
+        followingGhost[index].followingPoint = followingGhost[index - 1].getComponent(Transform).position
+        break;
     }
 
-    followingGhost = []
 
   }
 
