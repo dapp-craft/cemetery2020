@@ -333,9 +333,8 @@ export class Skeleton extends Entity {
         this.home.activate()
         engine.removeEntity(this)
         counterIncrease()
-        if (followingSkeletons.length == 0) {
-          CloseAllGraves()
-        }
+        CloseAllGraves()
+
         sharedDialog.closeDialogWindow()
       })
     )
@@ -777,7 +776,7 @@ export function OpenAllGraves() {
 
 export function CloseAllGraves() {
   for (let grave of activeGraves) {
-    if (grave.isOpen) {
+    if (grave.resident.state == SkeletonState.Gone) {
       grave.close()
     }
   }
