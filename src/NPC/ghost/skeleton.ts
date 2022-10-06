@@ -371,7 +371,7 @@ export class GhostMove {
       let path = ghost.getComponent(LerpData)
       if (ghost.state == SkeletonState.Wondering) {
         if (path.fraction < 1) {
-          path.fraction += dt / 20
+          path.fraction += dt / 3
           transform.position = Vector3.Lerp(
             path.path[path.origin],
             path.path[path.target],
@@ -445,10 +445,11 @@ export let mainGhost: NPCUtils.NPC
 export function addMainGhostNPC(progression: HalloweenState) {
   mainGhost = new NPCUtils.NPC(
     {
-      position: new Vector3(26, 1.7, 40),
-      rotation: Quaternion.Euler(0, 270, 0),
+      position: new Vector3(65, 0.15, 13),
+      rotation: Quaternion.Euler(0, 180, 0),
+	  scale: new Vector3(1.35, 1.35, 1.35),
     },
-    'models/NPCs/ghost1.glb',
+    'models/NPCs/skeleton1.glb',
     () => {
       if (mainGhost.dialog.isDialogOpen) return
 
@@ -462,7 +463,6 @@ export function addMainGhostNPC(progression: HalloweenState) {
     {
       portrait: { path: 'images/portraits/main-ghost.png' },
       reactDistance: 10,
-      faceUser: true,
       idleAnim: `idle1`
     },
 
@@ -519,60 +519,65 @@ export function addGhostsAndCrypts() {
   //mother
   let ghost1 = new Skeleton(
     {
-      position: new Vector3(40, 1.7, 40),
-      rotation: Quaternion.Euler(0, 90, 0),
+      position: new Vector3(40, 0, 40),
+      rotation: Quaternion.Euler(0, 90, 0), 
+	  scale: new Vector3(1.35, 1.35, 1.35),
     },
     new GLTFShape(npc_data[0].modelPath),
     npc_data[0].patrolPath,
     ghost1Talk,
-    'Swirl.001',
+    'swirl',
     4
   )
 
   // oldtimer
   let ghost2 = new Skeleton(
     {
-      position: new Vector3(60, 1.7, 40),
-      rotation: Quaternion.Euler(0, 90, 0),
+      position: new Vector3(60, 0, 40),
+      rotation: Quaternion.Euler(0, 90, 0), 
+	  scale: new Vector3(1.35, 1.35, 1.35),
     },
     new GLTFShape(npc_data[1].modelPath),
     npc_data[1].patrolPath,
     ghost2Talk,
-    'Swirl.001',
+    'swirl',
     4
   )
 
   // hippie
   let ghost3 = new Skeleton(
     {
-      position: new Vector3(80, 1.7, 40),
+      position: new Vector3(80, 0, 40),
       rotation: Quaternion.Euler(0, 90, 0),
+	  scale: new Vector3(1.35, 1.35, 1.35),
     },
     new GLTFShape(npc_data[2].modelPath),
     npc_data[2].patrolPath,
     ghost3Talk,
-    'Swirl.001',
+    'swirl',
     4
   )
 
   // french
   let ghost4 = new Skeleton(
     {
-      position: new Vector3(80, 1.7, 40),
-      rotation: Quaternion.Euler(0, 90, 0),
+      position: new Vector3(80, 0, 40),
+      rotation: Quaternion.Euler(0, 90, 0), 
+	  scale: new Vector3(1.35, 1.35, 1.35),
     },
     new GLTFShape(npc_data[3].modelPath),
     npc_data[3].patrolPath,
     ghost4Talk,
-    'Swirl.001',
+    'swirl',
     4
   )
 
   // lover
   let ghost5 = new Skeleton(
     {
-      position: new Vector3(80, 1.7, 40),
-      rotation: Quaternion.Euler(0, 90, 0),
+      position: new Vector3(80, 0, 40),
+      rotation: Quaternion.Euler(0, 90, 0), 
+	  scale: new Vector3(1.35, 1.35, 1.35),
     },
     new GLTFShape(npc_data[4].modelPath),
     npc_data[4].patrolPath,
@@ -584,13 +589,14 @@ export function addGhostsAndCrypts() {
   // philosopher
   let ghost6 = new Skeleton(
     {
-      position: new Vector3(80, 1.7, 40),
-      rotation: Quaternion.Euler(0, 90, 0),
+      position: new Vector3(80, 0, 40),
+      rotation: Quaternion.Euler(0, 90, 0), 
+	  scale: new Vector3(1.35, 1.35, 1.35),
     },
     new GLTFShape(npc_data[5].modelPath),
     npc_data[5].patrolPath,
     ghost6Talk,
-    'Swirl.001',
+    'swirl',
     4
   )
 
@@ -612,14 +618,14 @@ export function addGhostsAndCrypts() {
     },
     new GLTFShape('models/graves/mother_grave.glb'),
     ghost1,
-    'Open_Grave',
-    'Close_Grave'
+    'Trigger',
+    'Trigger_Close'
   )
 
   let crypt2 = new Grave(
     {
       position: new Vector3(81 + 8, 0.2, 15),
-      rotation: Quaternion.Euler(0, 90, 0),
+      rotation: Quaternion.Euler(0, 90, 0), scale: new Vector3(1.35, 1.35, 1.35),
     },
     new GLTFShape('models/crypt_machete.glb'),
     null,
@@ -634,8 +640,8 @@ export function addGhostsAndCrypts() {
     },
     new GLTFShape('models/graves/oldtimer_grave.glb'),
     ghost2,
-    'Open_Grave',
-    'Close_Grave'
+    'Trigger',
+    'Trigger_Close'
   )
 
   let dummyForCat = new Entity()
@@ -659,8 +665,8 @@ export function addGhostsAndCrypts() {
 
   let crypt5 = new Grave(
     {
-      position: new Vector3(21 + 8, 0, 52),
-      rotation: Quaternion.Euler(0, 90, 0),
+      position: new Vector3(21 + 8, 0.10, 52),
+      rotation: Quaternion.Euler(0, 90, 0), scale: new Vector3(1.35, 1.35, 1.35),
     },
 
     new GLTFShape('models/graves/french_grave.glb'),
@@ -671,12 +677,12 @@ export function addGhostsAndCrypts() {
 
   let crypt6 = new Grave(
     {
-      position: new Vector3(48 + 8, 0.15, 53),
+      position: new Vector3(48 + 8, 0.15, 54),
     },
     new GLTFShape('models/graves/love_grave.glb'),
     ghost5,
-    'Open_Grave',
-    'Close_Grave'
+    'Trigger',
+    'Trigger_Close'
   )
 
   let crypt7 = new Grave(
@@ -693,7 +699,7 @@ export function addGhostsAndCrypts() {
 
   let crypt8 = new Grave(
     {
-      position: new Vector3(68 + 8, 0, 66),
+      position: new Vector3(68 + 8, 0.15, 66),
       rotation: Quaternion.Euler(0, -45, 0),
     },
     new GLTFShape('models/graves/hippie_grave.glb'),
@@ -715,7 +721,7 @@ export function addGhostsAndCrypts() {
   let crypt10 = new Grave(
     {
       position: new Vector3(92 + 8, 0, 69),
-      rotation: Quaternion.Euler(0, 90, 0),
+      rotation: Quaternion.Euler(0, 90, 0), scale: new Vector3(1.35, 1.35, 1.35),
       scale: new Vector3(0.7, 0.7, 0.7),
     },
     new GLTFShape('models/CryptZombieHand.glb'),
@@ -727,7 +733,7 @@ export function addGhostsAndCrypts() {
   let crypt11 = new Grave(
     {
       position: new Vector3(21.3 + 8, 0.2, 70),
-      rotation: Quaternion.Euler(0, 90, 0),
+      rotation: Quaternion.Euler(0, 90, 0), scale: new Vector3(1.35, 1.35, 1.35),
     },
     new GLTFShape('models/graves/philo_grave.glb'),
     ghost6,
