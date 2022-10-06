@@ -1,16 +1,16 @@
-import { followingGhost, Ghost } from './NPC/ghost/ghost'
+import { followingSkeletons, Skeleton } from './NPC/ghost/skeleton'
 
 export class Grave extends Entity {
   onActivate: () => void
   openAnim: AnimationState
   closeAnim: AnimationState
-  resident: Ghost
+  resident: Skeleton
   isOpen: boolean
   bugs: Entity
   constructor(
     position: TranformConstructorArgs,
     model: GLTFShape,
-    resident?: Ghost | null,
+    resident?: Skeleton | null,
     openAnim?: string,
     closeAnim?: string,
     onActivate?: () => void
@@ -53,13 +53,13 @@ export class Grave extends Entity {
           (e) => {
             if (
               this.resident &&
-              followingGhost &&
-              followingGhost[0] == this.resident
+              followingSkeletons &&
+              followingSkeletons[0] == this.resident
             ) {
               this.resident.goHome(this)
-            } else if (this.resident && followingGhost) {
+            } else if (this.resident && followingSkeletons) {
               log('Not my home')
-              followingGhost[0].refusePlace()
+              followingSkeletons[0].refusePlace()
             }
           },
           {

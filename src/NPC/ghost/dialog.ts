@@ -4,7 +4,7 @@ import * as utils from '@dcl/ecs-scene-utils';
 import {Reward} from '../../halloweenQuests/loot';
 import {quest} from '../../halloweenQuests/quest';
 import * as ui from '@dcl/ui-scene-utils';
-import {Ghost} from './ghost';
+import {Skeleton} from './skeleton';
 import {getKey} from '../../hauntedHouse';
 import {TTHouse} from "../../house";
 
@@ -274,7 +274,7 @@ export const phoneVoice: Dialog[] = [
 
 // Start of mission
 
-export function missionBrief(ghostCounter: ui.UICounter, ghostUIBck: ui.LargeIcon, ghostsArray: Ghost[]) {
+export function missionBrief(ghostCounter: ui.UICounter, ghostUIBck: ui.LargeIcon, ghostsArray: Skeleton[]) {
   return [
     {
       text: `Hey there!`,

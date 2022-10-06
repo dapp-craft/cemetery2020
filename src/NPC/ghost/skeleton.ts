@@ -26,7 +26,7 @@ import { updateProgression } from '../../halloweenQuests/progression'
 
 
 
-export enum GhostState {
+export enum SkeletonState {
   Wondering,
   Talking,
   Following,
@@ -49,9 +49,9 @@ export class LerpData {
   }
 }
 
-export let followingGhost: Ghost[] = []
+export let followingSkeletons: Skeleton[] = []
 
-export let ghostsArray: Ghost[] = []
+export let ghostsArray: Skeleton[] = []
 
 export let activeGraves: Grave[] = []
 
@@ -67,12 +67,12 @@ let sharedDialog = new NPCUtils.DialogWindow(
 )
 sharedDialog.panel.height = 150
 
-export class Ghost extends Entity {
+export class Skeleton extends Entity {
   public script: Dialog[]
   public hasDialogOpen: boolean
   public inCooldown: boolean
   public home: Grave
-  public state: GhostState = GhostState.Wondering
+  public state: SkeletonState = SkeletonState.Wondering
   private idleAnim: AnimationState
   private vanishAnim: AnimationState
   private lastPlayedAnim: AnimationState
@@ -113,9 +113,9 @@ export class Ghost extends Entity {
       new OnPointerDown(
         (e) => {
           if (!quest.isChecked(1)) return
-          if (this.state == GhostState.Wondering) {
+          if (this.state == SkeletonState.Wondering) {
             this.startFollowing()
-          } else if (this.state == GhostState.Following) {
+          } else if (this.state == SkeletonState.Following) {
             this.stopFollowing()
           }
         },
@@ -140,7 +140,7 @@ export class Ghost extends Entity {
             if (
               this.inCooldown ||
               sharedDialog.isDialogOpen ||
-              followingGhost.length == 0
+              followingSkeletons.length == 0
             ) {
               return
             }
@@ -164,7 +164,7 @@ export class Ghost extends Entity {
     if (duration) {
       sharedDialogTimerEntity.addComponentOrReplace(
         new utils.Delay(duration * 1000, () => {
-          if (followingGhost.length != 0 || !this.hasDialogOpen) return
+          if (followingSkeletons.length != 0 || !this.hasDialogOpen) return
           this.hasDialogOpen = false
           sharedDialog.closeDialogWindow()
         })
@@ -202,17 +202,17 @@ export class Ghost extends Entity {
   }
 
   startFollowing() {
-    this.state = GhostState.Following
+    this.state = SkeletonState.Following
     this.getComponent(utils.TriggerComponent).enabled = false
     this.getComponent(OnPointerDown).hoverText = 'Stop Following'
 
 
-    if (followingGhost.length == 0) {
+    if (followingSkeletons.length == 0) {
       this.followingPoint = player.position
     } else {
-      this.followingPoint = followingGhost[followingGhost.length - 1].getComponent(Transform).position
+      this.followingPoint = followingSkeletons[followingSkeletons.length - 1].getComponent(Transform).position
     }
-    followingGhost.push(this)
+    followingSkeletons.push(this)
     log("FOLLOWING POSITION: " + this.followingPoint)
 
     this.talk(this.script, 0, 2)
@@ -237,7 +237,7 @@ export class Ghost extends Entity {
 
     this.followingPoint = null
     let path = this.getComponent(LerpData)
-    this.state = GhostState.Returning
+    this.state = SkeletonState.Returning
     path.fraction = 0
     path.lastPos = this.getComponent(Transform).position.clone()
     path.nextPos = path.path[1] // get closest path point
@@ -252,27 +252,27 @@ export class Ghost extends Entity {
     this.idleAnim.play()
 
 
-    const index = followingGhost.indexOf(this)
+    const index = followingSkeletons.indexOf(this)
     log("INDEX: " + index)
-    const last = followingGhost.length - 1
+    const last = followingSkeletons.length - 1
     switch (index) {
       case 0:
-        followingGhost.splice(index, 1)
+        followingSkeletons.splice(index, 1)
 
-        if (followingGhost.length == 0) {
+        if (followingSkeletons.length == 0) {
           CloseAllGraves()
         } else {
-          followingGhost[0].followingPoint = player.position
+          followingSkeletons[0].followingPoint = player.position
         }
         break;
 
       case last:
-        followingGhost.splice(index, 1)
+        followingSkeletons.splice(index, 1)
         break;
 
       default:
-        followingGhost.splice(index, 1)
-        followingGhost[index].followingPoint = followingGhost[index - 1].getComponent(Transform).position
+        followingSkeletons.splice(index, 1)
+        followingSkeletons[index].followingPoint = followingSkeletons[index - 1].getComponent(Transform).position
         break;
     }
 
@@ -282,7 +282,7 @@ export class Ghost extends Entity {
   goHome(destination: Grave) {
     log('FOUND HOME')
     // say something
-    this.state = GhostState.Going
+    this.state = SkeletonState.Going
     this.talk(this.script, 1, 2)
 
     this.getComponent(LerpData).fraction = 0
@@ -310,12 +310,12 @@ export class Ghost extends Entity {
 
     this.home = destination
 
-    followingGhost.shift()
-    followingGhost[0].followingPoint = player.position
+    followingSkeletons.shift()
+    followingSkeletons[0].followingPoint = player.position
   }
 
   vanish() {
-    this.state = GhostState.Gone
+    this.state = SkeletonState.Gone
 
     this.lastPlayedAnim.stop()
     this.vanishAnim.play()
@@ -344,7 +344,7 @@ export class Ghost extends Entity {
 
     this.endAnimTimer.addComponentOrReplace(
       new utils.Delay(2000, () => {
-        if (this.state == GhostState.Following) return
+        if (this.state == SkeletonState.Following) return
         this.talk(this.script, 0)
       })
     )
@@ -369,7 +369,7 @@ export class GhostMove {
     for (let ghost of ghostsArray) {
       let transform = ghost.getComponent(Transform)
       let path = ghost.getComponent(LerpData)
-      if (ghost.state == GhostState.Wondering) {
+      if (ghost.state == SkeletonState.Wondering) {
         if (path.fraction < 1) {
           path.fraction += dt / 20
           transform.position = Vector3.Lerp(
@@ -381,12 +381,14 @@ export class GhostMove {
           path.origin = path.target
           path.target += 1
           if (path.target >= path.path.length) {
-            path.target = 0
+            path.path.reverse()
+            path.origin = 0
+            path.target = 1
           }
           path.fraction = 0
           transform.lookAt(path.path[path.target])
         }
-      } else if (ghost.state == GhostState.Following) {
+      } else if (ghost.state == SkeletonState.Following) {
         transform.lookAt(new Vector3(ghost.followingPoint.x, 0, ghost.followingPoint.z))
         //ghost.dialog.container.visible = true
         // Continue to move towards the player until it is within 2m away
@@ -402,7 +404,7 @@ export class GhostMove {
         } else {
           ghost.getComponent(Animator).getClip('idle2').play()
         }
-      } else if (ghost.state == GhostState.Returning) {
+      } else if (ghost.state == SkeletonState.Returning) {
         ghost.getComponent(Animator).getClip('idle1').play()
         path.fraction += dt / 3
         transform.position = Vector3.Lerp(
@@ -411,12 +413,12 @@ export class GhostMove {
           path.fraction
         )
         if (path.fraction >= 1) {
-          ghost.state = GhostState.Wondering
+          ghost.state = SkeletonState.Wondering
           path.target = 2
           path.fraction = 0
           log('Returned to normal path')
         }
-      } else if (ghost.state == GhostState.Going) {
+      } else if (ghost.state == SkeletonState.Going) {
         path.fraction += dt / 3
         transform.position = Vector3.Lerp(
           path.lastPos,
@@ -515,7 +517,7 @@ export function counterIncrease() {
 
 export function addGhostsAndCrypts() {
   //mother
-  let ghost1 = new Ghost(
+  let ghost1 = new Skeleton(
     {
       position: new Vector3(40, 1.7, 40),
       rotation: Quaternion.Euler(0, 90, 0),
@@ -528,7 +530,7 @@ export function addGhostsAndCrypts() {
   )
 
   // oldtimer
-  let ghost2 = new Ghost(
+  let ghost2 = new Skeleton(
     {
       position: new Vector3(60, 1.7, 40),
       rotation: Quaternion.Euler(0, 90, 0),
@@ -541,7 +543,7 @@ export function addGhostsAndCrypts() {
   )
 
   // hippie
-  let ghost3 = new Ghost(
+  let ghost3 = new Skeleton(
     {
       position: new Vector3(80, 1.7, 40),
       rotation: Quaternion.Euler(0, 90, 0),
@@ -554,7 +556,7 @@ export function addGhostsAndCrypts() {
   )
 
   // french
-  let ghost4 = new Ghost(
+  let ghost4 = new Skeleton(
     {
       position: new Vector3(80, 1.7, 40),
       rotation: Quaternion.Euler(0, 90, 0),
@@ -567,7 +569,7 @@ export function addGhostsAndCrypts() {
   )
 
   // lover
-  let ghost5 = new Ghost(
+  let ghost5 = new Skeleton(
     {
       position: new Vector3(80, 1.7, 40),
       rotation: Quaternion.Euler(0, 90, 0),
@@ -580,7 +582,7 @@ export function addGhostsAndCrypts() {
   )
 
   // philosopher
-  let ghost6 = new Ghost(
+  let ghost6 = new Skeleton(
     {
       position: new Vector3(80, 1.7, 40),
       rotation: Quaternion.Euler(0, 90, 0),
@@ -758,7 +760,7 @@ export function addGhostsAndCrypts() {
 
 export function OpenAllGraves() {
   for (let grave of activeGraves) {
-    if (grave.resident.state != GhostState.Gone) {
+    if (grave.resident.state != SkeletonState.Gone) {
       grave.open()
     }
   }
