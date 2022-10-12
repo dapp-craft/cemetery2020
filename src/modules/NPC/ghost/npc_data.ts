@@ -1,6 +1,8 @@
+import { npc_model_paths } from "src/resources/model_paths";
+
 export const npc_data = [
   {
-    modelPath: 'models/NPCs/skeleton.glb',
+    modelPath: npc_model_paths.skeleton1,
     patrolPath: [
 	            //"path_locator",
            new Vector3(
@@ -81,7 +83,7 @@ export const npc_data = [
     ],
   },
   {
-    modelPath: 'models/NPCs/skeleton.glb',
+    modelPath: npc_model_paths.skeleton2,
     patrolPath: [
             // "path_locator.004",
             new Vector3(
@@ -135,7 +137,7 @@ export const npc_data = [
     ]
   },
   {
-    modelPath: 'models/NPCs/skeleton.glb',
+    modelPath: npc_model_paths.skeleton3,
     patrolPath: [
             //"path_locator",
            new  Vector3(
@@ -195,7 +197,7 @@ export const npc_data = [
     ]
   },
   {
-    modelPath: 'models/NPCs/skeleton.glb',
+    modelPath: npc_model_paths.skeleton4,
     patrolPath: [
            //"path_locator",
             new Vector3(
@@ -230,7 +232,7 @@ export const npc_data = [
     ]
   },
   {
-    modelPath: 'models/NPCs/skeleton.glb',
+    modelPath: npc_model_paths.skeleton5,
     patrolPath: [
             // "path_locator",
             new Vector3(
@@ -270,7 +272,7 @@ export const npc_data = [
     ]
   },
   {
-    modelPath: 'models/NPCs/skeleton.glb',
+    modelPath: npc_model_paths.skeleton6,
     patrolPath: [
            //"path_locator",
             new Vector3(

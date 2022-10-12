@@ -4,7 +4,7 @@ import { TriggerSphereShape } from '@dcl/ecs-scene-utils'
 import * as NPCUtils from '@dcl/npc-scene-utils'
 import { Dialog } from '@dcl/npc-scene-utils'
 
-import { COLOR_GREEN } from '../../theme/color'
+import { COLOR_GREEN } from '../../../resources/theme/color'
 
 import { Grave } from '../../grave'
 
@@ -23,6 +23,7 @@ import { npc_data } from './npc_data'
 
 import { HalloweenState, halloweenTheme, quest } from '../../halloweenQuests/quest'
 import { updateProgression } from '../../halloweenQuests/progression'
+import { graveyard_models, npc_model_paths } from 'src/resources/model_paths'
 
 
 
@@ -450,7 +451,7 @@ export function addMainGhostNPC(progression: HalloweenState) {
       rotation: Quaternion.Euler(0, 180, 0),
       scale: new Vector3(1.35, 1.35, 1.35),
     },
-    'models/NPCs/skeleton1.glb',
+    npc_model_paths.skeletonQuestGiver,
     () => {
       if (mainGhost.dialog.isDialogOpen) return
 
@@ -617,7 +618,7 @@ export function addGhostsAndCrypts() {
       position: new Vector3(91 + 8, 0.15, 8),
       rotation: Quaternion.Euler(0, -90, 0),
     },
-    new GLTFShape('models/graves/mother_grave.glb'),
+    new GLTFShape(graveyard_models.motherGrave),
     ghost1,
     'Trigger',
     'Trigger_Close'
@@ -628,7 +629,7 @@ export function addGhostsAndCrypts() {
       position: new Vector3(81 + 8, 0.2, 15),
       rotation: Quaternion.Euler(0, 90, 0), scale: new Vector3(1.35, 1.35, 1.35),
     },
-    new GLTFShape('models/crypt_machete.glb'),
+    new GLTFShape(graveyard_models.machete),
     null,
     'Machete_Trigger',
     'Trigger_Close'
@@ -639,7 +640,7 @@ export function addGhostsAndCrypts() {
       position: new Vector3(57 + 8, 0.1, 19),
       rotation: Quaternion.Euler(0, 180, 0),
     },
-    new GLTFShape('models/graves/oldtimer_grave.glb'),
+    new GLTFShape(graveyard_models.oldtimerGrave),
     ghost2,
     'Trigger',
     'Trigger_Close'
@@ -658,7 +659,7 @@ export function addGhostsAndCrypts() {
       position: new Vector3(21 + 8, 0, 16),
       rotation: Quaternion.Euler(0, 270, 0),
     },
-    new GLTFShape('models/CatCrypt.glb'),
+    new GLTFShape(graveyard_models.catCrypt),
     null,
     'Trigger',
     'Trigger_Close'
@@ -670,7 +671,7 @@ export function addGhostsAndCrypts() {
       rotation: Quaternion.Euler(0, 90, 0), scale: new Vector3(1.35, 1.35, 1.35),
     },
 
-    new GLTFShape('models/graves/french_grave.glb'),
+    new GLTFShape(graveyard_models.frenchGrave),
     ghost4,
     'Trigger',
     'Trigger_Close'
@@ -680,7 +681,7 @@ export function addGhostsAndCrypts() {
     {
       position: new Vector3(48 + 8, 0.15, 54),
     },
-    new GLTFShape('models/graves/love_grave.glb'),
+    new GLTFShape(graveyard_models.loveGrave),
     ghost5,
     'Trigger',
     'Trigger_Close'
@@ -692,7 +693,7 @@ export function addGhostsAndCrypts() {
       rotation: Quaternion.Euler(0, 180, 0),
       scale: new Vector3(0.7, 0.7, 0.7)
     },
-    new GLTFShape('models/CryptZombieHand.glb'),
+    new GLTFShape(graveyard_models.zombieHand),
     null,
     'ZombieHand_Trigger',
     'Trigger_Close'
@@ -703,21 +704,13 @@ export function addGhostsAndCrypts() {
       position: new Vector3(68 + 8, 0.15, 66),
       rotation: Quaternion.Euler(0, -45, 0),
     },
-    new GLTFShape('models/graves/hippie_grave.glb'),
+    new GLTFShape(graveyard_models.hippieGrave),
     ghost3,
     'Trigger',
     'Trigger_Close_Armature'
   )
 
-  //   let crypt9 = new Grave(
-  //     {
-  //       position: new Vector3(77.3 + 8, 0, 52.5),
-  //     },
-  //     new GLTFShape('models/Crypt01.glb'),
-  //     null,
-  //     'Trigger',
-  //     'Trigger_Close'
-  //   )
+
 
   let crypt10 = new Grave(
     {
@@ -725,7 +718,7 @@ export function addGhostsAndCrypts() {
       rotation: Quaternion.Euler(0, 90, 0),
       scale: new Vector3(0.7, 0.7, 0.7)
     },
-    new GLTFShape('models/CryptZombieHand.glb'),
+    new GLTFShape(graveyard_models.zombieHand),
     null,
     'ZombieHand_Trigger',
     'Trigger_Close'
@@ -737,7 +730,7 @@ export function addGhostsAndCrypts() {
       rotation: Quaternion.Euler(0, 90, 0),
       scale: new Vector3(1.35, 1.35, 1.35)
     },
-    new GLTFShape('models/graves/philo_grave.glb'),
+    new GLTFShape(graveyard_models.philoGrave),
     ghost6,
     'Trigger',
     'Close_grave'

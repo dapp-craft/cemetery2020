@@ -1,3 +1,4 @@
+import { stuff } from 'src/resources/model_paths'
 import { followingSkeletons, Skeleton } from './NPC/ghost/skeleton'
 
 export class Grave extends Entity {
@@ -39,7 +40,7 @@ export class Grave extends Entity {
       this.bugs.addComponent(
         new Transform({ position: new Vector3(-0.3, 0, 0.5) })
       )
-      this.bugs.addComponent(new GLTFShape('models/graves/light_bugs.glb'))
+      this.bugs.addComponent(new GLTFShape(stuff.light_bugs))
       this.bugs.setParent(this)
       this.bugs.getComponent(GLTFShape).visible = false
 

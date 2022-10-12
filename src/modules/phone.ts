@@ -1,3 +1,5 @@
+import { haunted_model_paths } from "src/resources/model_paths"
+
 export class Phone extends Entity {
   onPickup: () => void
   anim: AnimationState
@@ -7,7 +9,7 @@ export class Phone extends Entity {
   picupSound: AudioClip
   constructor(position: TranformConstructorArgs, onPickup: () => void) {
     super()
-    this.addComponent(new GLTFShape('models/Phone.glb'))
+    this.addComponent(new GLTFShape(haunted_model_paths.phone))
     this.addComponent(new Transform(position))
     this.addComponent(new Animator())
     engine.addEntity(this)

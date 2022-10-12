@@ -1,14 +1,15 @@
 import * as utils from '@dcl/ecs-scene-utils'
 import * as ui from '@dcl/ui-scene-utils'
 import {fireBaseServer, playerRealm, setRealm, setUserData, updateProgression, userData,} from './progression'
-import {IN_PREVIEW} from '../config'
-import {COLOR_GREEN} from '../theme/color'
+import {IN_PREVIEW} from '../../resources/config'
+import {COLOR_GREEN} from '../../resources/theme/color'
 import {getProvider} from '@decentraland/web3-provider'
 import * as EthConnect from 'eth-connect'
+import { loot_models } from 'src/resources/model_paths'
 
 
-let particleGLTF = new GLTFShape('models/Particles.glb')
-let starGLTF = new GLTFShape('models/star.glb')
+let particleGLTF = new GLTFShape(loot_models.particles)
+let starGLTF = new GLTFShape(loot_models.star)
 
 @Component('alreadyFoundLoot')
 export class AlreadyFoundLoot {

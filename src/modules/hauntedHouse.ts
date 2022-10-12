@@ -3,6 +3,7 @@ import {quest} from './halloweenQuests/quest'
 import * as ui from '@dcl/ui-scene-utils'
 import {Reward} from './halloweenQuests/loot'
 import {Grave} from './grave'
+import { haunted_model_paths } from 'src/resources/model_paths'
 
 export let hasKey = false
 export let keyUI
@@ -10,7 +11,7 @@ export let keyUI
 export function doorHauntedHouse() {
   let doorHauntedHouse = new Entity()
 
-  doorHauntedHouse.addComponent(new GLTFShape('models/Door_HauntedHouse.glb'))
+  doorHauntedHouse.addComponent(new GLTFShape(haunted_model_paths.haunted_house))
   doorHauntedHouse.addComponent(
     new Transform({
       position: new Vector3(90.63, 0.53, 24),
@@ -52,7 +53,7 @@ export function doorHauntedHouse() {
       rotation: Quaternion.Euler(0, 45, 0),
       scale: new Vector3(1.6, 1.6, 1.6),
     },
-    new GLTFShape('models/Coffin.glb'),
+    new GLTFShape(haunted_model_paths.coffin),
     null,
     'Trigger',
     'Trigger_Close',

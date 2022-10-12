@@ -1,6 +1,6 @@
 import {NPC} from "@dcl/npc-scene-utils";
 import * as ui from "@dcl/ui-scene-utils";
-import {COLOR_GREEN} from "./theme/color";
+import {COLOR_GREEN} from "../resources/theme/color";
 import * as utils from "@dcl/ecs-scene-utils";
 import {updateProgression} from './halloweenQuests/progression'
 import {quest} from "./halloweenQuests/quest";

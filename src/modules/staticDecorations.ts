@@ -1,16 +1,17 @@
 import * as utils from '@dcl/ecs-scene-utils'
-import { fog_data } from './modules/fog/fog_data' 
-import { spawnFog } from './modules/fog/spawnFog' 
-import { openPhotosUI } from './modules/photosUI' 
+import { static_decoration_models } from 'src/resources/model_paths'
+import { fog_data } from './fog/fog_data'
+import { spawnFog } from './fog/spawnFog'
+import { openPhotosUI } from './photosUI'
 
 export function addStaticStuff() {
     //--- Set up a system ---
     let cementery = new Entity()
 
-    cementery.addComponent(new GLTFShape('models/base.glb'))
+    cementery.addComponent(new GLTFShape(static_decoration_models.base))
     cementery.addComponent(
         new Transform({
-            position: new Vector3(0, 3, 0),
+            position: new Vector3(0, 0, 0),
         })
     )
 
@@ -158,7 +159,7 @@ export function addStaticStuff() {
 
     let emptyCrypts = new Entity()
 
-    emptyCrypts.addComponent(new GLTFShape('models/tombs.glb'))
+    emptyCrypts.addComponent(new GLTFShape(static_decoration_models.tomb))
     emptyCrypts.addComponent(
         new Transform({
             position: new Vector3(0, 0, 0),
@@ -170,8 +171,7 @@ export function addStaticStuff() {
     //////// BATS
 
     const bats = new Entity()
-    //const gltfShape_fog = new GLTFShape('models/fogMaze.glb')
-    const batShape = new GLTFShape('models/Bat.glb')
+    const batShape = new GLTFShape(static_decoration_models.bat)
     bats.addComponentOrReplace(batShape)
     bats.addComponent(
         new Transform({
@@ -187,7 +187,7 @@ export function addStaticStuff() {
     engine.addEntity(bats)
 
     let corpse = new Entity()
-    corpse.addComponent(new GLTFShape('models/Corpse.glb'))
+    corpse.addComponent(new GLTFShape(static_decoration_models.corpse))
     corpse.addComponent(
         new Transform({
             position: new Vector3(8.5, 0.1, 41),

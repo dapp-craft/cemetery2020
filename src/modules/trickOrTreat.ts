@@ -7,7 +7,7 @@ import {
   mayorGhostDialog,
   phoneVoice,
 } from './NPC/ghost/dialog'
-import {COLOR_GREEN} from './theme/color'
+import {COLOR_GREEN} from '../resources/theme/color'
 import * as NPCUtils from '@dcl/npc-scene-utils'
 import {NPC} from '@dcl/npc-scene-utils'
 import {HalloweenState, halloweenTheme, quest} from './halloweenQuests/quest'
@@ -16,6 +16,7 @@ import * as ui from '@dcl/ui-scene-utils'
 import * as utils from '@dcl/ecs-scene-utils'
 import {Phone} from './phone'
 import {Reward} from './halloweenQuests/loot'
+import { npc_model_paths, stuff } from 'src/resources/model_paths'
 
 
 export let catLover: NPC
@@ -49,7 +50,7 @@ export function addClosedDoors() {
       position: new Vector3(112.8, 0.1, 72.45),
       rotation: Quaternion.Euler(0, 180, 0),
     },
-    new GLTFShape('models/Door_House.glb'),
+    new GLTFShape(stuff.door_house),
     'Open',
     'Close'
   )
@@ -59,7 +60,7 @@ export function addClosedDoors() {
       position: new Vector3(112.3, 0.15, 56.53),
       rotation: Quaternion.Euler(0, 180, 0),
     },
-    new GLTFShape('models/Door_House.glb'),
+    new GLTFShape(stuff.door_house),
     'Open',
     'Close'
   )
@@ -69,7 +70,7 @@ export function addClosedDoors() {
       position: new Vector3(112.82, 0.05, 40.83),
       rotation: Quaternion.Euler(0, 180, 0),
     },
-    new GLTFShape('models/Door_House.glb'),
+    new GLTFShape(stuff.door_house),
     'Open',
     'Close'
   )
@@ -79,7 +80,7 @@ export function addClosedDoors() {
       position: new Vector3(113, 0.05, 25.13),
       rotation: Quaternion.Euler(0, 180, 0),
     },
-    new GLTFShape('models/Door_Rectangle.glb'),
+    new GLTFShape(stuff.door_rectangle),
     'Open',
     'Close'
   )
@@ -89,7 +90,7 @@ export function addClosedDoors() {
       position: new Vector3(113, 0.05, 9.3),
       rotation: Quaternion.Euler(0, 180, 0),
     },
-    new GLTFShape('models/Door_Rectangle.glb'),
+    new GLTFShape(stuff.door_rectangle),
     'Open',
     'Close'
   )
@@ -99,7 +100,7 @@ export function addClosedDoors() {
       position: new Vector3(14.9, 0, 7.4),
       rotation: Quaternion.Euler(0, 0, 0),
     },
-    new GLTFShape('models/Door_Rectangle.glb'),
+    new GLTFShape(stuff.door_rectangle),
     'Open',
     'Close'
   )
@@ -109,7 +110,7 @@ export function addClosedDoors() {
       position: new Vector3(14.9, 0, 23.25),
       rotation: Quaternion.Euler(0, 0, 0),
     },
-    new GLTFShape('models/Door_Rectangle.glb'),
+    new GLTFShape(stuff.door_rectangle),
     'Open',
     'Close'
   )
@@ -119,7 +120,7 @@ export function addClosedDoors() {
       position: new Vector3(15.18, 0.15, 39.2),
       rotation: Quaternion.Euler(0, 0, 0),
     },
-    new GLTFShape('models/Door_House.glb'),
+    new GLTFShape(stuff.door_house),
     'Open',
     'Close',
     null,
@@ -132,7 +133,7 @@ export function addClosedDoors() {
       position: new Vector3(15.18, 0.15, 54.77),
       rotation: Quaternion.Euler(0, 0, 0),
     },
-    new GLTFShape('models/Door_House.glb'),
+    new GLTFShape(stuff.door_house),
     'Open',
     'Close'
   )
@@ -142,7 +143,7 @@ export function addClosedDoors() {
       position: new Vector3(15.18, 0.15, 70.73),
       rotation: Quaternion.Euler(0, 0, 0),
     },
-    new GLTFShape('models/Door_House.glb'),
+    new GLTFShape(stuff.door_house),
     'Open',
     'Close'
   )
@@ -188,7 +189,7 @@ export function addHouses(progression: HalloweenState) {
         position: new Vector3(-1, 0, 0.8),
         rotation: Quaternion.Euler(0, 90, 0),
       },
-      'models/NPCs/NPC Cat Lover.glb',
+      npc_model_paths.catLover,
       () => {
         // check for cat wearables
         catLover.talk(catLoverDialog(catLover, doorHouse1), 0)
@@ -230,7 +231,7 @@ export function addHouses(progression: HalloweenState) {
         position: new Vector3(-1, 0, 0.8),
         rotation: Quaternion.Euler(0, 90, 0),
       },
-      'models/NPCs/farmer.glb',
+      npc_model_paths.farmer,
       () => {
         farmer.talk(farmerDialog(farmer, doorHouse7), 0)
         farmer.playAnimation(`Head_Yes`, true, 2.63)
@@ -263,7 +264,7 @@ export function addHouses(progression: HalloweenState) {
         position: new Vector3(-1, 0.05, 0.7),
         rotation: Quaternion.Euler(0, 90, 0),
       },
-      'models/NPCs/ghostblaster_civil.glb',
+      npc_model_paths.ghostblaster,
       () => {
         ghostControlGuy.talk(ghostControlDialog(ghostControlGuy, doorHouse6), 0)
         ghostControlGuy.playAnimation(`Relieved`, true, 3.03)
@@ -302,7 +303,7 @@ export function addHouses(progression: HalloweenState) {
         position: new Vector3(-1, 0, 0.75),
         rotation: Quaternion.Euler(0, 90, 0),
       },
-      'models/NPCs/ghost1.glb',
+      npc_model_paths.ghost1,
       () => {
         mayorGhost.talk(mayorGhostDialog(mayorGhost, doorHouse4), 0)
         mayorGhost.playAnimation(`idle1`, true, 9.8)
@@ -341,7 +342,7 @@ export function addHouses(progression: HalloweenState) {
         position: new Vector3(-1, 0, 0.85),
         rotation: Quaternion.Euler(0, 90, 0),
       },
-      'models/NPCs/girl.glb',
+      npc_model_paths.girl,
       () => {
         templeGirl.talk(castleGuyDialog(templeGirl, doorHouse10), 0)
         templeGirl.playAnimation(`Acknowledging`, true, 1.97)

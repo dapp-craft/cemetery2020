@@ -1,4 +1,4 @@
-import {HalloweenState} from './halloweenQuests/quest'
+import {HalloweenState} from '../modules/halloweenQuests/quest'
 
 export const TESTDATA_ENABLED = true
 export let IN_PREVIEW: boolean = false

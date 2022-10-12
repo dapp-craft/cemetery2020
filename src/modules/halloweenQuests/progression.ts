@@ -1,6 +1,6 @@
 import {getUserData, UserData} from '@decentraland/Identity'
 import {getCurrentRealm, isPreviewMode, Realm,} from '@decentraland/EnvironmentAPI'
-import {IN_PREVIEW, setInPreview, TESTDATA_ENABLED, TESTQUESTSTATE,} from '../config'
+import {IN_PREVIEW, setInPreview, TESTDATA_ENABLED, TESTQUESTSTATE,} from '../../resources/config'
 import {HalloweenState, initialQuestUI, quest} from './quest'
 import * as ui from '@dcl/ui-scene-utils'
 import * as utils from '@dcl/ecs-scene-utils'
