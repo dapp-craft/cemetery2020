@@ -7,7 +7,7 @@ export function addStaticStuff() {
     //--- Set up a system ---
     let cementery = new Entity()
 
-    cementery.addComponent(new GLTFShape('base.glb'))
+    cementery.addComponent(new GLTFShape('models/base.glb'))
     cementery.addComponent(
         new Transform({
             position: new Vector3(0, 0, 0),
