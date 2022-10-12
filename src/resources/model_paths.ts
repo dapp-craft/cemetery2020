@@ -33,7 +33,7 @@ export const stuff = {
 }
 
 export const static_decoration_models = {
-    base: 'base.glb',
+    base: 'models/base.glb',
     tomb: 'models/tombs.glb',
     bat: 'models/Bat.glb',
     corpse: 'models/Corpse.glb',
