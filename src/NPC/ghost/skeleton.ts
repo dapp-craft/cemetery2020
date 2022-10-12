@@ -334,6 +334,7 @@ export class Skeleton extends Entity {
         engine.removeEntity(this)
         counterIncrease()
         CloseAllGraves()
+
         sharedDialog.closeDialogWindow()
       })
     )
@@ -447,7 +448,7 @@ export function addMainGhostNPC(progression: HalloweenState) {
     {
       position: new Vector3(65, 0.15, 13),
       rotation: Quaternion.Euler(0, 180, 0),
-	  scale: new Vector3(1.35, 1.35, 1.35),
+      scale: new Vector3(1.35, 1.35, 1.35),
     },
     'models/NPCs/skeleton1.glb',
     () => {
@@ -520,8 +521,8 @@ export function addGhostsAndCrypts() {
   let ghost1 = new Skeleton(
     {
       position: new Vector3(40, 0, 40),
-      rotation: Quaternion.Euler(0, 90, 0), 
-	  scale: new Vector3(1.35, 1.35, 1.35),
+      rotation: Quaternion.Euler(0, 90, 0),
+      scale: new Vector3(1.35, 1.35, 1.35),
     },
     new GLTFShape(npc_data[0].modelPath),
     npc_data[0].patrolPath,
@@ -534,8 +535,8 @@ export function addGhostsAndCrypts() {
   let ghost2 = new Skeleton(
     {
       position: new Vector3(60, 0, 40),
-      rotation: Quaternion.Euler(0, 90, 0), 
-	  scale: new Vector3(1.35, 1.35, 1.35),
+      rotation: Quaternion.Euler(0, 90, 0),
+      scale: new Vector3(1.35, 1.35, 1.35),
     },
     new GLTFShape(npc_data[1].modelPath),
     npc_data[1].patrolPath,
@@ -549,7 +550,7 @@ export function addGhostsAndCrypts() {
     {
       position: new Vector3(80, 0, 40),
       rotation: Quaternion.Euler(0, 90, 0),
-	  scale: new Vector3(1.35, 1.35, 1.35),
+      scale: new Vector3(1.35, 1.35, 1.35),
     },
     new GLTFShape(npc_data[2].modelPath),
     npc_data[2].patrolPath,
@@ -562,8 +563,8 @@ export function addGhostsAndCrypts() {
   let ghost4 = new Skeleton(
     {
       position: new Vector3(80, 0, 40),
-      rotation: Quaternion.Euler(0, 90, 0), 
-	  scale: new Vector3(1.35, 1.35, 1.35),
+      rotation: Quaternion.Euler(0, 90, 0),
+      scale: new Vector3(1.35, 1.35, 1.35),
     },
     new GLTFShape(npc_data[3].modelPath),
     npc_data[3].patrolPath,
@@ -576,8 +577,8 @@ export function addGhostsAndCrypts() {
   let ghost5 = new Skeleton(
     {
       position: new Vector3(80, 0, 40),
-      rotation: Quaternion.Euler(0, 90, 0), 
-	  scale: new Vector3(1.35, 1.35, 1.35),
+      rotation: Quaternion.Euler(0, 90, 0),
+      scale: new Vector3(1.35, 1.35, 1.35),
     },
     new GLTFShape(npc_data[4].modelPath),
     npc_data[4].patrolPath,
@@ -590,8 +591,8 @@ export function addGhostsAndCrypts() {
   let ghost6 = new Skeleton(
     {
       position: new Vector3(80, 0, 40),
-      rotation: Quaternion.Euler(0, 90, 0), 
-	  scale: new Vector3(1.35, 1.35, 1.35),
+      rotation: Quaternion.Euler(0, 90, 0),
+      scale: new Vector3(1.35, 1.35, 1.35),
     },
     new GLTFShape(npc_data[5].modelPath),
     npc_data[5].patrolPath,
@@ -689,7 +690,7 @@ export function addGhostsAndCrypts() {
     {
       position: new Vector3(35 + 8, 0, 66.3),
       rotation: Quaternion.Euler(0, 180, 0),
-      scale: new Vector3(0.7, 0.7, 0.7),
+      scale: new Vector3(0.7, 0.7, 0.7)
     },
     new GLTFShape('models/CryptZombieHand.glb'),
     null,
@@ -721,8 +722,8 @@ export function addGhostsAndCrypts() {
   let crypt10 = new Grave(
     {
       position: new Vector3(92 + 8, 0, 69),
-      rotation: Quaternion.Euler(0, 90, 0), scale: new Vector3(1.35, 1.35, 1.35),
-      scale: new Vector3(0.7, 0.7, 0.7),
+      rotation: Quaternion.Euler(0, 90, 0),
+      scale: new Vector3(0.7, 0.7, 0.7)
     },
     new GLTFShape('models/CryptZombieHand.glb'),
     null,
@@ -733,7 +734,8 @@ export function addGhostsAndCrypts() {
   let crypt11 = new Grave(
     {
       position: new Vector3(21.3 + 8, 0.2, 70),
-      rotation: Quaternion.Euler(0, 90, 0), scale: new Vector3(1.35, 1.35, 1.35),
+      rotation: Quaternion.Euler(0, 90, 0),
+      scale: new Vector3(1.35, 1.35, 1.35)
     },
     new GLTFShape('models/graves/philo_grave.glb'),
     ghost6,
@@ -774,7 +776,7 @@ export function OpenAllGraves() {
 
 export function CloseAllGraves() {
   for (let grave of activeGraves) {
-    if (grave.isOpen) {
+    if (grave.resident.state == SkeletonState.Gone) {
       grave.close()
     }
   }
