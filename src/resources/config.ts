@@ -17,7 +17,7 @@ export const TESTQUESTSTATE: HalloweenState = {
 
     // day 2
     NPCIntroDay2: true,
-    ghostsDone: false,
+    ghostsDone: true,
     w2Found: false,
 
     // day 3

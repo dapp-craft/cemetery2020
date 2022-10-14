@@ -76,7 +76,7 @@ export function doorHauntedHouse() {
 
       let r = new Reward(
         coffin,
-        'w2',
+        'halloween2022',
         {
           position: new Vector3(0.2, 0.8, 0.5),
           scale: new Vector3(0.8, 0.8, 0.8),
