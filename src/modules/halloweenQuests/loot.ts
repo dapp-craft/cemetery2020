@@ -6,6 +6,8 @@ import {COLOR_GREEN} from '../../resources/theme/color'
 import {getProvider} from '@decentraland/web3-provider'
 import * as EthConnect from 'eth-connect'
 import { loot_models } from 'src/resources/model_paths'
+import { signedFetch } from '@decentraland/SignedFetch'
+
 
 
 let particleGLTF = new GLTFShape(loot_models.particles)
@@ -131,6 +133,7 @@ export class Reward extends Entity {
       this,
       this.testUser ? this.testUser : null
     )
+    // let data = await claimToken()
 
     if (data) {
       this.storeData(data)
@@ -168,6 +171,33 @@ export enum ClaimState {
   REJECTED = 'rejected',
   NOSTOCK = 'nostock',
 }
+
+// async function claimToken() {
+
+
+
+//   try {
+//     let response = await signedFetch('https://rewards.decentraland.io/api/campaigns/0e1ddf39-b993-4ea4-bad3-97ab0485cccf/rewards', {
+//       headers: { "Content-Type": "application/json" },
+//       method: "POST",
+//       body: JSON.stringify({
+//         campaign_key: 'eyJpZCI6IjMwYTBmZWUzLTg4NzQtNGU2ZC05NTJlLWU0NDQ0NDYxNTUxMyIsImNhbXBhaWduX2lkIjoiMGUxZGRmMzktYjk5My00ZWE0LWJhZDMtOTdhYjA0ODVjY2NmIn0=.uT-XNdGJEkMz-JtUXpfw/BPcBMnLlze8kfaoguB8HZc=',
+//         beneficiary: '0x9aD4A0FaeDa41b2275C60FC6D70495A350EB08f4'
+//       }),
+//     })
+
+//     if (!response.text) {
+//       throw new Error("Invalid response")
+//     }
+
+//     let json = await JSON.parse(response.text)
+
+//     log("Response received: ", json)
+//   } catch {
+//     log("failed to reach URL")
+//   }
+  
+// }
 
 export async function claimToken(
   progressionStep: string,
@@ -399,10 +429,11 @@ export async function checkServer(
     server: playerRealm.serverName,
     realm: playerRealm.layer,
   }
+  log(body)
 
   log('sending req to: ', url)
   try {
-    let response = await fetch(url, {
+    let response = await signedFetch(url, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(body),

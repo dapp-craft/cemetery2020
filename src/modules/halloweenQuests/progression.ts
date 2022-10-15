@@ -14,7 +14,7 @@ export let playerRealm: Realm
 export let fireBaseServer =
   'https://us-central1-halloween-361612.cloudfunctions.net/app/'
 //To DO Check local sever
-//`http://localhost:5001/decentraland-halloween/us-central1/app/`
+// `http://localhost:5001/halloween-361612/us-central1/app/`
 
 export async function setUserData() {
   const data = await getUserData()
