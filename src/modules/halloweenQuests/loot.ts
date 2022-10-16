@@ -114,7 +114,7 @@ export class Reward extends Entity {
     engine.addEntity(this.particles)
 
     if (!onlyActivateWhenClicked) {
-      this.activate()
+      // this.activate()
       const spawnSource = new AudioSource(
         new AudioClip('sounds/star-spawn.mp3')
       )
