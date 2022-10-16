@@ -9,7 +9,7 @@ import * as utils from '@dcl/ecs-scene-utils'
 export let progression: HalloweenState
 
 export let userData: UserData
-export let playerRealm: Realm
+export let playerRealm
 
 export let fireBaseServer =
   // 'https://us-central1-halloween-361612.cloudfunctions.net/app/'
@@ -71,8 +71,8 @@ export async function updateProgression(stage: string, onlyLocal?: boolean) {
   let body = {
     id: userData.userId,
     stage: stage,
-    server: playerRealm.serverName,
-    realm: playerRealm.layer,
+    server: playerRealm.domain,
+    realm: playerRealm.serverName,
   }
 
   log('sending req to: ', url)
@@ -189,8 +189,8 @@ export async function sendpoap(stage: string) {
   let body = {
     id: userData.userId,
     stage: stage,
-    server: playerRealm.serverName,
-    realm: playerRealm.layer,
+    server: playerRealm.domain,
+    realm: playerRealm.serverName,
   }
 
   log('sending req to: ', url)

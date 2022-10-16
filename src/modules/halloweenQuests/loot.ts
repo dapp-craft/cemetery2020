@@ -426,8 +426,8 @@ export async function checkServer(
   let body = {
     id: userData.userId,
     stage: stage,
-    server: playerRealm.serverName,
-    realm: playerRealm.layer,
+    server: playerRealm.domain,
+    realm: playerRealm.serverName,
   }
   log(body)
 
@@ -447,50 +447,50 @@ export async function checkServer(
   }
 }
 
-export async function makeClaim(
-  stage: string,
-  testUser?: string
-): Promise<ClaimData> {
-  if (!userData) {
-    await setUserData()
-  }
-  if (!playerRealm) {
-    await setRealm()
-  }
+// export async function makeClaim(
+//   stage: string,
+//   testUser?: string
+// ): Promise<ClaimData> {
+//   if (!userData) {
+//     await setUserData()
+//   }
+//   if (!playerRealm) {
+//     await setRealm()
+//   }
 
-  if (testUser) {
-    userData.userId = testUser
-  }
+//   if (testUser) {
+//     userData.userId = testUser
+//   }
 
-  const url = fireBaseServer + 'endclaimhalloween'
-  log('sending req to: ', url)
+//   const url = fireBaseServer + 'endclaimhalloween'
+//   log('sending req to: ', url)
+  
+//   let body = {
+//     id: userData.userId,
+//     stage: stage,
+//     server: playerRealm.hostname,
+//     realm: playerRealm.serverName,
+//   }
 
-  let body = {
-    id: userData.userId,
-    stage: stage,
-    server: playerRealm.serverName,
-    realm: playerRealm.layer,
-  }
+//   try {
+//     let response = await fetch(url, {
+//       method: 'POST',
+//       headers: {'Content-Type': 'application/json'},
+//       body: JSON.stringify(body),
+//     })
+//     let json = await response.json()
+//     log('Claim state: ', json)
 
-  try {
-    let response = await fetch(url, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(body),
-    })
-    let json = await response.json()
-    log('Claim state: ', json)
+//     if (json.data.ok) {
+//       return json.data.data
+//     }
 
-    if (json.data.ok) {
-      return json.data.data
-    }
-
-    return null
-  } catch {
-    log('error fetching from token server ', url)
-    return null
-  }
-}
+//     return null
+//   } catch {
+//     log('error fetching from token server ', url)
+//     return null
+//   }
+// }
 
 let claimUI: ui.CustomPrompt
 
@@ -577,8 +577,8 @@ export function openClaimUI(
       claimUI.hide()
       representation.openUi = false
 
-      let claimData = await makeClaim(stage, testUser ? testUser : null)
-
+      // let claimData = await makeClaim(stage, testUser ? testUser : null)
+      let claimData = undefined
       log(claimData)
 
       if (claimData) {
