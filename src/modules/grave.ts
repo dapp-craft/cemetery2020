@@ -186,6 +186,12 @@ Well... sure a cat can scratch ye, but people can hurt more. So if ya ain’t a 
       },
     },
     {
+      text: `example`,
+      triggeredByNext: () => {
+        npc.playAnimation(`HeadShake_No`, true,  1.83)
+      },
+    },
+    {
       text: `And if you meet a cat on the streets, make sure to feed ‘em!Pst-pst-pst! Gather around friends, time for supper! Pst-pst-pst!`,
       triggeredByNext: () => {
         doorHouse.close()
