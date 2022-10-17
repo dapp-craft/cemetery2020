@@ -17,6 +17,7 @@
     "decentraland-ecs": "^6.11.6"
   },
   "dependencies": {
+    "@dcl/crypto-scene-utils": "^1.1.1",
     "@dcl/ecs-scene-utils": "^1.7.5",
     "@dcl/npc-scene-utils": "^1.4.0",
     "@dcl/ui-scene-utils": "^1.8.4",
@@ -26,6 +27,7 @@
     "@dcl/ecs-scene-utils",
     "@dcl/npc-scene-utils",
     "@dcl/ui-scene-utils",
-    "eth-connect"
+    "eth-connect",
+    "@dcl/crypto-scene-utils"
   ]
 }

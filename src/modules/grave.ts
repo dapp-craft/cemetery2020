@@ -99,7 +99,7 @@ export function doorHauntedHouse() {
           nextDay(3)
         }
       )
-    })
+    }, { hoverText: 'Open coffin'})
   )
 }
 

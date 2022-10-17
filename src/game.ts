@@ -3,7 +3,7 @@ import { addClosedDoors, addHouses } from './modules/trickOrTreat'
 import { checkProgression, progression } from './modules/halloweenQuests/progression'
 import { addStaticStuff } from './modules/staticDecorations'
 import { Coords, initialQuestUI } from './modules/halloweenQuests/quest'
-import { doorHauntedHouse, getKey } from './modules/hauntedHouse'
+import { doorHauntedHouse, getKey } from './modules/grave'
 import { Reward } from './modules/halloweenQuests/loot'
 
 addStaticStuff()

@@ -9,12 +9,12 @@ import * as utils from '@dcl/ecs-scene-utils'
 export let progression: HalloweenState
 
 export let userData: UserData
-export let playerRealm: Realm
+export let playerRealm
 
 export let fireBaseServer =
-  'https://us-central1-halloween-361612.cloudfunctions.net/app/'
+  // 'https://us-central1-halloween-361612.cloudfunctions.net/app/'
 //To DO Check local sever
-//`http://localhost:5001/decentraland-halloween/us-central1/app/`
+`http://localhost:5001/halloween-361612/us-central1/app/`
 
 export async function setUserData() {
   const data = await getUserData()
@@ -25,7 +25,9 @@ export async function setUserData() {
 // fetch the player's realm
 export async function setRealm() {
   let realm = await getCurrentRealm()
-  log(`You are in the realm: ${JSON.stringify(realm.displayName)}`)
+  // log(`You are in the realm: ${JSON.stringify(realm.displayName)}`)
+  log(`You are in the realm: ${JSON.stringify(realm)}`)
+
   playerRealm = realm
 }
 
@@ -69,8 +71,8 @@ export async function updateProgression(stage: string, onlyLocal?: boolean) {
   let body = {
     id: userData.userId,
     stage: stage,
-    server: playerRealm.serverName,
-    realm: playerRealm.layer,
+    server: playerRealm.domain,
+    realm: playerRealm.serverName,
   }
 
   log('sending req to: ', url)
@@ -187,8 +189,8 @@ export async function sendpoap(stage: string) {
   let body = {
     id: userData.userId,
     stage: stage,
-    server: playerRealm.serverName,
-    realm: playerRealm.layer,
+    server: playerRealm.domain,
+    realm: playerRealm.serverName,
   }
 
   log('sending req to: ', url)
