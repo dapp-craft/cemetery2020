@@ -147,43 +147,46 @@ export function useKey() {
 export function catLoverDialog(npc: NPC, doorHouse: TTHouse) {
   return [
     {
-      text: `Hey there, I'm a cat guy!`,
+      text: `Pst-pst-pst... KITTY! Whatcha lookin’ at? No, not you. You aren’t a kitty, are ya?`,
       triggeredByNext: () => {
         npc.playAnimation(`HeadShake_No`, true, 1.83)
       },
     },
     {
-      text: `To be honest, I don't really have a personality beyond that. Cats are my thing. And that's about it.`,
+      text: `You are not a cat right? You don’t look like a cat. Kitties got soft paws, and pointy ears and fluffy tails and warm bellies! My goal is to pet every cat there is!`,
       triggeredByNext: () => {
         npc.playAnimation(`Lengthy`, true, 1.77)
       },
     },
     {
-      text: `The guy writing my lines is kind of stuck. So my character is not very well rounded. ...beyond the fact that I like cats.`,
+      text: `Soon I will set off on a ‘round the globe journey – I will ride around the world and pet cats. What can be better than that? All alone! Just me and the kitties!
+`,
       triggeredByNext: () => {
         npc.playAnimation(`Cocky`, true, 1.83)
       },
     },
     {
-      text: `I love cats. I love every kind of cat`,
+      text: `Cats are much better than people.
+Well... sure a cat can scratch ye, but people can hurt more. So if ya ain’t a cat — you better leave.
+`,
       triggeredByNext: () => {
         npc.playAnimation(`HeadShake_No`, true, 1.83)
       },
     },
     {
-      text: `I just want to hug them all. But I can't hug every cat.`,
+      text: `And you are obviously not a cat. Leave.`,
       triggeredByNext: () => {
         npc.playAnimation(`Annoyed_HeadShake`, true, 2.6)
       },
     },
     {
-      text: `Can't hug every cat.`,
+      text: `Wait! Don’t go. Lemme give ya somethin`,
       triggeredByNext: () => {
         npc.playAnimation(`Dismissing`, true, 3.3)
       },
     },
     {
-      text: `I should maybe say something that is more relevant to the story somehow. But anyway, you're not a cat so... see you around`,
+      text: `And if you meet a cat on the streets, make sure to feed ‘em!Pst-pst-pst! Gather around friends, time for supper! Pst-pst-pst!`,
       triggeredByNext: () => {
         doorHouse.close()
       },
