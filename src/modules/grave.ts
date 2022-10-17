@@ -147,19 +147,31 @@ export function useKey() {
 export function catLoverDialog(npc: NPC, doorHouse: TTHouse) {
   return [
     {
-      text: `Pst-pst-pst... KITTY! Whatcha lookin’ at? No, not you. You aren’t a kitty, are ya?`,
+      text: `Pst-pst-pst... KITTY! Whatcha lookin’ at? No, not you.`,
       triggeredByNext: () => {
         npc.playAnimation(`HeadShake_No`, true, 1.83)
       },
     },
     {
-      text: `You are not a cat right? You don’t look like a cat. Kitties got soft paws, and pointy ears and fluffy tails and warm bellies! My goal is to pet every cat there is!`,
+      text: `You aren’t a kitty, are ya? You don’t look like a cat.`,
+      triggeredByNext: () => {
+        npc.playAnimation(`HeadShake_No`, true, 1.83)
+      },
+    },
+    {
+      text: `Kitties got soft paws, and pointy ears and fluffy tails and warm bellies! My goal is to pet every cat there is!`,
       triggeredByNext: () => {
         npc.playAnimation(`Lengthy`, true, 1.77)
       },
     },
     {
-      text: `Soon I will set off on a ‘round the globe journey – I will ride around the world and pet cats. What can be better than that? All alone! Just me and the kitties!
+      text: `Soon I will set off on a ‘round the globe journey – I will ride around the world and pet cats.`,
+      triggeredByNext: () => {
+        npc.playAnimation(`Lengthy`, true, 1.77)
+      },
+    },
+    {
+      text: `What can be better than that? All alone! Just me and the kitties!
 `,
       triggeredByNext: () => {
         npc.playAnimation(`Cocky`, true, 1.83)
@@ -186,13 +198,13 @@ Well... sure a cat can scratch ye, but people can hurt more. So if ya ain’t a 
       },
     },
     {
-      text: `example`,
+      text: `And if you meet a cat on the streets, make sure to feed ‘em!`,
       triggeredByNext: () => {
         npc.playAnimation(`HeadShake_No`, true,  1.83)
       },
     },
     {
-      text: `And if you meet a cat on the streets, make sure to feed ‘em!Pst-pst-pst! Gather around friends, time for supper! Pst-pst-pst!`,
+      text: `Pst-pst-pst! Gather around friends, time for supper! Pst-pst-pst!`,
       triggeredByNext: () => {
         doorHouse.close()
       },
