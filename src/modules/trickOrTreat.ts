@@ -10,7 +10,9 @@ import {
 import {COLOR_GREEN} from '../resources/theme/color'
 import * as NPCUtils from '@dcl/npc-scene-utils'
 import {NPC} from '@dcl/npc-scene-utils'
-import {HalloweenState, halloweenTheme, quest} from './halloweenQuests/quest'
+import {quest} from "./halloweenQuests/quest/questTasks";
+import {HalloweenState} from "./halloweenQuests/quest/types";
+import {halloweenTheme} from "./halloweenQuests/quest/questCheckBox";
 import {TTHouse} from './house'
 import * as ui from '@dcl/ui-scene-utils'
 import * as utils from '@dcl/ecs-scene-utils'

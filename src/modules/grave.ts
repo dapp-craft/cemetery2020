@@ -6,7 +6,6 @@ import { COLOR_GREEN } from '../resources/theme/color'
 
 import { npc_data } from './NPC/ghost/npc_data'
 
-import { HalloweenState, halloweenTheme, quest } from './halloweenQuests/quest'
 import { graveyard_models, npc_model_paths } from 'src/resources/model_paths'
 
 import {Reward} from './halloweenQuests/loot'
@@ -17,6 +16,9 @@ import {TTHouse} from "./house";
 
 import {nextDay, updateProgression} from './halloweenQuests/progression'
 import { haunted_model_paths } from 'src/resources/model_paths'
+import {quest} from "./halloweenQuests/quest/questTasks";
+import {HalloweenState} from "./halloweenQuests/quest/types";
+import {halloweenTheme} from "./halloweenQuests/quest/questCheckBox";
 
 export let hasKey = false
 export let keyUI

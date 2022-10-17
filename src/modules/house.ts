@@ -3,7 +3,7 @@ import * as ui from "@dcl/ui-scene-utils";
 import {COLOR_GREEN} from "../resources/theme/color";
 import * as utils from "@dcl/ecs-scene-utils";
 import {updateProgression} from './halloweenQuests/progression'
-import {quest} from "./halloweenQuests/quest";
+import {quest} from "./halloweenQuests/quest/questTasks";
 
 export let doorCounter = 0
 

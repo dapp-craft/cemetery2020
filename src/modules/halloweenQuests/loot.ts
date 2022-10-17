@@ -1,12 +1,12 @@
 import * as utils from '@dcl/ecs-scene-utils'
 import * as ui from '@dcl/ui-scene-utils'
 import {fireBaseServer, playerRealm, setRealm, setUserData, updateProgression, userData,} from './progression'
-import {IN_PREVIEW} from '../../resources/config'
-import {COLOR_GREEN} from '../../resources/theme/color'
 import {getProvider} from '@decentraland/web3-provider'
 import * as EthConnect from 'eth-connect'
 import { loot_models } from 'src/resources/model_paths'
 import { signedFetch } from '@decentraland/SignedFetch'
+import {IN_PREVIEW} from "./config";
+import {COLOR_GREEN} from "../../resources/theme/color";
 
 
 

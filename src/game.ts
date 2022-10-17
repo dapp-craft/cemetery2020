@@ -2,9 +2,10 @@ import { addGhostsAndCrypts, addMainGhostNPC } from './modules/grave'
 import { addClosedDoors, addHouses } from './modules/trickOrTreat'
 import { checkProgression, progression } from './modules/halloweenQuests/progression'
 import { addStaticStuff } from './modules/staticDecorations'
-import { Coords, initialQuestUI } from './modules/halloweenQuests/quest'
 import { doorHauntedHouse, getKey } from './modules/grave'
 import { Reward } from './modules/halloweenQuests/loot'
+import {updateQuestUI} from "./modules/halloweenQuests/quest/questTasks";
+import {isEqual} from "./modules/halloweenQuests/utils/isEqual";
 
 addStaticStuff()
 addClosedDoors()
@@ -59,9 +60,11 @@ Input.instance.subscribe('BUTTON_DOWN', ActionButton.PRIMARY, false, (e) => {
 })
 
 async function updateQuest(){
-  await checkProgression()
+    const curr_progression = await checkProgression()
+    progression.data = curr_progression.data
+    progression.day = curr_progression.day
 
-  initialQuestUI(progression.data, progression.day, Coords.CemeteryCoords)
+    updateQuestUI(progression.data, progression.day)
 
   addHouses(progression)
 
@@ -83,3 +86,39 @@ async function updateQuest(){
     }
   }
 }
+
+// TODO quest UI smart wearable code
+
+const updateProgressInterval = 10
+
+async function updateSceneUI() {
+    const curr_progression = await checkProgression()
+    log(curr_progression, progression)
+    if (curr_progression == null) return
+    if (progression.data != null && isEqual(progression.data, curr_progression.data)) return
+    progression.data = curr_progression.data
+    progression.day = curr_progression.day
+
+    if (progression.data) {
+        log('UPDATE QUEST UI', progression.day, progression.data)
+        updateQuestUI(progression.data, progression.day)
+    }
+}
+
+class UpdateSceneUISystem implements ISystem {
+    private timer = 0
+
+    constructor() { }
+
+    async update(dt: number) {
+        this.timer += dt
+        if (this.timer > updateProgressInterval) {
+            this.timer = 0
+            await updateSceneUI()
+
+        }
+    }
+}
+
+engine.addSystem(new UpdateSceneUISystem())
+//// end quest UI smart wearable code
