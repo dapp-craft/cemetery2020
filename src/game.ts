@@ -11,29 +11,6 @@ addClosedDoors()
 setUpScene()
 
 export async function setUpScene() {
-  await checkProgression()
-
-  initialQuestUI(progression.data, progression.day, Coords.CemeteryCoords)
-
-  addHouses(progression)
-
-  doorHauntedHouse()
-
-  // conditional elements depending on progression
-  if (
-    progression.data.w1Found &&
-    !progression.data.w2Found &&
-    progression.day > 1
-  ) {
-    // day 2
-    addMainGhostNPC(progression)
-
-    if (!progression.data.ghostsDone) {
-      addGhostsAndCrypts()
-    } else {
-      getKey()
-    }
-  }
 
   // avatar modifier
   const modArea = new Entity()
@@ -75,3 +52,34 @@ Input.instance.subscribe('BUTTON_DOWN', ActionButton.PRIMARY, false, (e) => {
 })
 
 //test
+ onEnterSceneObservable.add((player) => {
+  log('player enter')
+  updateQuest()
+
+})
+
+async function updateQuest(){
+  await checkProgression()
+
+  initialQuestUI(progression.data, progression.day, Coords.CemeteryCoords)
+
+  addHouses(progression)
+
+  doorHauntedHouse()
+
+  // conditional elements depending on progression
+  if (
+    progression.data.w1Found &&
+    !progression.data.w2Found &&
+    progression.day > 1
+  ) {
+    // day 2
+    addMainGhostNPC(progression)
+
+    if (!progression.data.ghostsDone) {
+      addGhostsAndCrypts()
+    } else {
+      getKey()
+    }
+  }
+}
