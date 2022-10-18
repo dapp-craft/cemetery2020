@@ -559,7 +559,7 @@ export let thanks: Dialog[] = [
 ////// Other Ghosts
 export const ghost1Talk: Dialog[] = [
   {
-    text: `Ooooh where are my sons!`,
+    text: `Everyone used to call me Big Mom. All my life I thought I had big bones. But here's the surprise - it turned out to be false!`,
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
@@ -569,7 +569,7 @@ export const ghost1Talk: Dialog[] = [
     },
   },
   {
-    text: `Kids, mommy is home!`,
+    text: `Mommy is back!`,
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
@@ -579,7 +579,7 @@ export const ghost1Talk: Dialog[] = [
     },
   },
   {
-    text: `My kids ain't here!`,
+    text: `You flatter me, son. I'm not that skinny.`,
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
@@ -592,7 +592,7 @@ export const ghost1Talk: Dialog[] = [
 
 export const ghost2Talk: Dialog[] = [
   {
-    text: `Good heavens! Have gentlemen stopped wearing their ties? Scandalous`,
+    text: `Once I could circumnavigate the entire globe in eighty days! What now? I can't even find my way to my own grave.`,
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
@@ -602,7 +602,7 @@ export const ghost2Talk: Dialog[] = [
     },
   },
   {
-    text: `I had enough of this topsy-turvy world, not for me.`,
+    text: `Passepartout! I'm home!`,
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
@@ -612,7 +612,7 @@ export const ghost2Talk: Dialog[] = [
     },
   },
   {
-    text: `I refuse to enter that tastelessly improvised shack!`,
+    text: `I bet we'll find my grave before sunrise!`,
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
@@ -625,7 +625,7 @@ export const ghost2Talk: Dialog[] = [
 
 export const ghost3Talk: Dialog[] = [
   {
-    text: `Flying is totally groovy man, I'm not even high.`,
+    text: `Dude, you should have heard Jimmy in '69 at Woodstock! Dude, he played like a god!`,
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
@@ -635,7 +635,7 @@ export const ghost3Talk: Dialog[] = [
     },
   },
   {
-    text: `I'm off to chill man, keep it fresh.`,
+    text: `Peace out dude!`,
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
@@ -645,7 +645,7 @@ export const ghost3Talk: Dialog[] = [
     },
   },
   {
-    text: `No bro, bad mojo in there.`,
+    text: `Hey dude, I don't feel the earth’s power over here. Let's go somewhere else.`,
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
@@ -691,7 +691,7 @@ export const ghost4Talk: Dialog[] = [
 
 export const ghost5Talk: Dialog[] = [
   {
-    text: `I must meet my lover again, I can't bare a world without him.`,
+    text: `My favorite book is Romeo and Juliet! It is written, as if about us!`,
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
@@ -701,7 +701,10 @@ export const ghost5Talk: Dialog[] = [
     },
   },
   {
-    text: `Reunited at last!`,
+    text: `You will lie down in a stately grave.
+In a grave? No, in a shining hall.
+Where Juliet rests. 
+And fills the crypt with light.`,
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
@@ -711,7 +714,7 @@ export const ghost5Talk: Dialog[] = [
     },
   },
   {
-    text: `He's not here!`,
+    text: `Good night, good night! Parting is such sweet sorrow, That I shall say good night till it be morrow.`,
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
@@ -724,7 +727,7 @@ export const ghost5Talk: Dialog[] = [
 
 export const ghost6Talk: Dialog[] = [
   {
-    text: `This notion of being a disembodied spirit is perplexing.`,
+    text: `I know that I know nothing. I don't even know where my grave is. Does being determine consciousness or consciousness determine being? Right now I have got both the consciousness and the being of a homeless skeleton...`,
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
@@ -734,7 +737,7 @@ export const ghost6Talk: Dialog[] = [
     },
   },
   {
-    text: `Time to go write about it!`,
+    text: `My coffin is my fortress!,
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
@@ -744,7 +747,7 @@ export const ghost6Talk: Dialog[] = [
     },
   },
   {
-    text: `The physical vessel that I used to inhabit is not here.`,
+    text: `A grave without books is like a body without a soul. Let’s get out of here.`,
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
