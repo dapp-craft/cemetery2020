@@ -737,7 +737,7 @@ export const ghost6Talk: Dialog[] = [
     },
   },
   {
-    text: `My coffin is my fortress!,
+    text: `My coffin is my fortress!`,
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
