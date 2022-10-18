@@ -446,35 +446,40 @@ export const lockedHouse: Dialog[] = [
 ]
 
 // Phone ringing
-export const phoneVoice: Dialog[] = [
-  {
-    text: `These dreams. These horrible dreams. They aren’t letting me rest.
-
-Today i decied not to wake up, and sleep until the end.`,
-  },
-  {
-    text: `Oh, how hard it was to stay asleep. It was so horrifying... so horrifying ... It all seemed so real...
-And then i finally saw him.`,
-  },
-  {
-    text: `He was right there. He was in the depths of my dream. Right at the source.
-
-He lives in my dreams and he twists them by his will.`,
-  },
-  {
-    text: `Dear heavens, how scared I am. How tired I am. But I am so scared that if I fall asleep, I will never wake up and he will take me away.`,
-  },
-  {
-    text: `If you are listening to this, come to the Glass Pavilion, near the 0,0 coordinates, I believe you are the one who can help me.`,
-    triggeredByNext: () => {
-      quest.checkBox(1)
-      quest.showCheckBox(2)
-      updateProgression('phone')
+export function day1GirlDialog(callback:()=>void){
+  const dialog: Dialog[] = [
+    {
+      text: `These dreams. These horrible dreams. They aren’t letting me rest.
+  
+  Today i decied not to wake up, and sleep until the end.`,
     },
+    {
+      text: `Oh, how hard it was to stay asleep. It was so horrifying... so horrifying ... It all seemed so real...
+  And then i finally saw him.`,
+    },
+    {
+      text: `He was right there. He was in the depths of my dream. Right at the source.
+  
+  He lives in my dreams and he twists them by his will.`,
+    },
+    {
+      text: `Dear heavens, how scared I am. How tired I am. But I am so scared that if I fall asleep, I will never wake up and he will take me away.`,
+    },
+    {
+      text: `If you are listening to this, come to the Glass Pavilion, near the 0,0 coordinates, I believe you are the one who can help me.`,
+      triggeredByNext: () => {
+        quest.checkBox(1)
+        quest.showCheckBox(2)
+        updateProgression('phone')
 
-    isEndOfDialog: true,
-  },
-]
+        callback()
+      },
+  
+      isEndOfDialog: true,
+    },
+  ]
+  return dialog
+}
 
 /////////////////// DAY 2
 
