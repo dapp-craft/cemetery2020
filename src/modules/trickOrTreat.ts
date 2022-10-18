@@ -473,7 +473,7 @@ export function addHouses(progression: HalloweenState) {
       )
       engine.addEntity(dummyEnt)
 
-      quest.showCheckBox(1)
+      //quest.showCheckBox(1)
       //updateProgression('foundBody')
 
       let phone = new Phone(
