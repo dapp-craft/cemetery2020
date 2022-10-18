@@ -313,7 +313,7 @@ export function addHouses(progression: HalloweenState) {
       },
 
       {
-        portrait: {path: 'images/portraits/main-ghost.png'},
+        portrait: {path: 'images/portraits/skeleton.png'},
         reactDistance: 12,
         idleAnim: `Idle`,
         faceUser: false,
@@ -331,7 +331,7 @@ export function addHouses(progression: HalloweenState) {
     )
     mayorGhost.removeComponent(OnPointerDown)
     mayorGhost.dialog = new NPCUtils.DialogWindow(
-      {path: 'images/portraits/main-ghost.png'},
+      {path: 'images/portraits/skeleton.png'},
       true,
       '',
       halloweenTheme
