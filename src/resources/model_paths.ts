@@ -40,10 +40,6 @@ export const static_decoration_models = {
 }
 
 export const graveyard_models = {
-    machete: 'models/crypt_machete.glb',
-
-    catCrypt: 'models/CatCrypt.glb',
-    zombieHand: 'models/CryptZombieHand.glb',
     
     motherGrave: 'models/graves/mother_grave.glb',
     frenchGrave:'models/graves/french_grave.glb',
