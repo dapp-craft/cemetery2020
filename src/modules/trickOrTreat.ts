@@ -231,16 +231,17 @@ export function addHouses(progression: HalloweenState) {
       {
         position: new Vector3(-1, 0, 0.8),
         rotation: Quaternion.Euler(0, 90, 0),
+		scale: new Vector3(1.1, 1.1, 1.1),
       },
       npc_model_paths.farmer,
       () => {
         farmer.talk(farmerDialog(farmer, doorHouse7), 0)
-        farmer.playAnimation(`Head_Yes`, true, 2.63)
+        farmer.playAnimation(`talk`, false, 6.65)
       },
       {
         portrait: {path: 'images/portraits/farmer.png', height: 128, width: 128},
         reactDistance: 12,
-        idleAnim: `Weight_Shift`,
+        idleAnim: `stand`,
         faceUser: false,
         onlyExternalTrigger: true,
 
@@ -264,6 +265,7 @@ export function addHouses(progression: HalloweenState) {
       {
         position: new Vector3(-1, 0.05, 0.7),
         rotation: Quaternion.Euler(0, 90, 0),
+		scale: new Vector3(1.1, 1.1, 1.1),
       },
       npc_model_paths.ghostblaster,
       () => {

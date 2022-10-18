@@ -9,7 +9,7 @@ export const npc_model_paths = {
     skeletonQuestGiver: 'models/NPCs/skeleton1.glb',
 
     catLover: 'models/NPCs/NPC Cat Lover.glb',
-    farmer: 'models/NPCs/farmer.glb',
+    farmer: 'models/NPCs/hunter_villager.glb',
     ghostblaster: 'models/NPCs/illusionist_villager.glb',
     ghost1: 'models/NPCs/ghost1.glb',
     girl:  'models/NPCs/girl.glb'

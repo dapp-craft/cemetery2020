@@ -224,35 +224,20 @@ export function farmerDialog(npc: NPC, doorHouse: TTHouse) {
     {
       text: `Trick or treat eh? 
 How about I just get my big gun and pepper your mug full of buckshot!`,
-      triggeredByNext: () => {
-        npc.playAnimation(`HeadShake_No`, true, 1.83)
-      },
     },
     {
       text: `Ain’t that gonna be a nasty little trick!
 Don’t you think?`,
-      triggeredByNext: () => {
-        npc.playAnimation(`Annoyed_HeadShake`, true, 2.6)
-      },
     },
     {
       text: `Alright, alright, I am just kidding around! Calm down! It doesn’t even shoot anymore.`,
-      triggeredByNext: () => {
-        npc.playAnimation(`Hard Head`, true, 1.67)
-      },
     },
     {
       text: `What, you got spooked? He-he, the spirit of halloween as it is — Friendly jokes, pranks and just a bit of that good ol’ pure horror!`,
-      triggeredByNext: () => {
-        npc.playAnimation(`Hard Head`, true, 1.67)
-      },
     },
       {
       text: `I am actually a nice fellow. I like to have fun, I like parties. Especially when they feed you well.
 Good food! — that is what defines a good party!`,
-      triggeredByNext: () => {
-        npc.playAnimation(`Hard Head`, true, 1.67)
-      },
     },
     {
       text: `Here, take this! Don’t peek! And don’t get mad about the “mug full of buckshot” thing.`,
