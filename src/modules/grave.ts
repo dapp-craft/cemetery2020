@@ -336,9 +336,6 @@ export function ghostControlDialog(npc: NPC, doorHouse: TTHouse) {
   return [
     {
       text: `Wanna see trick?`,
-      triggeredByNext: () => {
-        npc.playAnimation(`Lengthy`, true, 1.77)
-      },
     },
     {
       text: `Mumbo jumbo, watch the hands...
@@ -346,39 +343,26 @@ Now, you have to blow.
 If you don’t blow nothing will happen...
 
 Bam!`,
-      triggeredByNext: () => {
-        npc.playAnimation(`Annoyed_HeadShake`, true, 2.6)
-      },
     },
     {
       text: `Now check your wallet.
 
 What do you mean you’ve still got it?
 Oh well, i am loosing my grip...`,
-      triggeredByNext: () => {
-        npc.playAnimation(`Dismissing`, true, 3.3)
-      },
     },
     {
       text: `You know, i haven’t had the most honest way of life. And then i decided to settle down here. I thought this was a fine calm place with good neighbors.
 But no!`,
-      triggeredByNext: () => {
-        npc.playAnimation(`Sarcastic`, true, 2.37)
-      },
     },
       {
       text: `See that house over there? I thought – a fine lass lives there.
 But she just keeps on screaming at night, with her lights on.`,
-      triggeredByNext: () => {
-        npc.playAnimation(`Sarcastic`, true, 2.37)
-      },
     },
     {
       text: `Then it stopped.
 Someone must have finally called the cops on her.`,
       triggeredByNext: () => {
-        npc.playAnimation(`Angry`, true, 2.23)
-
+	  
         let dummyEnt = new Entity()
         dummyEnt.addComponent(
           new utils.Delay(1000, () => {

@@ -268,13 +268,13 @@ export function addHouses(progression: HalloweenState) {
       npc_model_paths.ghostblaster,
       () => {
         ghostControlGuy.talk(ghostControlDialog(ghostControlGuy, doorHouse6), 0)
-        ghostControlGuy.playAnimation(`Relieved`, true, 3.03)
+        ghostControlGuy.playAnimation(`talk`, false, 6.26)
       },
 
       {
         portrait: {path: 'images/portraits/ghostblaster.png'},
         reactDistance: 12,
-        idleAnim: `Idle`,
+        idleAnim: `stand`,
         faceUser: false,
         onlyExternalTrigger: true,
 
