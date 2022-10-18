@@ -1,11 +1,15 @@
 import { haunted_model_paths } from "src/resources/model_paths"
+import * as NPCUtils from '@dcl/npc-scene-utils'
+import { COLOR_GREEN } from "src/resources/theme/color"
+import { day1GirlDialog } from "./grave"
+import { halloweenTheme } from "./halloweenQuests/quest/questCheckBox"
 
 export class Phone extends Entity {
   onPickup: () => void
   anim: AnimationState
 
   ringing: boolean = true
-  ringSound: AudioClip = new AudioClip(`sounds/ring.mp3`)
+  ringSound: AudioClip = new AudioClip(`sounds/day1/creepy_girl.mp3`)
   picupSound: AudioClip
   constructor(position: TranformConstructorArgs, onPickup: () => void) {
     super()
@@ -39,14 +43,29 @@ export class Phone extends Entity {
     this.anim.playing = true
   }
   activate() {
-    if (!this.ringing) return
 
     // stop anim
     // stop sound
     // play pickup sound
 
+    
+   
+    
+    let phoneDialog = new NPCUtils.DialogWindow(
+      {path: 'images/portraits/phoneCharacter.png'},
+      true,
+      '',
+      halloweenTheme
+    ) // + path to portrait
+    phoneDialog.openDialogWindow(day1GirlDialog(this.end_of_dialog), 0)
+
+    phoneDialog.leftClickIcon.positionX = 340 - 60
+    phoneDialog.text.color = Color4.FromHexString(COLOR_GREEN)
+    
+  }
+
+  private end_of_dialog(){
     this.anim.playing = false
-    this.getComponent(Animator).getClip('Ring').stop()
     this.getComponent(AudioSource).playing = false
     this.ringing = false
     this.onPickup()

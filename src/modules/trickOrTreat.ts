@@ -5,7 +5,6 @@ import {
   ghostControlDialog,
   lockedHouse,
   mayorGhostDialog,
-  phoneVoice,
 } from './grave'
 import {COLOR_GREEN} from '../resources/theme/color'
 import * as NPCUtils from '@dcl/npc-scene-utils'
@@ -458,35 +457,23 @@ export function addHouses(progression: HalloweenState) {
       funMusic1.getComponent(AudioSource).playing = false
       funMusic2.getComponent(AudioSource).playing = false
 
-      dramaticMusic = new Entity()
-      dramaticMusic.addComponent(
-        new AudioSource(new AudioClip('sounds/SpookyHouse10.mp3'))
-      )
-      dramaticMusic.addComponent(
-        new Transform({
-          position: new Vector3(13.7, 0.15, 39.14),
-        })
-      )
-      engine.addEntity(dramaticMusic)
-      dramaticMusic.getComponent(AudioSource).loop = false
-      dramaticMusic.getComponent(AudioSource).volume = 0.5
-      dramaticMusic.getComponent(AudioSource).playing = true
+
 
       let dummyEnt = new Entity()
       dummyEnt.addComponent(
-        new utils.Delay(2000, () => {
-          ui.displayAnnouncement(
-            'Metaverse Murder Mystery',
-            10,
-            Color4.Red(),
-            70
-          )
+        new utils.Delay(16000, () => {
+          // ui.displayAnnouncement(
+          //   'Metaverse Murder Mystery',
+          //   10,
+          //   Color4.Red(),
+          //   70
+          // )
           phone.ring()
         })
       )
       engine.addEntity(dummyEnt)
 
-      quest.showCheckBox(1)
+      //quest.showCheckBox(1)
       //updateProgression('foundBody')
 
       let phone = new Phone(
@@ -495,16 +482,7 @@ export function addHouses(progression: HalloweenState) {
           rotation: Quaternion.Euler(0, 0, 0),
         },
         () => {
-          let phoneDialog = new NPCUtils.DialogWindow(
-            {path: 'images/portraits/phoneCharacter.png'},
-            true,
-            '',
-            halloweenTheme
-          ) // + path to portrait
-          phoneDialog.openDialogWindow(phoneVoice, 0)
-
-          phoneDialog.leftClickIcon.positionX = 340 - 60
-          phoneDialog.text.color = Color4.FromHexString(COLOR_GREEN)
+         
         }
       )
 
