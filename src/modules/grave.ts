@@ -222,25 +222,40 @@ Well... sure a cat can scratch ye, but people can hurt more. So if ya ain’t a 
 export function farmerDialog(npc: NPC, doorHouse: TTHouse) {
   return [
     {
-      text: `Howdy there! What brings you over to my old shack here?`,
+      text: `Trick or treat eh? 
+How about I just get my big gun and pepper your mug full of buckshot!`,
       triggeredByNext: () => {
         npc.playAnimation(`HeadShake_No`, true, 1.83)
       },
     },
     {
-      text: `I real don't like these parties... people scambling around wearing this, wearing that`,
+      text: `Ain’t that gonna be a nasty little trick!
+Don’t you think?`,
       triggeredByNext: () => {
         npc.playAnimation(`Annoyed_HeadShake`, true, 2.6)
       },
     },
     {
-      text: `This girl a while back I was hearing... she be crazy yelling her lungs out like they was killing her or something. Chill out, man!`,
+      text: `Alright, alright, I am just kidding around! Calm down! It doesn’t even shoot anymore.`,
       triggeredByNext: () => {
         npc.playAnimation(`Hard Head`, true, 1.67)
       },
     },
     {
-      text: `Anyway, thanks for sticking around while I ramble on about stuff. Here, take this little something as a token of my appreciationing.`,
+      text: `What, you got spooked? He-he, the spirit of halloween as it is — Friendly jokes, pranks and just a bit of that good ol’ pure horror!`,
+      triggeredByNext: () => {
+        npc.playAnimation(`Hard Head`, true, 1.67)
+      },
+    },
+      {
+      text: `I am actually a nice fellow. I like to have fun, I like parties. Especially when they feed you well.
+Good food! — that is what defines a good party!`,
+      triggeredByNext: () => {
+        npc.playAnimation(`Hard Head`, true, 1.67)
+      },
+    },
+    {
+      text: `Here, take this! Don’t peek! And don’t get mad about the “mug full of buckshot” thing.`,
       triggeredByNext: () => {
         doorHouse.close()
         let r = new Reward(npc, 'house1', {
@@ -257,33 +272,51 @@ export function farmerDialog(npc: NPC, doorHouse: TTHouse) {
 export function mayorGhostDialog(npc: NPC, doorHouse: TTHouse) {
   return [
     {
-      text: `Hey! What's the matter, you look like you just saw a ghost!`,
+      text: `Why are you looking at me like that? Yes, I am completely naked.`,
       triggeredByNext: () => {
         npc.playAnimation(`talk2`, true, 10.3)
       },
     },
     {
-      text: `To you this is a pretend fun night of dressing up... me, this is just who I am.`,
+      text: `And the omnipresent power of censorship can’t even do anything about me. Because aside from being naked, I am also dead.`,
       triggeredByNext: () => {
         npc.playAnimation(`deny2`, true, 1.67)
       },
     },
     {
-      text: `I've lived ...or rather been here for a very long time, this place is my home.`,
+      text: `Like what are they going to tell me? —
+Hey Fine Sir dead skeleton, would you mind at least using a towel?`,
       triggeredByNext: () => {
         npc.playAnimation(`deny3`, true, 4.97)
       },
     },
-
+    {
+      text: `Oh no! If some smug fellow in a suit, from the DAO censorship department tries telling me something like that, he will get fired. Because everyone at the DAO knows that the dead does not speak.`,
+      triggeredByNext: () => {
+        npc.playAnimation(`deny3`, true, 4.97)
+      },
+    },
     {
       text: `And nothing, or no one is going to get in the way of that. No matter how hard they try.`,
       triggeredByNext: () => {
         npc.playAnimation(`talk2`, true, 3.97)
       },
     },
-
     {
-      text: `You want something to dress up like the other guys? Sure why not. Take this and have fun, see ya.`,
+      text: `Ofcourse on the other side being a naked skeleton means it isn’t easy finding friends.`,
+      triggeredByNext: () => {
+        npc.playAnimation(`talk2`, true, 3.97)
+      },
+    },
+     {
+      text: `My neighbor from that house over there, recently died, and by the rumors her spirit still lives there.
+I am dying to know her a little better.`,
+      triggeredByNext: () => {
+        npc.playAnimation(`talk2`, true, 3.97)
+      },
+    },
+    {
+      text: `If you ever get to her, ask her if she wants an athletically built skeleton to take her out sometime.`,
       triggeredByNext: () => {
         // give wearable
         let r = new Reward(npc, 'house2', {
@@ -302,31 +335,47 @@ export function mayorGhostDialog(npc: NPC, doorHouse: TTHouse) {
 export function ghostControlDialog(npc: NPC, doorHouse: TTHouse) {
   return [
     {
-      text: `What, what is it!`,
+      text: `Wanna see trick?`,
       triggeredByNext: () => {
         npc.playAnimation(`Lengthy`, true, 1.77)
       },
     },
     {
-      text: `Oh... you're one of those. Messing around collecting junk. Listen, I don't have time for this now.`,
+      text: `Mumbo jumbo, watch the hands...
+Now, you have to blow.
+If you don’t blow nothing will happen...
+
+Bam!`,
       triggeredByNext: () => {
         npc.playAnimation(`Annoyed_HeadShake`, true, 2.6)
       },
     },
     {
-      text: `And to be honest, I don't really care much for all of this. My neighbors started organizing this event, calling crowds of people in to visit.`,
+      text: `Now check your wallet.
+
+What do you mean you’ve still got it?
+Oh well, i am loosing my grip...`,
       triggeredByNext: () => {
         npc.playAnimation(`Dismissing`, true, 3.3)
       },
     },
     {
-      text: `I don't like it one bit. They're weird, so oddly friendly with everyone... it's creepy, that's what it is.`,
+      text: `You know, i haven’t had the most honest way of life. And then i decided to settle down here. I thought this was a fine calm place with good neighbors.
+But no!`,
+      triggeredByNext: () => {
+        npc.playAnimation(`Sarcastic`, true, 2.37)
+      },
+    },
+      {
+      text: `See that house over there? I thought – a fine lass lives there.
+But she just keeps on screaming at night, with her lights on.`,
       triggeredByNext: () => {
         npc.playAnimation(`Sarcastic`, true, 2.37)
       },
     },
     {
-      text: `I don't know you, you don't know me. So what the hell are you doing banging on my door asking me for things.`,
+      text: `Then it stopped.
+Someone must have finally called the cops on her.`,
       triggeredByNext: () => {
         npc.playAnimation(`Angry`, true, 2.23)
 
@@ -340,7 +389,9 @@ export function ghostControlDialog(npc: NPC, doorHouse: TTHouse) {
       },
     },
     {
-      text: `Quit wasting our time.`,
+      text: `You are not welcome here.
+No one is welcome here.
+Happines has not visited this home a long time... Do the same.`,
 
       isEndOfDialog: true,
     },
@@ -351,31 +402,25 @@ export function ghostControlDialog(npc: NPC, doorHouse: TTHouse) {
 export function castleGuyDialog(npc: NPC, doorHouse: TTHouse) {
   return [
     {
-      text: `Hey there. So you're trick or treating, are you?`,
+      text: `Ocuppied!`,
       triggeredByNext: () => {
         npc.playAnimation(`Happy Hand Gesture`, true, 2.97)
       },
     },
     {
-      text: `Are you even aware of the true origins of all this? The celtic pagan ritual of Samhaim, also known as "all hallows eve"?`,
+      text: `Stop knocking!`,
       triggeredByNext: () => {
         npc.playAnimation(`Angry`, true, 2.23)
       },
     },
     {
-      text: `The blurring of the lines between the world of the living and the dead as otherwordly spirits seep into our world, the prophecies and the sacrificial rituals and all that must happen as we enter the start of a cold and dark winter?`,
+      text: `Nope, this is gonna take a while!`,
       triggeredByNext: () => {
         npc.playAnimation(`Cocky`, true, 2.93)
       },
     },
     {
-      text: `Or are you just here to stuff your face with candy?`,
-      triggeredByNext: () => {
-        npc.playAnimation(`Lengthy`, true, 1.77)
-      },
-    },
-    {
-      text: `Well... fine. Each to his own. Take this.`,
+      text: `I shouldn’t have eaten that hotdog...`,
       triggeredByNext: () => {
         doorHouse.close()
         // give wearable
@@ -391,15 +436,11 @@ export function castleGuyDialog(npc: NPC, doorHouse: TTHouse) {
 // Locked house
 export const lockedHouse: Dialog[] = [
   {
-    text: `Go away, busy here!`,
+    text: `Mike? is that you?`,
     isEndOfDialog: true,
   },
   {
-    text: `Not a good time, get out!`,
-    isEndOfDialog: true,
-  },
-  {
-    text: `I hate interruptions, you're not welcome!`,
+    text: `If that is you, I am not letting you inside this house with that damned mask of yours!`,
     isEndOfDialog: true,
   },
 ]
@@ -407,13 +448,24 @@ export const lockedHouse: Dialog[] = [
 // Phone ringing
 export const phoneVoice: Dialog[] = [
   {
-    text: `Listen up, I want to keep this short because there could be people listening in.`,
+    text: `These dreams. These horrible dreams. They aren’t letting me rest.
+
+Today i decied not to wake up, and sleep until the end.`,
   },
   {
-    text: `I have some information that could be useful to figure out what happened here, and WHO did this.`,
+    text: `Oh, how hard it was to stay asleep. It was so horrifying... so horrifying ... It all seemed so real...
+And then i finally saw him.`,
   },
   {
-    text: `Meet me at Genesis Plaza, near the 0,0 coordinates, and I'll tell you what I know.`,
+    text: `He was right there. He was in the depths of my dream. Right at the source.
+
+He lives in my dreams and he twists them by his will.`,
+  },
+  {
+    text: `Dear heavens, how scared I am. How tired I am. But I am so scared that if I fall asleep, I will never wake up and he will take me away.`,
+  },
+  {
+    text: `If you are listening to this, come to the Glass Pavilion, near the 0,0 coordinates, I believe you are the one who can help me.`,
     triggeredByNext: () => {
       quest.checkBox(1)
       quest.showCheckBox(2)
@@ -433,25 +485,26 @@ export const phoneVoice: Dialog[] = [
 export function missionBrief(ghostCounter: ui.UICounter, ghostUIBck: ui.LargeIcon, ghostsArray: Skeleton[]) {
   return [
     {
-      text: `Hey there!`,
+      text: `Hey, dude! Check out these moves! I think they are fire!`,
     },
     {
-      text: `Overheard you yesterday, I think ** gah **`,
+      text: `We’ve got a dancing club with my brothers and sisters. If you lie in a coffin underground most of the time your body will get stiff, and you’ll want to get your bones to move once in a while.
+That’s why sometimes we gather around to dance.`,
     },
     {
-      text: `I might be able help, maybe`,
+      text: `Oh, I love to dance! I used to dislike dancing, but you know after death you look at a lot of things differently.`,
     },
     {
-      text: `can't concentrate... someone made a mess here, undug some graves`,
+      text: `My siblings got a bit carried away.`,
     },
     {
-      text: `Could you... could you please help us out?`,
+      text: `It's time for them to return. Please guide them back`,
     },
     {
-      text: `All these loose ghosts, they need to find their resting place. Please guide them back`,
+      text: `I would myself, but it’s a pity to interrupt such a good flow...`,
     },
     {
-      text: `Then we can have a proper talk`,
+      text: `Move to the rhythm, bro!`,
       triggeredByNext: () => {
         quest.checkBox(1)
         quest.showCheckBox(2)
@@ -472,19 +525,19 @@ export function missionBrief(ghostCounter: ui.UICounter, ghostUIBck: ui.LargeIco
 // When all ghosts are returned
 export const missionEnd: Dialog[] = [
   {
-    text: `Thank you! Things are so much calmer now.`,
+    text: `Great job! You dealt with it, one might say, dancing!`,
   },
   {
-    text: `Ok, so what I wanted to tell you before..`,
+    text: `Oh, and by the way. My siblings didn’t get lost by themselves. Somone confused them, someone who isn’t from around here.`,
   },
   {
-    text: `There were strange things going on last night. Someone was trying to bury something, and dug up a lot of graves looking for a spot.`,
+    text: `You have got to drive them off, or my skelleton brothers will keep getting lost.`,
   },
   {
-    text: `Whoever that was, we chased him out. He left something inside that old shack in the middle of the graveyard.`,
+    text: `Take this key. It’s from the crypt over there. Perhaps there, you’ll find something useful.`,
   },
   {
-    text: `Take this key for the shack and take a look.`,
+    text: `Keep the rhythm`,
     triggeredByNext: () => {
       getKey()
     },
