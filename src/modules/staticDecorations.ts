@@ -2,7 +2,7 @@ import * as utils from '@dcl/ecs-scene-utils'
 import { static_decoration_models } from 'src/resources/model_paths'
 import { fog_data } from './fog/fog_data'
 import { spawnFog } from './fog/spawnFog'
-import { openPhotosUI } from './photosUI'
+//import { openPhotosUI } from './photosUI'
 
 export function addStaticStuff() {
     //--- Set up a system ---
@@ -195,17 +195,17 @@ export function addStaticStuff() {
     )
     engine.addEntity(corpse)
 
-    corpse.addComponent(
-        new OnPointerDown(
-            (e) => {
-                openPhotosUI()
-            },
-            {
-                hoverText: 'Inspect photos',
-                distance: 6,
-            }
-        )
-    )
+    // corpse.addComponent(
+    //     new OnPointerDown(
+    //         (e) => {
+    //             openPhotosUI()
+    //         },
+    //         {
+    //             hoverText: 'Inspect photos',
+    //             distance: 6,
+    //         }
+    //     )
+    // )
 
 
 
