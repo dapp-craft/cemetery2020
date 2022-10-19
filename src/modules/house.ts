@@ -122,7 +122,7 @@ export class TTHouse extends Entity {
       doorCounter += 1
       log('doors opened ', doorCounter)
       if (doorCounter >= 6) {
-        //quest.checkBox(0)
+        quest.checkBox(0)
         updateProgression('allHouses')
       }
     }
