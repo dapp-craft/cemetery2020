@@ -8,17 +8,17 @@ import { npc_data } from './NPC/ghost/npc_data'
 
 import { graveyard_models, npc_model_paths } from 'src/resources/model_paths'
 
-import {Reward} from './halloweenQuests/loot'
-import {Dialog, NPC} from '@dcl/npc-scene-utils';
+import { Reward } from './halloweenQuests/loot'
+import { Dialog, NPC } from '@dcl/npc-scene-utils';
 import * as utils from '@dcl/ecs-scene-utils';
 import * as ui from '@dcl/ui-scene-utils';
-import {TTHouse} from "./house";
+import { TTHouse } from "./house";
 
-import {nextDay, updateProgression} from './halloweenQuests/progression'
+import { nextDay, updateProgression } from './halloweenQuests/progression'
 import { haunted_model_paths } from 'src/resources/model_paths'
-import {quest} from "./halloweenQuests/quest/questTasks";
-import {HalloweenState} from "./halloweenQuests/quest/types";
-import {halloweenTheme} from "./halloweenQuests/quest/questCheckBox";
+import { quest } from "./halloweenQuests/quest/questTasks";
+import { HalloweenState } from "./halloweenQuests/quest/types";
+import { halloweenTheme } from "./halloweenQuests/quest/questCheckBox";
 
 export let hasKey = false
 export let keyUI
@@ -56,7 +56,7 @@ export function doorHauntedHouse() {
 
         coffin.openAnim.stop()
       },
-      {distance: 6, hoverText: 'Open'}
+      { distance: 6, hoverText: 'Open' }
     )
   )
 
@@ -101,7 +101,7 @@ export function doorHauntedHouse() {
           nextDay(3)
         }
       )
-    }, { hoverText: 'Open coffin'})
+    }, { hoverText: 'Open coffin' })
   )
 }
 
@@ -202,7 +202,7 @@ Well... sure a cat can scratch ye, but people can hurt more. So if ya ain’t a 
     {
       text: `And if you meet a cat on the streets, make sure to feed ‘em!`,
       triggeredByNext: () => {
-        npc.playAnimation(`HeadShake_No`, true,  1.83)
+        npc.playAnimation(`HeadShake_No`, true, 1.83)
       },
     },
     {
@@ -235,7 +235,7 @@ Don’t you think?`,
     {
       text: `What, you got spooked? He-he, the spirit of halloween as it is — Friendly jokes, pranks and just a bit of that good ol’ pure horror!`,
     },
-      {
+    {
       text: `I am actually a nice fellow. I like to have fun, I like parties. Especially when they feed you well.
 Good food! — that is what defines a good party!`,
     },
@@ -275,7 +275,7 @@ Hey Fine Sir dead skeleton, would you mind at least using a towel?`,
     {
       text: `Ofcourse on the other side being a naked skeleton means it isn’t easy finding friends.`,
     },
-     {
+    {
       text: `My neighbor from that house over there, recently died, and by the rumors her spirit still lives there.
 I am dying to know her a little better.`,
     },
@@ -318,7 +318,7 @@ Oh well, i am loosing my grip...`,
       text: `You know, i haven’t had the most honest way of life. And then i decided to settle down here. I thought this was a fine calm place with good neighbors.
 But no!`,
     },
-      {
+    {
       text: `See that house over there? I thought – a fine lass lives there.
 But she just keeps on screaming at night, with her lights on.`,
     },
@@ -326,7 +326,7 @@ But she just keeps on screaming at night, with her lights on.`,
       text: `Then it stopped.
 Someone must have finally called the cops on her.`,
       triggeredByNext: () => {
-	  
+
         let dummyEnt = new Entity()
         dummyEnt.addComponent(
           new utils.Delay(1000, () => {
@@ -394,21 +394,19 @@ export const lockedHouse: Dialog[] = [
 ]
 
 // Phone ringing
-export function day1GirlDialog(callback:()=>void){
+export function day1GirlDialog(callback: () => void) {
   const dialog: Dialog[] = [
     {
-      text: `These dreams. These horrible dreams. They aren’t letting me rest.
-  
-  Today i decied not to wake up, and sleep until the end.`,
+      text: `These dreams. These horrible dreams. They aren’t letting me rest.` +
+        `Today i decied not to wake up, and sleep until the end.`,
     },
     {
-      text: `Oh, how hard it was to stay asleep. It was so horrifying... so horrifying ... It all seemed so real...
-  And then i finally saw him.`,
+      text: `Oh, how hard it was to stay asleep. It was so horrifying... so horrifying ... It all seemed so real...` +
+        `And then i finally saw him.`,
     },
     {
-      text: `He was right there. He was in the depths of my dream. Right at the source.
-  
-  He lives in my dreams and he twists them by his will.`,
+      text: `He was right there. He was in the depths of my dream. Right at the source.` +
+        `He lives in my dreams and he twists them by his will.`,
     },
     {
       text: `Dear heavens, how scared I am. How tired I am. But I am so scared that if I fall asleep, I will never wake up and he will take me away.`,
@@ -422,7 +420,7 @@ export function day1GirlDialog(callback:()=>void){
 
         callback()
       },
-  
+
       isEndOfDialog: true,
     },
   ]
