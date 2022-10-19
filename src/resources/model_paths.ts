@@ -11,7 +11,7 @@ export const npc_model_paths = {
     catLover: 'models/NPCs/NPC Cat Lover.glb',
     farmer: 'models/NPCs/hunter_villager.glb',
     ghostblaster: 'models/NPCs/illusionist_villager.glb',
-    ghost1: 'models/NPCs/ghost1.glb',
+    ghost1: 'models/NPCs/skeleton.glb',
     girl:  'models/NPCs/girl.glb'
 }
 

@@ -305,17 +305,18 @@ export function addHouses(progression: HalloweenState) {
       {
         position: new Vector3(-1, 0, 0.75),
         rotation: Quaternion.Euler(0, 90, 0),
+		scale: new Vector3(1.35, 1.35, 1.35)
       },
       npc_model_paths.ghost1,
       () => {
         mayorGhost.talk(mayorGhostDialog(mayorGhost, doorHouse4), 0)
-        mayorGhost.playAnimation(`idle1`, true, 9.8)
+        mayorGhost.playAnimation(`idle2`, false, 10.65)
       },
 
       {
         portrait: {path: 'images/portraits/skeleton.png'},
         reactDistance: 12,
-        idleAnim: `Idle`,
+        idleAnim: `idle2`,
         faceUser: false,
         onlyExternalTrigger: true,
 

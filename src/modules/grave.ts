@@ -258,47 +258,26 @@ export function mayorGhostDialog(npc: NPC, doorHouse: TTHouse) {
   return [
     {
       text: `Why are you looking at me like that? Yes, I am completely naked.`,
-      triggeredByNext: () => {
-        npc.playAnimation(`talk2`, true, 10.3)
-      },
     },
     {
       text: `And the omnipresent power of censorship can’t even do anything about me. Because aside from being naked, I am also dead.`,
-      triggeredByNext: () => {
-        npc.playAnimation(`deny2`, true, 1.67)
-      },
     },
     {
       text: `Like what are they going to tell me? —
 Hey Fine Sir dead skeleton, would you mind at least using a towel?`,
-      triggeredByNext: () => {
-        npc.playAnimation(`deny3`, true, 4.97)
-      },
     },
     {
       text: `Oh no! If some smug fellow in a suit, from the DAO censorship department tries telling me something like that, he will get fired. Because everyone at the DAO knows that the dead does not speak.`,
-      triggeredByNext: () => {
-        npc.playAnimation(`deny3`, true, 4.97)
-      },
     },
     {
       text: `And nothing, or no one is going to get in the way of that. No matter how hard they try.`,
-      triggeredByNext: () => {
-        npc.playAnimation(`talk2`, true, 3.97)
-      },
     },
     {
       text: `Ofcourse on the other side being a naked skeleton means it isn’t easy finding friends.`,
-      triggeredByNext: () => {
-        npc.playAnimation(`talk2`, true, 3.97)
-      },
     },
      {
       text: `My neighbor from that house over there, recently died, and by the rumors her spirit still lives there.
 I am dying to know her a little better.`,
-      triggeredByNext: () => {
-        npc.playAnimation(`talk2`, true, 3.97)
-      },
     },
     {
       text: `If you ever get to her, ask her if she wants an athletically built skeleton to take her out sometime.`,
