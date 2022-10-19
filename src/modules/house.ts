@@ -53,7 +53,7 @@ export class TTHouse extends Entity {
     if (closeAnim) {
       this.closeAnim = new AnimationState(closeAnim, {looping: false})
       this.getComponent(Animator).addClip(this.closeAnim)
-      //this.closeAnim.play()
+      this.closeAnim.play()
     }
 
     if (locked) {
