@@ -19,7 +19,8 @@ export const npc_model_paths = {
 export const haunted_model_paths = {
     haunted_house: 'models/Door_HauntedHouse.glb',
     coffin: 'models/Coffin.glb',
-    phone: 'models/Phone.glb'
+    phone: 'models/Phone.glb',
+    girl: 'models/ghost_girl.glb'
 }
 
 
