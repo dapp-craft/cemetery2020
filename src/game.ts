@@ -1,11 +1,11 @@
 import { addGhostsAndCrypts, addMainGhostNPC } from './modules/grave'
 import { addClosedDoors, addHouses } from './modules/trickOrTreat'
-import { checkProgression, progression } from './modules/halloweenQuests/progression'
+import { checkProgression, progression } from './halloweenQuests/halloweenQuests/progression'
 import { addStaticStuff } from './modules/staticDecorations'
 import { doorHauntedHouse, getKey } from './modules/grave'
-import { Reward } from './modules/halloweenQuests/loot'
-import {updateQuestUI} from "./modules/halloweenQuests/quest/questTasks";
-import {isEqual} from "./modules/halloweenQuests/utils/isEqual";
+import { Reward } from './halloweenQuests/halloweenQuests/loot'
+import {updateQuestUI} from "./halloweenQuests/halloweenQuests/quest/questTasks";
+import {isEqual} from "./halloweenQuests/halloweenQuests/utils/isEqual";
 
 addStaticStuff()
 addClosedDoors()
@@ -30,6 +30,10 @@ export async function setUpScene() {
 
   // dummy underground loot for faster loading
   let dummyReward = new Reward(modArea, 'dummy', { position: new Vector3(0, -10, 0) }, true)
+
+  updateQuest()
+  doorHauntedHouse()
+
 }
 
 Input.instance.subscribe('BUTTON_DOWN', ActionButton.PRIMARY, false, (e) => {
@@ -55,7 +59,7 @@ Input.instance.subscribe('BUTTON_DOWN', ActionButton.PRIMARY, false, (e) => {
 //test
  onEnterSceneObservable.add((player) => {
   log('player enter')
-  updateQuest()
+ 
 
 })
 
@@ -68,7 +72,6 @@ async function updateQuest(){
 
   addHouses(progression)
 
-  doorHauntedHouse()
 
   // conditional elements depending on progression
   if (
