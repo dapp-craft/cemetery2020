@@ -2,7 +2,7 @@ import { haunted_model_paths } from 'src/resources/model_paths'
 import * as NPCUtils from '@dcl/npc-scene-utils'
 import { COLOR_GREEN } from 'src/resources/theme/color'
 import { day1GirlDialog } from './grave'
-import { halloweenTheme } from '../halloweenQuests/halloweenQuests/quest/questCheckBox'
+import { halloweenTheme } from '../halloweenQuests/quest/questCheckBox'
 import * as utils from '@dcl/ecs-scene-utils'
 
 export class Phone extends Entity {

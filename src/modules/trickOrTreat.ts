@@ -9,14 +9,14 @@ import {
 import {COLOR_GREEN} from '../resources/theme/color'
 import * as NPCUtils from '@dcl/npc-scene-utils'
 import {NPC} from '@dcl/npc-scene-utils'
-import {quest} from "../halloweenQuests/halloweenQuests/quest/questTasks";
-import {HalloweenState} from "../halloweenQuests/halloweenQuests/quest/types";
-import {halloweenTheme} from "../halloweenQuests/halloweenQuests/quest/questCheckBox";
+import {quest} from "../halloweenQuests/quest/questTasks";
+import {HalloweenState} from "../halloweenQuests/quest/types";
+import {halloweenTheme} from "../halloweenQuests/quest/questCheckBox";
 import {TTHouse} from './house'
 import * as ui from '@dcl/ui-scene-utils'
 import * as utils from '@dcl/ecs-scene-utils'
 import {Phone} from './phone'
-import {Reward} from '../halloweenQuests/halloweenQuests/loot'
+import {Reward} from '../halloweenQuests/loot'
 import { npc_model_paths, stuff } from 'src/resources/model_paths'
 
 
@@ -151,6 +151,7 @@ export function addClosedDoors() {
 }
 
 export function addHouses(progression: HalloweenState) {
+  log('addHouses')
   if (!progression.data.phone) {
     funMusic1 = new Entity()
     funMusic1.addComponent(

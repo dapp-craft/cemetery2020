@@ -1,18 +1,13 @@
 import { addGhostsAndCrypts, addMainGhostNPC } from './modules/grave'
 import { addClosedDoors, addHouses } from './modules/trickOrTreat'
-import { checkProgression, progression } from './halloweenQuests/halloweenQuests/progression'
+import {checkProgression, progression, updateProgression} from './halloweenQuests/progression'
 import { addStaticStuff } from './modules/staticDecorations'
 import { doorHauntedHouse, getKey } from './modules/grave'
-import { Reward } from './halloweenQuests/halloweenQuests/loot'
-import {updateQuestUI} from "./halloweenQuests/halloweenQuests/quest/questTasks";
-import {isEqual} from "./halloweenQuests/halloweenQuests/utils/isEqual";
+import { Reward } from './halloweenQuests/loot'
+import {updateQuestUI} from "./halloweenQuests/quest/questTasks";
 
-addStaticStuff()
-addClosedDoors()
-setUpScene()
 
-export async function setUpScene() {
-
+export function setUpScene() {
   // avatar modifier
   const modArea = new Entity()
   modArea.addComponent(
@@ -31,9 +26,7 @@ export async function setUpScene() {
   // dummy underground loot for faster loading
   let dummyReward = new Reward(modArea, 'dummy', { position: new Vector3(0, -10, 0) }, true)
 
-  updateQuest()
-  doorHauntedHouse()
-
+    doorHauntedHouse()
 }
 
 Input.instance.subscribe('BUTTON_DOWN', ActionButton.PRIMARY, false, (e) => {
@@ -56,20 +49,7 @@ Input.instance.subscribe('BUTTON_DOWN', ActionButton.PRIMARY, false, (e) => {
   )
 })
 
-//test
- onEnterSceneObservable.add((player) => {
-  log('player enter')
- 
-
-})
-
-async function updateQuest(){
-    const curr_progression = await checkProgression()
-    progression.data = curr_progression.data
-    progression.day = curr_progression.day
-
-    updateQuestUI(progression.data, progression.day)
-
+function updateSceneByProgression(){
   addHouses(progression)
 
 
@@ -90,38 +70,52 @@ async function updateQuest(){
   }
 }
 
-// TODO quest UI smart wearable code
+function updateSceneUI() {
+    executeTask(async () => {
+        const curr_progression = await checkProgression()
+        log('checkProgression', curr_progression)
+        if (curr_progression == null) return
+        progression.data = curr_progression.data
+        progression.day = curr_progression.day
 
-const updateProgressInterval = 10
-
-async function updateSceneUI() {
-    const curr_progression = await checkProgression()
-    log(curr_progression, progression)
-    if (curr_progression == null) return
-    if (progression.data != null && isEqual(progression.data, curr_progression.data)) return
-    progression.data = curr_progression.data
-    progression.day = curr_progression.day
-
-    if (progression.data) {
-        log('UPDATE QUEST UI', progression.day, progression.data)
-        updateQuestUI(progression.data, progression.day)
-    }
-}
-
-class UpdateSceneUISystem implements ISystem {
-    private timer = 0
-
-    constructor() { }
-
-    async update(dt: number) {
-        this.timer += dt
-        if (this.timer > updateProgressInterval) {
-            this.timer = 0
-            await updateSceneUI()
-
+        if (progression.data != null ) {
+            log('updateQuestUI', progression.day, progression.data)
+            updateQuestUI(progression.data, progression.day)
+            updateSceneByProgression()
         }
-    }
+    })
 }
 
-engine.addSystem(new UpdateSceneUISystem())
-//// end quest UI smart wearable code
+onSceneReadyObservable.add(() => {
+    log('onSceneReadyObservable')
+
+    addStaticStuff()
+    addClosedDoors()
+    setUpScene()
+
+    updateSceneUI()
+})
+
+
+const input = Input.instance
+
+const stages = [
+    'talkBat',
+    'meetGirl',
+    'allHouses',
+    'phone',
+    'w1Found',
+    'NPCIntroDay2',
+    'ghostsDone',
+    'w2Found'
+]
+
+let stage_index = 0
+input.subscribe('BUTTON_DOWN', ActionButton.ACTION_3, false, (e) => {
+    // log('pointer Down', e)
+    log('updateProgression', stages[stage_index])
+    if (updateProgression(stages[stage_index])) {
+        log('updateProgression success', stages[stage_index])
+        stage_index++
+    }
+})
