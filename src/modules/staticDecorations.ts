@@ -186,28 +186,6 @@ export function addStaticStuff() {
 
     engine.addEntity(bats)
 
-    let corpse = new Entity()
-    corpse.addComponent(new GLTFShape(static_decoration_models.corpse))
-    corpse.addComponent(
-        new Transform({
-            position: new Vector3(8.5, 0.1, 41),
-        })
-    )
-    engine.addEntity(corpse)
-
-    // corpse.addComponent(
-    //     new OnPointerDown(
-    //         (e) => {
-    //             openPhotosUI()
-    //         },
-    //         {
-    //             hoverText: 'Inspect photos',
-    //             distance: 6,
-    //         }
-    //     )
-    // )
-
-
 
     for (const data of fog_data) {
         spawnFog(data)

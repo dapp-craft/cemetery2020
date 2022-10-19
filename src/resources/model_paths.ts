@@ -36,8 +36,7 @@ export const stuff = {
 export const static_decoration_models = {
     base: 'models/base.glb',
     tomb: 'models/tombs.glb',
-    bat: 'models/Bat.glb',
-    corpse: 'models/Corpse.glb',
+    bat: 'models/Bat.glb'
 }
 
 export const graveyard_models = {
