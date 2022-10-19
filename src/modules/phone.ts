@@ -1,19 +1,24 @@
-import { haunted_model_paths } from "src/resources/model_paths"
+import { haunted_model_paths } from 'src/resources/model_paths'
 import * as NPCUtils from '@dcl/npc-scene-utils'
-import { COLOR_GREEN } from "src/resources/theme/color"
-import { day1GirlDialog } from "./grave"
-import { halloweenTheme } from "./halloweenQuests/quest/questCheckBox"
+import { COLOR_GREEN } from 'src/resources/theme/color'
+import { day1GirlDialog } from './grave'
+import { halloweenTheme } from './halloweenQuests/quest/questCheckBox'
+import * as utils from '@dcl/ecs-scene-utils'
 
 export class Phone extends Entity {
   onPickup: () => void
   anim: AnimationState
 
-  ringing: boolean = true
-  ringSound: AudioClip = new AudioClip(`sounds/day1/creepy_girl.mp3`)
-  picupSound: AudioClip
+  private ringing: boolean = true
+  private ringSound: AudioClip = new AudioClip(`sounds/day1/creepy_girl.mp3`)
+  private picupSound: AudioClip
+
+  private ghost_girl: Entity
+
   constructor(position: TranformConstructorArgs, onPickup: () => void) {
     super()
     this.addComponent(new GLTFShape(haunted_model_paths.phone))
+
     this.addComponent(new Transform(position))
     this.addComponent(new Animator())
     engine.addEntity(this)
@@ -36,11 +41,28 @@ export class Phone extends Entity {
     this.anim = new AnimationState('Ring', { looping: true })
     this.getComponent(Animator).addClip(this.anim)
     this.anim.playing = true
+
+    const girl = new Entity()
+    girl.addComponentOrReplace(new GLTFShape(haunted_model_paths.girl))
+    girl.addComponentOrReplace(new Transform(
+      {
+        position: new Vector3(7.9517, 0.08, 40.137)
+      }
+    ))
+    girl.addComponentOrReplace(new Animator())
+    girl.getComponent(Animator).addClip(new AnimationState('walk', { looping: false }))
+    girl.getComponent(Animator).addClip(new AnimationState('stand', { looping: true }))
+    engine.addEntity(girl)
+    this.ghost_girl = girl
   }
   ring() {
     this.getComponent(AudioSource).loop = true
     this.getComponent(AudioSource).playing = true
     this.anim.playing = true
+    this.ghost_girl.getComponent(Animator).getClip('walk').play(true)
+    utils.setTimeout(26000, ()=>{
+      this.ghost_girl.getComponent(Animator).getClip('stand').play(true)
+    })
   }
   activate() {
 
@@ -48,11 +70,11 @@ export class Phone extends Entity {
     // stop sound
     // play pickup sound
 
-    
-   
-    
+
+
+
     let phoneDialog = new NPCUtils.DialogWindow(
-      {path: 'images/portraits/phoneCharacter.png'},
+      { path: 'images/portraits/phoneCharacter.png' },
       true,
       '',
       halloweenTheme
@@ -61,10 +83,10 @@ export class Phone extends Entity {
 
     phoneDialog.leftClickIcon.positionX = 340 - 60
     phoneDialog.text.color = Color4.FromHexString(COLOR_GREEN)
-    
+
   }
 
-  private end_of_dialog(){
+  private end_of_dialog() {
     this.anim.playing = false
     this.getComponent(AudioSource).playing = false
     this.ringing = false
