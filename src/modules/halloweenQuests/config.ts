@@ -1,7 +1,7 @@
 import { HalloweenState } from './quest/types'
 
-export const TESTDATA_ENABLED = false
-export let IN_PREVIEW: boolean = false
+export const TESTDATA_ENABLED = true
+export let IN_PREVIEW: boolean = true
 
 export function setInPreview(val: boolean) {
   IN_PREVIEW = val
@@ -9,8 +9,8 @@ export function setInPreview(val: boolean) {
 
 export const TESTQUESTSTATE: HalloweenState = {
   data: {
-    talkBat: false,
-    meetGirl: false,
+    talkBat: true,
+    meetGirl: true,
 
     // day 1
     allHouses: false,
