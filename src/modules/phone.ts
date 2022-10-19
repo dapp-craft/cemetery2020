@@ -7,7 +7,6 @@ import * as utils from '@dcl/ecs-scene-utils'
 
 export class Phone extends Entity {
   onPickup: () => void
-  anim: AnimationState
 
   private ringing: boolean = true
   private ringSound: AudioClip = new AudioClip(`sounds/day1/creepy_girl.mp3`)
@@ -17,7 +16,6 @@ export class Phone extends Entity {
 
   constructor(position: TranformConstructorArgs, onPickup: () => void) {
     super()
-    this.addComponent(new GLTFShape(haunted_model_paths.phone))
 
     this.addComponent(new Transform(position))
     this.addComponent(new Animator())
@@ -38,9 +36,6 @@ export class Phone extends Entity {
 
     // play ringing sound
 
-    this.anim = new AnimationState('Ring', { looping: true })
-    this.getComponent(Animator).addClip(this.anim)
-    this.anim.playing = true
 
     const girl = new Entity()
     girl.addComponentOrReplace(new GLTFShape(haunted_model_paths.girl))
@@ -58,12 +53,13 @@ export class Phone extends Entity {
   ring() {
     this.getComponent(AudioSource).loop = true
     this.getComponent(AudioSource).playing = true
-    this.anim.playing = true
+
     this.ghost_girl.getComponent(Animator).getClip('walk').play(true)
     utils.setTimeout(26000, ()=>{
       this.ghost_girl.getComponent(Animator).getClip('stand').play(true)
     })
   }
+  
   activate() {
 
     // stop anim
@@ -87,7 +83,7 @@ export class Phone extends Entity {
   }
 
   private end_of_dialog() {
-    this.anim.playing = false
+
     this.getComponent(AudioSource).playing = false
     this.ringing = false
     this.onPickup()
