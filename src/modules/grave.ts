@@ -48,7 +48,7 @@ export function doorHauntedHouse() {
           return
         }
         doorHauntedHouseAnim.play()
-        //quest.checkBox(3)
+        quest.checkBox(3)
         useKey()
         const source = new AudioSource(openClip)
         doorHauntedHouse.addComponentOrReplace(source)
@@ -437,8 +437,8 @@ export function day1GirlDialog(callback:()=>void){
     {
       text: `If you are listening to this, come to the Glass Pavilion, near the 0,0 coordinates, I believe you are the one who can help me.`,
       triggeredByNext: () => {
-        //quest.checkBox(1)
-        //quest.showCheckBox(2)
+        quest.checkBox(1)
+        quest.showCheckBox(2)
         updateProgression('phone')
 
         callback()
@@ -480,10 +480,10 @@ That’s why sometimes we gather around to dance.`,
     {
       text: `Move to the rhythm, bro!`,
       triggeredByNext: () => {
-        //quest.checkBox(1)
-        //quest.showCheckBox(2)
-        //quest.showCheckBox(3)
-        //updateProgression('ghostIntro')
+        quest.checkBox(1)
+        quest.showCheckBox(2)
+        quest.showCheckBox(3)
+        updateProgression('ghostIntro')
         ghostUIBck.image.visible = true
         ghostCounter.uiText.visible = true
         for (let ghost of ghostsArray) {
@@ -1309,7 +1309,7 @@ export function counterIncrease() {
   ghostCounter.increase()
   if (ghostCounter.read() >= 6) {
     // update quest info
-    //quest.checkBox(2)
+    quest.checkBox(2)
     updateProgression('ghostsDone')
     // remove UI
     ghostUIBck.image.visible = false
