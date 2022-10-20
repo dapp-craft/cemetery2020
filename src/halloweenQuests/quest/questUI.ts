@@ -5,7 +5,7 @@ import { Coords, QuestItem } from './types'
 
 const ITEM_SPACING = 50
 const Y_OFFSET = -59
-const X_OFFSET = -5
+const X_OFFSET = 5
 
 
 export class QuestUI extends Entity {
