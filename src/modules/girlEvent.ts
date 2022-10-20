@@ -4,6 +4,8 @@ import { COLOR_GREEN } from 'src/resources/theme/color'
 import { day1GirlDialog } from './grave'
 import { halloweenTheme } from '../halloweenQuests/quest/questCheckBox'
 import * as utils from '@dcl/ecs-scene-utils'
+import { quest } from 'src/halloweenQuests/quest/questTasks'
+import { updateProgression } from 'src/halloweenQuests/progression'
 
 export class GirlTalkEvent extends Entity {
   onPickup: () => void
@@ -50,7 +52,7 @@ export class GirlTalkEvent extends Entity {
 
 
     this.ghost_girl.getComponent(Animator).getClip('walk').play(true)
-    utils.setTimeout(16000, () => {
+    utils.setTimeout(17000, () => {
       
       this.getComponent(AudioSource).loop = true
       this.getComponent(AudioSource).playing = true
@@ -61,7 +63,7 @@ export class GirlTalkEvent extends Entity {
         '',
         halloweenTheme
       ) // + path to portrait
-      phoneDialog.openDialogWindow(day1GirlDialog(this.end_of_dialog), 0)
+      phoneDialog.openDialogWindow(day1GirlDialog(this.end_of_dialog.bind(this)), 0)
       phoneDialog.leftClickIcon.positionX = 340 - 60
       phoneDialog.text.color = Color4.FromHexString(COLOR_GREEN)
 
@@ -73,6 +75,10 @@ export class GirlTalkEvent extends Entity {
 
 
   private end_of_dialog() {
+
+    quest.checkBox(2)
+    quest.showCheckBox(3)
+    updateProgression('phone')
 
     this.getComponent(AudioSource).playing = false
     this.ringing = false
