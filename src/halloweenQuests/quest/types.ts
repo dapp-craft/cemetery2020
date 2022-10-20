@@ -1,9 +1,9 @@
 export enum Coords {
-  GenesisCoords = `0,0`,
-  CemeteryCoords = `-13,-3`,
-  TempleCoords = `47,67`,
-  FarmCoords = `89,14`,
-  Secret = `secret`
+  GenesisCoords = `-66,-66`,
+  CemeteryCoords = `-65,-55`,
+  TempleCoords = `-55,-55`,
+  FarmCoords = `-55,-60`,
+  Secret = `-55,-70`
 }
 
 export type QuestItem = {
