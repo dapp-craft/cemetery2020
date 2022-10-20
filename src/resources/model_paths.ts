@@ -3,7 +3,7 @@ export const npc_model_paths = {
     skeleton2: 'models/NPCs/skeleton.glb',
     skeleton3: 'models/NPCs/skeleton.glb',
     skeleton4: 'models/NPCs/skeleton.glb',
-    skeleton5: 'models/NPCs/skeleton.glb',
+    skeleton5: 'models/NPCs/skeleton_lovers.glb',
     skeleton6: 'models/NPCs/skeleton.glb',
 
     skeletonQuestGiver: 'models/NPCs/skeleton1.glb',
