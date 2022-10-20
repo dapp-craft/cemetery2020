@@ -140,6 +140,7 @@ input.subscribe('BUTTON_DOWN', ActionButton.ACTION_4, false, (e) => {
         () => {
             executeTask(async () => {
                 await updateProgression('w2Found')
+                progression.data['w2Found'] = true
                 await nextDay(3)
             })
         }
