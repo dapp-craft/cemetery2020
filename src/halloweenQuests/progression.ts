@@ -10,13 +10,13 @@ import { Coords, HalloweenState } from './quest/types'
 
 export let progression: HalloweenState = { data: null, day: 0 }
 
-export let userData
+export let userData: UserData
 export let playerRealm: Realm
 
 export const fireBaseServer =
   'https://us-central1-halloween-361612.cloudfunctions.net/app/'
   //To DO Check local sever
-  // `http://localhost:5001/halloween-361612/us-central1/app/`
+  // `http://localhost:5001/halloween-361612/us-central1/app/` 
 
 export async function setUserData() {
   const data = await getUserData()
@@ -30,7 +30,31 @@ export async function setRealm() {
   log(`You are in the realm: ${JSON.stringify(realm.displayName)}`)
   playerRealm = realm
 }
+export async function resetProgression() {
 
+
+  if (!userData) {
+    await setUserData()
+    log(userData)
+  }
+
+  const url = fireBaseServer + 'halloweenupdate'
+  try {
+    let body = {
+      id: userData.userId,
+      clear: true
+    }
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    })
+    return true
+  } catch (e) {
+    log('reset progress error', e.message)
+    return null
+  }
+}
 export async function checkProgression() {
   setInPreview(await isPreviewMode())
   if (TESTDATA_ENABLED && IN_PREVIEW) {
