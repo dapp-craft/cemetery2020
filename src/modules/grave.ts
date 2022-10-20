@@ -1302,7 +1302,7 @@ export function addGhostsAndCrypts() {
     new GLTFShape(npc_data[0].modelPath),
     npc_data[0].patrolPath,
     ghost1Talk,
-    'swirl',
+    'idle2',
     4
   )
 
@@ -1316,7 +1316,7 @@ export function addGhostsAndCrypts() {
     new GLTFShape(npc_data[1].modelPath),
     npc_data[1].patrolPath,
     ghost2Talk,
-    'swirl',
+    'idle2',
     4
   )
 
@@ -1330,7 +1330,7 @@ export function addGhostsAndCrypts() {
     new GLTFShape(npc_data[2].modelPath),
     npc_data[2].patrolPath,
     ghost3Talk,
-    'swirl',
+    'idle2',
     4
   )
 
@@ -1344,7 +1344,7 @@ export function addGhostsAndCrypts() {
     new GLTFShape(npc_data[3].modelPath),
     npc_data[3].patrolPath,
     ghost4Talk,
-    'swirl',
+    'idle2',
     4
   )
 
@@ -1358,7 +1358,7 @@ export function addGhostsAndCrypts() {
     new GLTFShape(npc_data[4].modelPath),
     npc_data[4].patrolPath,
     ghost5Talk,
-    'swirl',
+    'idle2',
     4
   )
 
@@ -1372,7 +1372,7 @@ export function addGhostsAndCrypts() {
     new GLTFShape(npc_data[5].modelPath),
     npc_data[5].patrolPath,
     ghost6Talk,
-    'swirl',
+    'idle2',
     4
   )
 
