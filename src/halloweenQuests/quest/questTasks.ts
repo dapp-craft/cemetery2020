@@ -22,31 +22,25 @@ export class questUITasks{
                 coords: Coords.CemeteryCoords
             },
             {
-                label: 'Listen Music',
+                label: 'Find a vinyl player',
                 checked: this.data.phone,
                 visible: this.data.talkBat,
                 coords: Coords.CemeteryCoords
             },
             {
-                label: 'Meet girl near '+Coords.GenesisCoords,
+                label: 'Meet mystic girl near '+Coords.GenesisCoords,
                 checked: this.data.meetGirl,
                 visible: this.data.phone,
                 coords: Coords.GenesisCoords
             },
             {
-                label: 'Collect all the candy',
+                label: 'Collect sweets for a Spooky Girl',
                 checked: this.data.pumpkinDone,
                 visible: this.data.meetGirl,
                 coords: Coords.GenesisCoords
             },
-            // {
-            //     label: 'Search the wearables building',
-            //     checked: this.data.w1Found,
-            //     visible: this.data.pumpkinDone,
-            //     coords: Coords.GenesisCoords
-            // },
             {
-                label: 'Return to the girl',
+                label: 'Return to the Spooky Girl',
                 checked: this.data.w1Found,
                 visible: this.data.pumpkinDone,
                 coords: Coords.GenesisCoords
@@ -57,19 +51,19 @@ export class questUITasks{
     day2():QuestItem[] {
         return [
             {
-                label: 'Talk to Old lady',
+                label: 'Return to the Spooky Girl',
                 checked: this.data.NPCIntroDay2,
                 visible: true,
                 coords: Coords.GenesisCoords
             },
             {
-                label: 'Talk to blue ghost',
+                label: 'Talk to the dancing Skeleton',
                 checked: this.data.ghostsDone,
                 visible: this.data.NPCIntroDay2,
                 coords: Coords.CemeteryCoords
             },
             {
-                label: 'Return ghosts to their graves',
+                label: 'Return skeletons to their graves',
                 checked: this.data.ghostsDone,
                 visible: this.data.ghostsDone,
                 coords: Coords.CemeteryCoords
@@ -86,19 +80,25 @@ export class questUITasks{
     day3():QuestItem[] {
         return [
             {
-                label: 'Talk to the old lady',
+                label: 'Talk to the Spooky Girl',
                 checked: this.data.NPCIntroDay3,
                 visible: true,
                 coords: Coords.GenesisCoords
             },
             {
-                label: 'Talk to the archeologist',
+                label: 'Open the Castle gates',
+                checked: this.data.puzzleDone, // TODO
+                visible: this.data.NPCIntroDay3,
+                coords: Coords.TempleCoords
+            },
+            {
+                label: 'Solve the Coffin puzzle',
                 checked: this.data.puzzleDone,
                 visible: this.data.NPCIntroDay3,
                 coords: Coords.TempleCoords
             },
             {
-                label: 'Solve the Temple puzzles',
+                label: 'Light mirrors with one shot',
                 checked: this.data.w3Found,
                 visible: this.data.puzzleDone,
                 coords: Coords.TempleCoords
@@ -109,25 +109,25 @@ export class questUITasks{
     day4():QuestItem[] {
         return [
             {
-                label: 'Talk to the old lady',
+                label: 'Talk to the Spooky Girl',
                 checked: this.data.NPCIntroDay4,
                 visible: true,
                 coords: Coords.GenesisCoords
             },
             {
-                label: 'Talk to the farmer',
+                label: 'Talk to the Illusionist',
                 checked: this.data.monsterDefeated,
                 visible: this.data.NPCIntroDay4,
                 coords: Coords.FarmCoords
             },
             {
-                label: 'Defeat the monster',
+                label: 'Return joker cards to the clown',
                 checked: this.data.monsterDefeated,
                 visible: this.data.monsterDefeated,
                 coords: Coords.FarmCoords
             },
             {
-                label: 'Say farewell to the farmer',
+                label: 'Say farewell to the Illusionist',
                 checked: this.data.w4Found,
                 visible: this.data.monsterDefeated,
                 coords: Coords.FarmCoords
@@ -138,31 +138,31 @@ export class questUITasks{
     day5():QuestItem[] {
         return [
             {
-                label: 'Find the old lady',
+                label: 'Find the Girl',
                 checked: this.data.NPCIntroDay5,
                 visible: true,
                 coords: Coords.GenesisCoords
             },
             {
-                label: 'Visit the cult mansion',
+                label: 'Visit the Castle', // TODO
                 checked: this.data.waypoint5,
                 visible: this.data.NPCIntroDay5,
                 coords: Coords.Secret
             },
             {
-                label: 'Find a way inside',
+                label: 'Follow the clues to the Castle',
                 checked: false,
                 visible: this.data.waypoint5,
                 coords: Coords.Secret
             },
             {
-                label: 'Defeat the Cult Leader',
+                label: 'Defeat The Evil',
                 checked: this.data.ghostDefeated,
                 visible: this.data.ghostDefeated,
                 coords: Coords.Secret
             },
             {
-                label: 'Talk to GhostBlaster crew',
+                label: 'Talk to Hunter',
                 checked: false,
                 visible: this.data.ghostDefeated,
                 coords: Coords.Secret
