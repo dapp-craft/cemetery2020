@@ -1,6 +1,6 @@
 import { addGhostsAndCrypts, addMainGhostNPC } from './modules/grave'
 import { addClosedDoors, addHouses } from './modules/trickOrTreat'
-import {checkProgression, progression, updateProgression} from './halloweenQuests/progression'
+import {checkProgression, nextDay, progression, updateProgression} from './halloweenQuests/progression'
 import { addStaticStuff } from './modules/staticDecorations'
 import { doorHauntedHouse, getKey } from './modules/grave'
 import { Reward } from './halloweenQuests/loot'
@@ -76,6 +76,8 @@ function updateSceneUI() {
         log('checkProgression', curr_progression)
         if (curr_progression == null) return
         // curr_progression.data['talkBat'] = true
+        // curr_progression.data['NPCIntroDay2'] = true
+        // curr_progression.data['ghostsDone'] = true
         progression.data = curr_progression.data
         progression.day = curr_progression.day
 
@@ -119,4 +121,27 @@ input.subscribe('BUTTON_DOWN', ActionButton.ACTION_3, false, (e) => {
         log('updateProgression success', stages[stage_index])
         stage_index++
     }
+})
+
+input.subscribe('BUTTON_DOWN', ActionButton.ACTION_4, false, (e) => {
+    const rewardtest = new Entity()
+
+    rewardtest.addComponent(new Transform({ position: new Vector3(115, 1.05, 45.83) }))
+    engine.addEntity(rewardtest)
+
+    let r = new Reward(
+        rewardtest,
+        'w2',
+        {
+            position: new Vector3(0.2, 0.8, 0.5),
+            scale: new Vector3(0.8, 0.8, 0.8),
+        },
+        false,
+        () => {
+            executeTask(async () => {
+                await updateProgression('w2Found')
+                await nextDay(3)
+            })
+        }
+    )
 })

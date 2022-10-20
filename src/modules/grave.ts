@@ -82,7 +82,6 @@ export function doorHauntedHouse() {
     new OnPointerDown((e) => {
       if (e.hit.length > 6) return
       coffin.openAnim.play()
-      updateProgression('w2Found')
 
       coffin.addComponent(new AudioSource(new AudioClip('sounds/coffin.mp3')))
       //coffin.getComponent(AudioSource).volume = 0.5
@@ -91,14 +90,17 @@ export function doorHauntedHouse() {
 
       let r = new Reward(
         coffin,
-        'halloween2022',
+        'w2',
         {
           position: new Vector3(0.2, 0.8, 0.5),
           scale: new Vector3(0.8, 0.8, 0.8),
         },
         false,
         () => {
-          nextDay(3)
+          executeTask(async () => {
+            await updateProgression('w2Found')
+            await nextDay(3)
+          })
         }
       )
     }, { hoverText: 'Open coffin' })
