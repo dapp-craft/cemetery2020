@@ -457,9 +457,9 @@ That’s why sometimes we gather around to dance.`,
     {
       text: `Move to the rhythm, bro!`,
       triggeredByNext: () => {
-        quest.checkBox(2)
+        quest.checkBox(1)
+        quest.showCheckBox(2)
         quest.showCheckBox(3)
-        quest.showCheckBox(4)
         updateProgression('ghostIntro')
         ghostUIBck.image.visible = true
         ghostCounter.uiText.visible = true
