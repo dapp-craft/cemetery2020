@@ -838,7 +838,7 @@ let sharedDialogTimerEntity = new Entity()
 engine.addEntity(sharedDialogTimerEntity)
 
 let sharedDialog = new NPCUtils.DialogWindow(
-  { path: 'images/portraits/main-ghost.png' },
+  { path: 'images/portraits/skeleton.png' },
   true
 )
 sharedDialog.panel.height = 150
@@ -1238,7 +1238,7 @@ export function addMainGhostNPC(progression: HalloweenState) {
       //mainGhost.playAnimation(`Head_Yes`, true, 2.63)
     },
     {
-      portrait: { path: 'images/portraits/main-ghost.png' },
+      portrait: { path: 'images/portraits/skeleton.png' },
       reactDistance: 10,
       idleAnim: `idle1`
     },
@@ -1246,7 +1246,7 @@ export function addMainGhostNPC(progression: HalloweenState) {
   )
 
   mainGhost.dialog = new NPCUtils.DialogWindow(
-    { path: 'images/portraits/main-ghost.png' },
+    { path: 'images/portraits/skeleton.png' },
     true,
     '',
     halloweenTheme
