@@ -5,7 +5,7 @@ import { day1GirlDialog } from './grave'
 import { halloweenTheme } from '../halloweenQuests/quest/questCheckBox'
 import * as utils from '@dcl/ecs-scene-utils'
 
-export class Phone extends Entity {
+export class GirlTalkEvent extends Entity {
   onPickup: () => void
 
   private ringing: boolean = true
@@ -23,14 +23,7 @@ export class Phone extends Entity {
 
     this.onPickup = onPickup
 
-    this.addComponent(
-      new OnPointerDown(
-        (e) => {
-          this.activate()
-        },
-        { hoverText: 'Pick up' }
-      )
-    )
+
     this.ringSound.loop = true
     this.addComponent(new AudioSource(this.ringSound))
 
@@ -50,37 +43,34 @@ export class Phone extends Entity {
     engine.addEntity(girl)
     this.ghost_girl = girl
   }
-  ring() {
-    this.getComponent(AudioSource).loop = true
-    this.getComponent(AudioSource).playing = true
+
+
+  
+  public ring() {
+
 
     this.ghost_girl.getComponent(Animator).getClip('walk').play(true)
-    utils.setTimeout(26000, ()=>{
-      this.ghost_girl.getComponent(Animator).getClip('stand').play(true)
+    utils.setTimeout(16000, () => {
+      
+      this.getComponent(AudioSource).loop = true
+      this.getComponent(AudioSource).playing = true
+
+      let phoneDialog = new NPCUtils.DialogWindow(
+        { path: 'images/portraits/phoneCharacter.png' },
+        true,
+        '',
+        halloweenTheme
+      ) // + path to portrait
+      phoneDialog.openDialogWindow(day1GirlDialog(this.end_of_dialog), 0)
+      phoneDialog.leftClickIcon.positionX = 340 - 60
+      phoneDialog.text.color = Color4.FromHexString(COLOR_GREEN)
+
+      utils.setTimeout(8000, () => {
+        this.ghost_girl.getComponent(Animator).getClip('stand').play(true)
+      })
     })
   }
-  
-  activate() {
 
-    // stop anim
-    // stop sound
-    // play pickup sound
-
-
-
-
-    let phoneDialog = new NPCUtils.DialogWindow(
-      { path: 'images/portraits/phoneCharacter.png' },
-      true,
-      '',
-      halloweenTheme
-    ) // + path to portrait
-    phoneDialog.openDialogWindow(day1GirlDialog(this.end_of_dialog), 0)
-
-    phoneDialog.leftClickIcon.positionX = 340 - 60
-    phoneDialog.text.color = Color4.FromHexString(COLOR_GREEN)
-
-  }
 
   private end_of_dialog() {
 

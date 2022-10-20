@@ -6,18 +6,19 @@ import {
   lockedHouse,
   mayorGhostDialog,
 } from './grave'
-import {COLOR_GREEN} from '../resources/theme/color'
+import { COLOR_GREEN } from '../resources/theme/color'
 import * as NPCUtils from '@dcl/npc-scene-utils'
-import {NPC} from '@dcl/npc-scene-utils'
-import {quest} from "../halloweenQuests/quest/questTasks";
-import {HalloweenState} from "../halloweenQuests/quest/types";
-import {halloweenTheme} from "../halloweenQuests/quest/questCheckBox";
-import {TTHouse} from './house'
+import { NPC } from '@dcl/npc-scene-utils'
+import { quest } from "../halloweenQuests/quest/questTasks";
+import { HalloweenState } from "../halloweenQuests/quest/types";
+import { halloweenTheme } from "../halloweenQuests/quest/questCheckBox";
+import { TTHouse } from './house'
 import * as ui from '@dcl/ui-scene-utils'
 import * as utils from '@dcl/ecs-scene-utils'
-import {Phone} from './phone'
-import {Reward} from '../halloweenQuests/loot'
+import { GirlTalkEvent } from './girlEvent'
+import { Reward } from '../halloweenQuests/loot'
 import { npc_model_paths, stuff } from 'src/resources/model_paths'
+import { updateProgression } from 'src/halloweenQuests/progression';
 
 
 export let catLover: NPC
@@ -198,7 +199,7 @@ export function addHouses(progression: HalloweenState) {
         catLover.playAnimation(`Cocky`, true, 1.83)
       },
       {
-        portrait: {path: 'images/portraits/catguy.png', height: 128, width: 128},
+        portrait: { path: 'images/portraits/catguy.png', height: 128, width: 128 },
         reactDistance: 12,
         idleAnim: `Weight_Shift`,
         faceUser: false,
@@ -232,7 +233,7 @@ export function addHouses(progression: HalloweenState) {
       {
         position: new Vector3(-1, 0, 0.8),
         rotation: Quaternion.Euler(0, 90, 0),
-		scale: new Vector3(1.1, 1.1, 1.1),
+        scale: new Vector3(1.1, 1.1, 1.1),
       },
       npc_model_paths.farmer,
       () => {
@@ -240,7 +241,7 @@ export function addHouses(progression: HalloweenState) {
         farmer.playAnimation(`talk`, false, 6.65)
       },
       {
-        portrait: {path: 'images/portraits/farmer.png', height: 128, width: 128},
+        portrait: { path: 'images/portraits/farmer.png', height: 128, width: 128 },
         reactDistance: 12,
         idleAnim: `stand`,
         faceUser: false,
@@ -253,7 +254,7 @@ export function addHouses(progression: HalloweenState) {
     )
     farmer.removeComponent(OnPointerDown)
     farmer.dialog = new NPCUtils.DialogWindow(
-      {path: 'images/portraits/farmer.png'},
+      { path: 'images/portraits/farmer.png' },
       true,
       '',
       halloweenTheme
@@ -266,7 +267,7 @@ export function addHouses(progression: HalloweenState) {
       {
         position: new Vector3(-1, 0.05, 0.7),
         rotation: Quaternion.Euler(0, 90, 0),
-		scale: new Vector3(1.1, 1.1, 1.1),
+        scale: new Vector3(1.1, 1.1, 1.1),
       },
       npc_model_paths.ghostblaster,
       () => {
@@ -275,7 +276,7 @@ export function addHouses(progression: HalloweenState) {
       },
 
       {
-        portrait: {path: 'images/portraits/ghostblaster.png'},
+        portrait: { path: 'images/portraits/ghostblaster.png' },
         reactDistance: 12,
         idleAnim: `stand`,
         faceUser: false,
@@ -293,7 +294,7 @@ export function addHouses(progression: HalloweenState) {
     )
     ghostControlGuy.removeComponent(OnPointerDown)
     ghostControlGuy.dialog = new NPCUtils.DialogWindow(
-      {path: 'images/portraits/ghostblaster.png'},
+      { path: 'images/portraits/ghostblaster.png' },
       true,
       '',
       halloweenTheme
@@ -306,7 +307,7 @@ export function addHouses(progression: HalloweenState) {
       {
         position: new Vector3(-1, 0, 0.75),
         rotation: Quaternion.Euler(0, 90, 0),
-		scale: new Vector3(1.35, 1.35, 1.35)
+        scale: new Vector3(1.35, 1.35, 1.35)
       },
       npc_model_paths.ghost1,
       () => {
@@ -315,7 +316,7 @@ export function addHouses(progression: HalloweenState) {
       },
 
       {
-        portrait: {path: 'images/portraits/skeleton.png'},
+        portrait: { path: 'images/portraits/skeleton.png' },
         reactDistance: 12,
         idleAnim: `idle2`,
         faceUser: false,
@@ -333,7 +334,7 @@ export function addHouses(progression: HalloweenState) {
     )
     mayorGhost.removeComponent(OnPointerDown)
     mayorGhost.dialog = new NPCUtils.DialogWindow(
-      {path: 'images/portraits/skeleton.png'},
+      { path: 'images/portraits/skeleton.png' },
       true,
       '',
       halloweenTheme
@@ -353,7 +354,7 @@ export function addHouses(progression: HalloweenState) {
         templeGirl.playAnimation(`Acknowledging`, true, 1.97)
       },
       {
-        portrait: {path: 'images/portraits/girl.png'},
+        portrait: { path: 'images/portraits/girl.png' },
         reactDistance: 12,
         idleAnim: `Weight_Shift`,
         faceUser: false,
@@ -371,7 +372,7 @@ export function addHouses(progression: HalloweenState) {
     )
     templeGirl.removeComponent(OnPointerDown)
     templeGirl.dialog = new NPCUtils.DialogWindow(
-      {path: 'images/portraits/girl.png'},
+      { path: 'images/portraits/girl.png' },
       true,
       '',
       halloweenTheme
@@ -382,7 +383,7 @@ export function addHouses(progression: HalloweenState) {
 
   /// Doors to open
 
-  if (!progression.data.NPCIntroDay2) {
+  if (!progression.data.NPCIntroDay2 && progression.data.talkBat) {
     // day 1
 
     doorHouse1.onActivate = () => {
@@ -462,38 +463,21 @@ export function addHouses(progression: HalloweenState) {
       funMusic2.getComponent(AudioSource).playing = false
 
 
-
-      let dummyEnt = new Entity()
-      dummyEnt.addComponent(
-        new utils.Delay(16000, () => {
-          // ui.displayAnnouncement(
-          //   'Metaverse Murder Mystery',
-          //   10,
-          //   Color4.Red(),
-          //   70
-          // )
-          phone.ring()
-        })
-      )
-      engine.addEntity(dummyEnt)
-
-      quest.showCheckBox(1)
-      //updateProgression('foundBody')
-
-      let phone = new Phone(
+      let phone = new GirlTalkEvent(
         {
           position: new Vector3(10, 1.2, 36),
           rotation: Quaternion.Euler(0, 0, 0),
         },
         () => {
-         
+
         }
       )
+      phone.ring()
 
       let easterEgg = new Reward(
         phone,
         'egg2',
-        {position: new Vector3(14 - 10, 4.2, 40 - 36)},
+        { position: new Vector3(14 - 10, 4.2, 40 - 36) },
         true
       )
     }
@@ -512,7 +496,7 @@ export function addHouses(progression: HalloweenState) {
       let easterEgg3 = new Reward(
         doorHouse3,
         'egg3',
-        {position: new Vector3(-8, 1.5, 0)},
+        { position: new Vector3(-8, 1.5, 0) },
         true
       )
     }

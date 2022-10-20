@@ -14,7 +14,7 @@
     "lint:fix": "eslint . --ext .ts --fix"
   },
   "devDependencies": {
-    "decentraland-ecs": "^6.11.6"
+    "decentraland-ecs": "^6.11.8"
   },
   "dependencies": {
     "@dcl/crypto-scene-utils": "^1.1.1",
