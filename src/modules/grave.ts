@@ -510,7 +510,7 @@ export const ghost1Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-mother.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -520,7 +520,7 @@ export const ghost1Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-mother.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -530,7 +530,7 @@ export const ghost1Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-mother.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -543,7 +543,7 @@ export const ghost2Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-oldtimer.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -553,7 +553,7 @@ export const ghost2Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-oldtimer.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -563,7 +563,7 @@ export const ghost2Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-oldtimer.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -576,7 +576,7 @@ export const ghost3Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-hippie.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -586,7 +586,7 @@ export const ghost3Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-hippie.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -596,7 +596,7 @@ export const ghost3Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-hippie.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -609,7 +609,7 @@ export const ghost4Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-french.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -619,7 +619,7 @@ export const ghost4Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-french.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -629,7 +629,7 @@ export const ghost4Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-french.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -642,7 +642,7 @@ export const ghost5Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-lover.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -655,7 +655,7 @@ And fills the crypt with light.`,
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-lover.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -665,7 +665,7 @@ And fills the crypt with light.`,
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-lover.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -678,7 +678,7 @@ export const ghost6Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-phylo.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -688,7 +688,7 @@ export const ghost6Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-phylo.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -698,7 +698,7 @@ export const ghost6Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-phylo.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
