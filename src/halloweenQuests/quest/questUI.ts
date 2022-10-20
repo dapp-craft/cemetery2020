@@ -208,5 +208,5 @@ questBackground.vAlign = 'top'
 questBackground.width = 280
 questBackground.height = 50
 questBackground.positionY = -20
-questBackground.positionX = 5
+questBackground.positionX = 10
 questBackground.visible = false
