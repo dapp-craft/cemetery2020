@@ -337,14 +337,8 @@ Someone must have finally called the cops on her.`,
         )
         engine.addEntity(dummyEnt)
       },
-    },
-    {
-      text: `You are not welcome here.
-No one is welcome here.
-Happines has not visited this home a long time... Do the same.`,
-
-      isEndOfDialog: true,
-    },
+      isEndOfDialog: true
+    }
   ]
 }
 
