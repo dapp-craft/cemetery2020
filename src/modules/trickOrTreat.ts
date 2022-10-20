@@ -24,7 +24,7 @@ import { updateProgression } from 'src/halloweenQuests/progression';
 export let catLover: NPC
 export let farmer: NPC
 export let ghostControlGuy: NPC
-export let templeGirl: NPC
+//export let templeGirl: NPC
 export let mayorGhost: NPC
 
 export let doorHouse1: TTHouse
@@ -342,43 +342,43 @@ export function addHouses(progression: HalloweenState) {
     mayorGhost.dialog.leftClickIcon.positionX = 340 - 60
     mayorGhost.dialog.text.color = Color4.FromHexString(COLOR_GREEN)
 
-    // castle guy
-    templeGirl = new NPC(
-      {
-        position: new Vector3(-1, 0, 0.85),
-        rotation: Quaternion.Euler(0, 90, 0),
-      },
-      npc_model_paths.girl,
-      () => {
-        templeGirl.talk(castleGuyDialog(templeGirl, doorHouse10), 0)
-        templeGirl.playAnimation(`Acknowledging`, true, 1.97)
-      },
-      {
-        portrait: { path: 'images/portraits/girl.png' },
-        reactDistance: 12,
-        idleAnim: `Weight_Shift`,
-        faceUser: false,
-        onlyExternalTrigger: true,
+    // // castle guy
+    // templeGirl = new NPC(
+    //   {
+    //     position: new Vector3(-1, 0, 0.85),
+    //     rotation: Quaternion.Euler(0, 90, 0),
+    //   },
+    //   npc_model_paths.girl,
+    //   () => {
+    //     templeGirl.talk(castleGuyDialog(templeGirl, doorHouse10), 0)
+    //     templeGirl.playAnimation(`Acknowledging`, true, 1.97)
+    //   },
+    //   {
+    //     portrait: { path: 'images/portraits/girl.png' },
+    //     reactDistance: 12,
+    //     idleAnim: `Weight_Shift`,
+    //     faceUser: false,
+    //     onlyExternalTrigger: true,
 
-        onWalkAway: () => {
-          if (templeGirl.dialog.isDialogOpen) {
-            templeGirl.dialog.closeDialogWindow()
-          }
-          if (doorHouse10.isOpen) {
-            doorHouse10.close()
-          }
-        }
-      }
-    )
-    templeGirl.removeComponent(OnPointerDown)
-    templeGirl.dialog = new NPCUtils.DialogWindow(
-      { path: 'images/portraits/girl.png' },
-      true,
-      '',
-      halloweenTheme
-    )
-    templeGirl.dialog.leftClickIcon.positionX = 340 - 60
-    templeGirl.dialog.text.color = Color4.FromHexString(COLOR_GREEN)
+    //     onWalkAway: () => {
+    //       if (templeGirl.dialog.isDialogOpen) {
+    //         templeGirl.dialog.closeDialogWindow()
+    //       }
+    //       if (doorHouse10.isOpen) {
+    //         doorHouse10.close()
+    //       }
+    //     }
+    //   }
+    // )
+    // templeGirl.removeComponent(OnPointerDown)
+    // templeGirl.dialog = new NPCUtils.DialogWindow(
+    //   { path: 'images/portraits/girl.png' },
+    //   true,
+    //   '',
+    //   halloweenTheme
+    // )
+    // templeGirl.dialog.leftClickIcon.positionX = 340 - 60
+    // templeGirl.dialog.text.color = Color4.FromHexString(COLOR_GREEN)
   }
 
   /// Doors to open
@@ -407,8 +407,7 @@ export function addHouses(progression: HalloweenState) {
       lockDialog.text.color = Color4.FromHexString(COLOR_GREEN)
 
       // path to portrait
-      let randomIndex = Math.floor(Math.random() * 3)
-      lockDialog.openDialogWindow(lockedHouse, randomIndex)
+      lockDialog.openDialogWindow(lockedHouse, 0)
 
       log('door locked')
 
@@ -482,12 +481,12 @@ export function addHouses(progression: HalloweenState) {
       )
     }
 
-    doorHouse10.unlock()
-    doorHouse10.npc = templeGirl
-    templeGirl.setParent(doorHouse10)
-    doorHouse10.onActivate = () => {
-      doorHouse10.npc.onActivate()
-    }
+    // doorHouse10.unlock()
+    // doorHouse10.npc = templeGirl
+    // templeGirl.setParent(doorHouse10)
+    // doorHouse10.onActivate = () => {
+    //   doorHouse10.npc.onActivate()
+    // }
   } else if (progression.data.w2Found) {
     // day 3 onwards
     doorHouse3.unlock()

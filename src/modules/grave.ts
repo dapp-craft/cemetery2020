@@ -385,7 +385,6 @@ export function castleGuyDialog(npc: NPC, doorHouse: TTHouse) {
 export const lockedHouse: Dialog[] = [
   {
     text: `Mike? is that you?`,
-    isEndOfDialog: true,
   },
   {
     text: `If that is you, I am not letting you inside this house with that damned mask of yours!`,
@@ -510,7 +509,7 @@ export const ghost1Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-mother.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -520,7 +519,7 @@ export const ghost1Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-mother.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -530,7 +529,7 @@ export const ghost1Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-mother.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -543,7 +542,7 @@ export const ghost2Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-oldtimer.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -553,7 +552,7 @@ export const ghost2Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-oldtimer.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -563,7 +562,7 @@ export const ghost2Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-oldtimer.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -576,7 +575,7 @@ export const ghost3Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-hippie.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -586,7 +585,7 @@ export const ghost3Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-hippie.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -596,7 +595,7 @@ export const ghost3Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-hippie.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -609,7 +608,7 @@ export const ghost4Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-french.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -619,7 +618,7 @@ export const ghost4Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-french.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -629,7 +628,7 @@ export const ghost4Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-french.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -642,7 +641,7 @@ export const ghost5Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-lover.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -655,7 +654,7 @@ And fills the crypt with light.`,
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-lover.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -665,7 +664,7 @@ And fills the crypt with light.`,
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-lover.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -678,7 +677,7 @@ export const ghost6Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-phylo.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -688,7 +687,7 @@ export const ghost6Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-phylo.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -698,7 +697,7 @@ export const ghost6Talk: Dialog[] = [
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
-      path: 'images/portraits/ghost-phylo.png',
+      path: 'images/portraits/skeleton.png',
       height: 128 + 64,
       width: 128 + 64,
     },
@@ -838,7 +837,7 @@ let sharedDialogTimerEntity = new Entity()
 engine.addEntity(sharedDialogTimerEntity)
 
 let sharedDialog = new NPCUtils.DialogWindow(
-  { path: 'images/portraits/main-ghost.png' },
+  { path: 'images/portraits/skeleton.png' },
   true
 )
 sharedDialog.panel.height = 150
@@ -1238,7 +1237,7 @@ export function addMainGhostNPC(progression: HalloweenState) {
       //mainGhost.playAnimation(`Head_Yes`, true, 2.63)
     },
     {
-      portrait: { path: 'images/portraits/main-ghost.png' },
+      portrait: { path: 'images/portraits/skeleton.png' },
       reactDistance: 10,
       idleAnim: `idle1`
     },
@@ -1246,7 +1245,7 @@ export function addMainGhostNPC(progression: HalloweenState) {
   )
 
   mainGhost.dialog = new NPCUtils.DialogWindow(
-    { path: 'images/portraits/main-ghost.png' },
+    { path: 'images/portraits/skeleton.png' },
     true,
     '',
     halloweenTheme
@@ -1269,7 +1268,7 @@ export const ghostUIBck = new ui.LargeIcon(
 ghostUIBck.image.visible = false
 export let ghostCounter = new ui.UICounter(
   0,
-  -55,
+  -70,
   180,
   Color4.FromHexString(COLOR_GREEN),
   50
@@ -1303,7 +1302,7 @@ export function addGhostsAndCrypts() {
     new GLTFShape(npc_data[0].modelPath),
     npc_data[0].patrolPath,
     ghost1Talk,
-    'swirl',
+    'idle2',
     4
   )
 
@@ -1317,7 +1316,7 @@ export function addGhostsAndCrypts() {
     new GLTFShape(npc_data[1].modelPath),
     npc_data[1].patrolPath,
     ghost2Talk,
-    'swirl',
+    'idle2',
     4
   )
 
@@ -1331,7 +1330,7 @@ export function addGhostsAndCrypts() {
     new GLTFShape(npc_data[2].modelPath),
     npc_data[2].patrolPath,
     ghost3Talk,
-    'swirl',
+    'idle2',
     4
   )
 
@@ -1345,7 +1344,7 @@ export function addGhostsAndCrypts() {
     new GLTFShape(npc_data[3].modelPath),
     npc_data[3].patrolPath,
     ghost4Talk,
-    'swirl',
+    'idle2',
     4
   )
 
@@ -1359,7 +1358,7 @@ export function addGhostsAndCrypts() {
     new GLTFShape(npc_data[4].modelPath),
     npc_data[4].patrolPath,
     ghost5Talk,
-    'swirl',
+    'idle2',
     4
   )
 
@@ -1373,7 +1372,7 @@ export function addGhostsAndCrypts() {
     new GLTFShape(npc_data[5].modelPath),
     npc_data[5].patrolPath,
     ghost6Talk,
-    'swirl',
+    'idle2',
     4
   )
 
