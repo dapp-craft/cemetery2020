@@ -5,7 +5,7 @@ import { Coords, QuestItem } from './types'
 
 const ITEM_SPACING = 50
 const Y_OFFSET = -59
-const X_OFFSET = -10
+const X_OFFSET = -5
 
 
 export class QuestUI extends Entity {
@@ -203,9 +203,10 @@ export class QuestUI extends Entity {
 }
 
 setSection(questBackground, resources.backgrounds.promptBackground)
-questBackground.hAlign = 'left'
+questBackground.hAlign = 'right'
 questBackground.vAlign = 'top'
 questBackground.width = 280
 questBackground.height = 50
-questBackground.positionY = -140
+questBackground.positionY = -20
+questBackground.positionX = 5
 questBackground.visible = false
