@@ -414,10 +414,6 @@ export function day1GirlDialog(callback: () => void) {
     {
       text: `If you are listening to this, come to the Glass Pavilion, near the 0,0 coordinates, I believe you are the one who can help me.`,
       triggeredByNext: () => {
-        quest.checkBox(2)
-        quest.showCheckBox(3)
-        updateProgression('phone')
-
         callback()
       },
 
