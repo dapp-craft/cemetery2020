@@ -2,9 +2,8 @@ import { getUserData, UserData } from '@decentraland/Identity'
 import { getCurrentRealm, isPreviewMode, Realm } from '@decentraland/EnvironmentAPI'
 import { IN_PREVIEW, setInPreview, TESTDATA_ENABLED, TESTQUESTSTATE } from './config'
 import * as ui from '@dcl/ui-scene-utils'
-import * as utils from '@dcl/ecs-scene-utils'
-import { quest, updateQuestUI } from './quest/questTasks'
-import { Coords, HalloweenState } from './quest/types'
+import { updateQuestUI } from './quest/questTasks'
+import { HalloweenState } from './quest/types'
 
 // import {PlayCloseSound} from '@dcl/ui-scene-utils'
 
@@ -64,7 +63,12 @@ export async function checkProgression() {
 
   if (!userData) {
     await setUserData()
-    log(userData)
+    log('userData',userData)
+  }
+
+  if (!playerRealm) {
+    await setRealm()
+    log('playerRealm',playerRealm)
   }
 
   const url = fireBaseServer + 'halloweenstate/?id=' + userData.userId

@@ -5,7 +5,7 @@ import { Coords, QuestItem } from './types'
 
 const ITEM_SPACING = 50
 const Y_OFFSET = -59
-const X_OFFSET = -5
+const X_OFFSET = -10
 
 
 export class QuestUI extends Entity {
@@ -208,5 +208,5 @@ questBackground.vAlign = 'top'
 questBackground.width = 280
 questBackground.height = 50
 questBackground.positionY = -20
-questBackground.positionX = 5
+questBackground.positionX = 10
 questBackground.visible = false

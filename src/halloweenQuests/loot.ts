@@ -2,10 +2,8 @@ import * as utils from '@dcl/ecs-scene-utils'
 import * as ui from '@dcl/ui-scene-utils'
 import { loot_models } from 'src/resources/model_paths'
 import { signedFetch } from '@decentraland/SignedFetch'
-import { IN_PREVIEW } from "./config";
 import { COLOR_GREEN } from "../resources/theme/color";
-
-
+import {fireBaseServer, playerRealm, userData} from "./progression";
 
 let particleGLTF = new GLTFShape(loot_models.particles)
 let starGLTF = new GLTFShape(loot_models.star)
@@ -19,16 +17,10 @@ export class Reward extends Entity {
   particles: Entity
   openUi: boolean
   onFinished: () => void
-  userData
-  playerRealm
-  fireBaseServer
 
   constructor(
     parent: Entity,
     progressionStep: string,
-    userData,
-    playerRealm,
-    fireBaseServer,
     offset?: TranformConstructorArgs,
     onlyActivateWhenClicked?: boolean,
     onFinished?: () => void,
@@ -38,14 +30,7 @@ export class Reward extends Entity {
     parent.addComponent(new AlreadyFoundLoot())
 
     super()
-    this.userData = userData
-    log('userdata reward')
-    log(userData)
-    this.playerRealm = playerRealm
-    log('playerRealm')
-    log(playerRealm)
-    this.fireBaseServer = fireBaseServer
-    log(fireBaseServer)
+
     this.addComponent(starGLTF)
 
     this.addComponent(
@@ -250,11 +235,11 @@ export async function checkServer(
   stage: string,
   representation: Reward,
 ) {
-  log('checkserver')
+  log('checkserver', userData, playerRealm, fireBaseServer)
 
 
   log('before guest')
-  if (!representation.userData.publicKey) {
+  if (!userData.publicKey) {
     PlayOpenSound()
     let p = new ui.OkPrompt(
       'You need an in-browser Ethereum wallet (eg: Metamask) to claim this item.\n But you can go next without claiming.',
@@ -266,19 +251,19 @@ export async function checkServer(
       'Ok',
       true
     )
-    representation.runOnFinished()
+    // representation.runOnFinished()
 
     return
   }
-  const url = representation.fireBaseServer + 'startclaimhalloween'
+  const url = fireBaseServer + 'startclaimhalloween'
   log('url')
   log('url', url)
 
   const body = {
-    id: representation.userData.userId,
+    id: userData.userId,
     stage: stage,
-    realm: representation.playerRealm.serverName,
-    island: representation.playerRealm.room || 'without_room'
+    realm: playerRealm.serverName,
+    island: playerRealm.room || 'without_room'
   }
 
   log(body)
