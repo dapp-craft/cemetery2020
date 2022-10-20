@@ -385,7 +385,6 @@ export function castleGuyDialog(npc: NPC, doorHouse: TTHouse) {
 export const lockedHouse: Dialog[] = [
   {
     text: `Mike? is that you?`,
-    isEndOfDialog: true,
   },
   {
     text: `If that is you, I am not letting you inside this house with that damned mask of yours!`,
@@ -1269,7 +1268,7 @@ export const ghostUIBck = new ui.LargeIcon(
 ghostUIBck.image.visible = false
 export let ghostCounter = new ui.UICounter(
   0,
-  -55,
+  -70,
   180,
   Color4.FromHexString(COLOR_GREEN),
   50
