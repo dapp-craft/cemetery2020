@@ -1,10 +1,10 @@
 import { addGhostsAndCrypts, addMainGhostNPC } from './modules/grave'
 import { addClosedDoors, addHouses } from './modules/trickOrTreat'
-import {checkProgression, nextDay, progression, updateProgression} from './halloweenQuests/progression'
+import { checkProgression, nextDay, progression, updateProgression } from './halloweenQuests/progression'
 import { addStaticStuff } from './modules/staticDecorations'
 import { doorHauntedHouse, getKey } from './modules/grave'
 import { Reward } from './halloweenQuests/loot'
-import {updateQuestUI} from "./halloweenQuests/quest/questTasks";
+import { updateQuestUI } from "./halloweenQuests/quest/questTasks";
 
 
 export function setUpScene() {
@@ -26,7 +26,7 @@ export function setUpScene() {
   // dummy underground loot for faster loading
   let dummyReward = new Reward(modArea, 'dummy', { position: new Vector3(0, -10, 0) }, true)
 
-    doorHauntedHouse()
+  doorHauntedHouse()
 }
 
 Input.instance.subscribe('BUTTON_DOWN', ActionButton.PRIMARY, false, (e) => {
@@ -49,9 +49,9 @@ Input.instance.subscribe('BUTTON_DOWN', ActionButton.PRIMARY, false, (e) => {
   )
 })
 
-function updateSceneByProgression(){
-  addHouses(progression)
+function updateSceneByProgression() {
 
+  addHouses(progression)
 
   // conditional elements depending on progression
   if (
@@ -71,78 +71,83 @@ function updateSceneByProgression(){
 }
 
 function updateSceneUI() {
-    executeTask(async () => {
-        const curr_progression = await checkProgression()
-        log('checkProgression', curr_progression)
-        if (curr_progression == null) return
-        // curr_progression.data['talkBat'] = true
-        // curr_progression.data['NPCIntroDay2'] = true
-        // curr_progression.data['ghostsDone'] = true
-        progression.data = curr_progression.data
-        progression.day = curr_progression.day
+  executeTask(async () => {
+    const curr_progression = await checkProgression()
+    log('checkProgression', curr_progression)
+    if (curr_progression == null) return
+    // curr_progression.data['talkBat'] = true
+    // curr_progression.data['meetGirl'] = true
+    // curr_progression.data['allHouses'] = true
+    // curr_progression.data['phone'] = true
+    // curr_progression.data['pumpkinDone'] = true
+    // curr_progression.data['w1found'] = true
+    // curr_progression.data['NPCIntroDay2'] = true
+    // curr_progression.data['ghostsDone'] = true
+    progression.data = curr_progression.data
+    progression.day = curr_progression.day
 
-        if (progression.data != null ) {
-            log('updateQuestUI', progression.day, progression.data)
-            updateQuestUI(progression.data, progression.day)
-            updateSceneByProgression()
-        }
-    })
+    if (progression.data != null) {
+      log('updateQuestUI', progression.day, progression.data)
+      updateQuestUI(progression.data, progression.day)
+      updateSceneByProgression()
+    }
+  })
 }
 
 onSceneReadyObservable.add(() => {
-    log('onSceneReadyObservable')
+  log('onSceneReadyObservable')
 
-    addStaticStuff()
-    addClosedDoors()
-    setUpScene()
+  addStaticStuff()
+  addClosedDoors()
+  setUpScene()
 
-    updateSceneUI()
+  updateSceneUI()
 })
 
 
 const input = Input.instance
 
 const stages = [
-    'talkBat',
-    'meetGirl',
-    'allHouses',
-    'phone',
-    'w1Found',
-    'NPCIntroDay2',
-    'ghostsDone',
-    'w2Found'
+  'talkBat',
+  'meetGirl',
+  'allHouses',
+  'phone',
+  'w1Found',
+  'NPCIntroDay2',
+  'ghostsDone',
+  'w2Found'
 ]
 
 let stage_index = 0
 input.subscribe('BUTTON_DOWN', ActionButton.ACTION_3, false, (e) => {
-    // log('pointer Down', e)
-    log('updateProgression', stages[stage_index])
-    if (updateProgression(stages[stage_index])) {
-        log('updateProgression success', stages[stage_index])
-        stage_index++
-    }
+  // log('pointer Down', e)
+  log('updateProgression', stages[stage_index])
+  if (updateProgression(stages[stage_index])) {
+    log('updateProgression success', stages[stage_index])
+    stage_index++
+  }
 })
 
 input.subscribe('BUTTON_DOWN', ActionButton.ACTION_4, false, (e) => {
-    const rewardtest = new Entity()
+  const rewardtest = new Entity()
 
-    rewardtest.addComponent(new Transform({ position: new Vector3(115, 1.05, 45.83) }))
-    engine.addEntity(rewardtest)
+  rewardtest.addComponent(new Transform({ position: new Vector3(115, 1.05, 45.83) }))
+  engine.addEntity(rewardtest)
 
-    let r = new Reward(
-        rewardtest,
-        'w2',
-        {
-            position: new Vector3(0.2, 0.8, 0.5),
-            scale: new Vector3(0.8, 0.8, 0.8),
-        },
-        false,
-        () => {
-            executeTask(async () => {
-                await updateProgression('w2Found')
-                progression.data['w2Found'] = true
-                await nextDay(3)
-            })
-        }
-    )
+  let r = new Reward(
+    rewardtest,
+    'w2',
+    {
+      position: new Vector3(0.2, 0.8, 0.5),
+      scale: new Vector3(0.8, 0.8, 0.8),
+    },
+    false,
+    () => {
+      executeTask(async () => {
+        await updateProgression('w2Found')
+        progression.data['w2Found'] = true
+        await nextDay(3)
+      })
+    }
+  )
 })
