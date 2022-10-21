@@ -17,7 +17,7 @@ import { TTHouse } from "./house";
 import { nextDay, updateProgression } from '../halloweenQuests/progression'
 import { haunted_model_paths } from 'src/resources/model_paths'
 import { quest } from "../halloweenQuests/quest/questTasks";
-import { HalloweenState } from "../halloweenQuests/quest/types";
+import {Coords, HalloweenState} from "../halloweenQuests/quest/types";
 import { halloweenTheme } from "../halloweenQuests/quest/questCheckBox";
 
 export let hasKey = false
@@ -409,7 +409,7 @@ export function day1GirlDialog(callback: () => void) {
       text: `Dear heavens, how scared I am. How tired I am. But I am so scared that if I fall asleep, I will never wake up and he will take me away.`,
     },
     {
-      text: `If you are listening to this, come to the Glass Pavilion, near the 0,0 coordinates, I believe you are the one who can help me.`,
+      text: `If you are listening to this, come to the Glass Pavilion, near the `+Coords.GenesisCoords+` coordinates, I believe you are the one who can help me.`,
       triggeredByNext: () => {
         callback()
       },
