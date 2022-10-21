@@ -14,7 +14,7 @@ import * as utils from '@dcl/ecs-scene-utils';
 import * as ui from '@dcl/ui-scene-utils';
 import { TTHouse } from "./house";
 
-import { nextDay, updateProgression } from '../halloweenQuests/progression'
+import { nextDay, progression, updateProgression } from '../halloweenQuests/progression'
 import { haunted_model_paths } from 'src/resources/model_paths'
 import { quest } from "../halloweenQuests/quest/questTasks";
 import {Coords, HalloweenState} from "../halloweenQuests/quest/types";
@@ -98,8 +98,10 @@ export function doorHauntedHouse() {
         false,
         () => {
           executeTask(async () => {
-            await updateProgression('w2Found')
-            await nextDay(3)
+            if (await updateProgression("w2Found")) {
+              progression.data['w2Found'] = true
+              await nextDay(3)
+          }
           })
         }
       )
