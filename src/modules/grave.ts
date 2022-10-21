@@ -284,10 +284,7 @@ I am dying to know her a little better.`,
     {
       text: `If you ever get to her, ask her if she wants an athletically built skeleton to take her out sometime.`,
       triggeredByNext: () => {
-        // give wearable
-        let r = new Reward(npc, 'house2', {
-          position: new Vector3(0, 1.5, 2.5),
-        })
+
         doorHouse.close()
       },
       isEndOfDialog: true,
@@ -328,6 +325,11 @@ But she just keeps on screaming at night, with her lights on.`,
       text: `Then it stopped.
 Someone must have finally called the cops on her.`,
       triggeredByNext: () => {
+
+        // give wearable
+        let r = new Reward(npc, 'house2', {
+          position: new Vector3(0, 1.5, 2.5),
+        })
 
         let dummyEnt = new Entity()
         dummyEnt.addComponent(
@@ -378,15 +380,15 @@ export function castleGuyDialog(npc: NPC, doorHouse: TTHouse) {
 }
 
 // Locked house
-export const lockedHouse: Dialog[] = [
-  {
-    text: `Mike? is that you?`,
-  },
-  {
-    text: `If that is you, I am not letting you inside this house with that damned mask of yours!`,
-    isEndOfDialog: true,
-  },
-]
+// export const lockedHouse: Dialog[] = [
+//   {
+//     text: `Mike? is that you?`,
+//   },
+//   {
+//     text: `If that is you, I am not letting you inside this house with that damned mask of yours!`,
+//     isEndOfDialog: true,
+//   },
+// ]
 
 // Phone ringing
 export function day1GirlDialog(callback: () => void) {
@@ -454,6 +456,7 @@ That’s why sometimes we gather around to dance.`,
         updateProgression('ghostIntro')
         ghostUIBck.image.visible = true
         ghostCounter.uiText.visible = true
+        ghostCounter.valueAsNum = 0
         for (let ghost of ghostsArray) {
           ghost.getComponent(OnPointerDown).showFeedback = true
         }
@@ -1264,7 +1267,7 @@ export const ghostUIBck = new ui.LargeIcon(
 ghostUIBck.image.visible = false
 export let ghostCounter = new ui.UICounter(
   0,
-  -70,
+  -50,
   180,
   Color4.FromHexString(COLOR_GREEN),
   50

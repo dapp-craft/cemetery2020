@@ -3,7 +3,7 @@ import {
   catLoverDialog,
   farmerDialog,
   ghostControlDialog,
-  lockedHouse,
+  // lockedHouse,
   mayorGhostDialog,
 } from './grave'
 import { COLOR_GREEN } from '../resources/theme/color'
@@ -394,42 +394,42 @@ export function addHouses(progression: HalloweenState) {
     doorHouse1.unlock()
 
     doorHouse3.onActivate = () => {
-      // TODO sound of locked door
-      let lockDialog = new NPCUtils.DialogWindow(
-        {
-          path: 'images/portraits/closedHouseCharacter.png',
-        },
-        true,
-        '',
-        halloweenTheme
-      )
-      lockDialog.leftClickIcon.positionX = 340 - 60
-      lockDialog.text.color = Color4.FromHexString(COLOR_GREEN)
+      // // TODO sound of locked door
+      // let lockDialog = new NPCUtils.DialogWindow(
+      //   {
+      //     path: 'images/portraits/closedHouseCharacter.png',
+      //   },
+      //   true,
+      //   '',
+      //   halloweenTheme
+      // )
+      // lockDialog.leftClickIcon.positionX = 340 - 60
+      // lockDialog.text.color = Color4.FromHexString(COLOR_GREEN)
 
-      // path to portrait
-      lockDialog.openDialogWindow(lockedHouse, 0)
+      // // path to portrait
+      // //lockDialog.openDialogWindow(lockedHouse, 0)
 
-      log('door locked')
+      // log('door locked')
 
-      let dummyEnt = new Entity()
-      dummyEnt.addComponent(
-        new utils.Delay(2000, () => {
-          lockDialog.closeDialogWindow()
-        })
-      )
-      engine.addEntity(dummyEnt)
+      // let dummyEnt = new Entity()
+      // dummyEnt.addComponent(
+      //   new utils.Delay(2000, () => {
+      //     lockDialog.closeDialogWindow()
+      //   })
+      // )
+      // engine.addEntity(dummyEnt)
 
-      return // to stop door from opening
+      // return // to stop door from opening
     }
 
-    doorHouse3.addComponentOrReplace(
-      new OnPointerDown((e) => {
-        const source = new AudioSource(doorHouse3.knockClip)
-        doorHouse3.addComponentOrReplace(source)
-        source.playing = true
-        doorHouse3.onActivate()
-      })
-    )
+    // doorHouse3.addComponentOrReplace(
+    //   new OnPointerDown((e) => {
+    //     const source = new AudioSource(doorHouse3.knockClip)
+    //     doorHouse3.addComponentOrReplace(source)
+    //     source.playing = true
+    //     doorHouse3.onActivate()
+    //   })
+    // )
 
     doorHouse4.unlock()
     doorHouse4.npc = mayorGhost
