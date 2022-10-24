@@ -839,9 +839,13 @@ engine.addEntity(sharedDialogTimerEntity)
 
 let sharedDialog = new NPCUtils.DialogWindow(
   { path: 'images/portraits/skeleton.png' },
-  true
+  true,
+  '',
+  halloweenTheme
 )
 sharedDialog.panel.height = 150
+sharedDialog.leftClickIcon.positionX = 340 - 60
+sharedDialog.text.color = Color4.FromHexString(COLOR_GREEN)
 
 export class Skeleton extends Entity {
   public script: Dialog[]
@@ -925,6 +929,7 @@ export class Skeleton extends Entity {
         },
       )
     )
+
   }
 
   talk(script: Dialog[], startIndex: number, duration?: number) {
