@@ -17,7 +17,7 @@ import { TTHouse } from "./house";
 import { nextDay, progression, updateProgression } from '../halloweenQuests/progression'
 import { haunted_model_paths } from 'src/resources/model_paths'
 import { quest } from "../halloweenQuests/quest/questTasks";
-import {Coords, HalloweenState} from "../halloweenQuests/quest/types";
+import { Coords, HalloweenState } from "../halloweenQuests/quest/types";
 import { halloweenTheme } from "../halloweenQuests/quest/questCheckBox";
 
 export let hasKey = false
@@ -101,7 +101,7 @@ export function doorHauntedHouse() {
             if (await updateProgression("w2Found")) {
               progression.data['w2Found'] = true
               await nextDay(3)
-          }
+            }
           })
         }
       )
@@ -177,7 +177,8 @@ export function catLoverDialog(npc: NPC, doorHouse: TTHouse) {
       },
     },
     {
-      text: `What can be better than that? All alone! Just me and the kitties!
+      text: `What can be better than that?
+      All alone! Just me and the kitties!
 `,
       triggeredByNext: () => {
         npc.playAnimation(`Cocky`, true, 1.83)
@@ -185,7 +186,8 @@ export function catLoverDialog(npc: NPC, doorHouse: TTHouse) {
     },
     {
       text: `Cats are much better than people.
-Well... sure a cat can scratch ye, but people can hurt more. So if ya ain’t a cat — you better leave.
+Well... sure a cat can scratch ye, but people can hurt more.
+So if ya ain’t a cat — you better leave.
 `,
       triggeredByNext: () => {
         npc.playAnimation(`HeadShake_No`, true, 1.83)
@@ -198,7 +200,9 @@ Well... sure a cat can scratch ye, but people can hurt more. So if ya ain’t a 
       },
     },
     {
-      text: `Wait! Don’t go. Lemme give ya somethin`,
+      text: `Wait!
+      Don’t go.
+      Lemme give ya somethin`,
       triggeredByNext: () => {
         npc.playAnimation(`Dismissing`, true, 3.3)
       },
@@ -231,20 +235,26 @@ How about I just get my big gun and pepper your mug full of buckshot!`,
     },
     {
       text: `Ain’t that gonna be a nasty little trick!
-Don’t you think?`,
+      Don’t you think?`,
     },
     {
-      text: `Alright, alright, I am just kidding around! Calm down! It doesn’t even shoot anymore.`,
+      text: `Alright, alright, I am just kidding around! Calm down!
+      It doesn’t even shoot anymore.`,
     },
     {
-      text: `What, you got spooked? He-he, the spirit of halloween as it is — Friendly jokes, pranks and just a bit of that good ol’ pure horror!`,
+      text: `What, you got spooked?
+      He-he, the spirit of halloween as it is:
+      Friendly jokes, pranks and just a bit of that good ol’ pure horror!`,
     },
     {
-      text: `I am actually a nice fellow. I like to have fun, I like parties. Especially when they feed you well.
-Good food! — that is what defines a good party!`,
+      text: `I am actually a nice fellow.
+      I like to have fun, I like parties.
+      Especially when they feed you well.
+      Good food! — that is what defines a good party!`,
     },
     {
-      text: `Here, take this! Don’t peek! And don’t get mad about the “mug full of buckshot” thing.`,
+      text: `Here, take this!
+      Don’t peek! And don’t get mad about the “mug full of buckshot” thing.`,
       triggeredByNext: () => {
         doorHouse.close()
         let r = new Reward(npc, 'house1', {
@@ -264,14 +274,16 @@ export function mayorGhostDialog(npc: NPC, doorHouse: TTHouse) {
       text: `Why are you looking at me like that? Yes, I am completely naked.`,
     },
     {
-      text: `And the omnipresent power of censorship can’t even do anything about me. Because aside from being naked, I am also dead.`,
+      text: `And the omnipresent power of censorship can’t even do anything about me.
+      Because aside from being naked, I am also dead.`,
     },
     {
       text: `Like what are they going to tell me? —
 Hey Fine Sir dead skeleton, would you mind at least using a towel?`,
     },
     {
-      text: `Oh no! If some smug fellow in a suit, from the DAO censorship department tries telling me something like that, he will get fired. Because everyone at the DAO knows that the dead does not speak.`,
+      text: `Oh no! If some smug fellow in a suit, from the DAO censorship department tries telling me something like that, he will get fired.
+      Because everyone at the DAO knows that the dead does not speak.`,
     },
     {
       text: `And nothing, or no one is going to get in the way of that. No matter how hard they try.`,
@@ -304,28 +316,35 @@ export function ghostControlDialog(npc: NPC, doorHouse: TTHouse) {
     },
     {
       text: `Mumbo jumbo, watch the hands...
-Now, you have to blow.
-If you don’t blow nothing will happen...
+      Now, you have to blow.
+      If you don’t blow
+      nothing will happen...
 
-Bam!`,
+    Bam!`,
     },
     {
       text: `Now check your wallet.
 
-What do you mean you’ve still got it?
-Oh well, i am loosing my grip...`,
+      What do you mean you’ve still got it?
+      Oh well, i am loosing my grip...`,
     },
     {
-      text: `You know, i haven’t had the most honest way of life. And then i decided to settle down here. I thought this was a fine calm place with good neighbors.
-But no!`,
+      text: `You know, i haven’t had the most honest way of life.
+      And then i decided to settle down here.
+
+      I thought this was a fine calm place with good neighbors.`,
     },
     {
-      text: `See that house over there? I thought – a fine lass lives there.
-But she just keeps on screaming at night, with her lights on.`,
+      text: ` But no!
+      See that house over there?
+      I thought – a fine lass lives there.
+      But she just keeps on screaming at night, with her lights on.`,
     },
     {
       text: `Then it stopped.
-Someone must have finally called the cops on her.`,
+      
+      Someone must have finally
+      called the cops on her.`,
       triggeredByNext: () => {
 
         // give wearable
@@ -396,22 +415,29 @@ export function castleGuyDialog(npc: NPC, doorHouse: TTHouse) {
 export function day1GirlDialog(callback: () => void) {
   const dialog: Dialog[] = [
     {
-      text: `These dreams. These horrible dreams. They aren’t letting me rest.` +
-        `Today i decied not to wake up, and sleep until the end.`,
+      text: `These dreams.
+      These horrible dreams.
+      They aren’t letting me rest.
+      Today i decied not to wake up, and sleep until the end.`,
     },
     {
-      text: `Oh, how hard it was to stay asleep. It was so horrifying... so horrifying ... It all seemed so real...` +
-        `And then i finally saw him.`,
+      text: `Oh, how hard it was to stay asleep.
+      It was so horrifying... so horrifying ...
+       It all seemed so real...
+      And then i finally saw him.`,
     },
     {
-      text: `He was right there. He was in the depths of my dream. Right at the source.` +
-        `He lives in my dreams and he twists them by his will.`,
+      text: `He was right there. He was in the depths of my dream.
+      Right at the source.
+      He lives in my dreams and he twists them by his will.`,
     },
     {
-      text: `Dear heavens, how scared I am. How tired I am. But I am so scared that if I fall asleep, I will never wake up and he will take me away.`,
+      text: `Dear heavens, how scared I am. How tired I am.
+       But I am so scared that if I fall asleep, I will never wake up and he will take me away.`,
     },
     {
-      text: `If you are listening to this, come to the Glass Pavilion, near the `+Coords.GenesisCoords+` coordinates, I believe you are the one who can help me.`,
+      text: `If you are listening to this, come to the Glass Pavilion, near the ` + Coords.GenesisCoords + ` coordinates.
+      I believe you are the one who can help me.`,
       triggeredByNext: () => {
         callback()
       },
@@ -434,8 +460,12 @@ export function missionBrief(ghostCounter: ui.UICounter, ghostUIBck: ui.LargeIco
       text: `Hey, dude! Check out these moves! I think they are fire!`,
     },
     {
-      text: `We’ve got a dancing club with my brothers and sisters. If you lie in a coffin underground most of the time your body will get stiff, and you’ll want to get your bones to move once in a while.
-That’s why sometimes we gather around to dance.`,
+      text: `We’ve got a dancing club with my brothers and sisters.`,
+    },
+    {
+      text: `If you lie in a coffin underground most of the time your body will get stiff,
+       and you’ll want to get your bones to move once in a while.
+       That’s why sometimes we gather around to dance.`,
     },
     {
       text: `Oh, I love to dance! I used to dislike dancing, but you know after death you look at a lot of things differently.`,
@@ -444,7 +474,8 @@ That’s why sometimes we gather around to dance.`,
       text: `My siblings got a bit carried away.`,
     },
     {
-      text: `It's time for them to return. Please guide them back`,
+      text: `It's time for them to return.
+      Please guide them back.`,
     },
     {
       text: `I would myself, but it’s a pity to interrupt such a good flow...`,
@@ -674,7 +705,8 @@ And fills the crypt with light.`,
 
 export const ghost6Talk: Dialog[] = [
   {
-    text: `I know that I know nothing. I don't even know where my grave is. Does being determine consciousness or consciousness determine being? Right now I have got both the consciousness and the being of a homeless skeleton...`,
+    text: `I know that I know nothing. I don't even know where my grave is.
+     Does being determine consciousness or consciousness determine being?`,
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
