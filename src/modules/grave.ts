@@ -1279,7 +1279,7 @@ export function addMainGhostNPC(progression: HalloweenState) {
     },
     {
       portrait: { path: 'images/portraits/skeleton.png' },
-      reactDistance: 10,
+      reactDistance: 4,
       idleAnim: `idle1`
     },
 
