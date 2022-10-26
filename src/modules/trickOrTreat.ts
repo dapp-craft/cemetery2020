@@ -472,13 +472,6 @@ export function addHouses(progression: HalloweenState) {
         }
       )
       phone.ring()
-
-      let easterEgg = new Reward(
-        phone,
-        'egg2',
-        { position: new Vector3(14 - 10, 4.2, 40 - 36) },
-        true
-      )
     }
 
     // doorHouse10.unlock()
@@ -487,19 +480,20 @@ export function addHouses(progression: HalloweenState) {
     // doorHouse10.onActivate = () => {
     //   doorHouse10.npc.onActivate()
     // }
-  } else if (progression.data.w2Found) {
-    // day 3 onwards
-    doorHouse3.unlock()
+    // } else if (progression.data.w2Found) {
+    //   // day 3 onwards
+    //   doorHouse3.unlock()
 
-    doorHouse3.onActivate = () => {
-      let easterEgg3 = new Reward(
-        doorHouse3,
-        'egg3',
-        { position: new Vector3(-8, 1.5, 0) },
-        true
-      )
-    }
+    //   doorHouse3.onActivate = () => {
+    //     let easterEgg3 = new Reward(
+    //       doorHouse3,
+    //       'egg3',
+    //       { position: new Vector3(-8, 1.5, 0) },
+    //       true
+    //     )
+    //   }
 
     doorHouse8.unlock()
-  }
+  } 
+  
 }
