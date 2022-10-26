@@ -55,6 +55,7 @@ export function doorHauntedHouse() {
         source.playing = true
 
         coffin.openAnim.stop()
+        doorHauntedHouse.removeComponent(OnPointerDown)
       },
       { distance: 6, hoverText: 'Open' }
     )
@@ -105,6 +106,8 @@ export function doorHauntedHouse() {
           })
         }
       )
+
+      coffin.removeComponent(OnPointerDown)
     }, { hoverText: 'Open coffin' })
   )
 }
