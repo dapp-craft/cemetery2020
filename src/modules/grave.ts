@@ -478,10 +478,8 @@ export function missionBrief(ghostCounter: ui.UICounter, ghostUIBck: ui.LargeIco
     },
     {
       text: `It's time for them to return.
-      Please guide them back.`,
-    },
-    {
-      text: `I would myself, but it’s a pity to interrupt such a good flow...`,
+Please guide them back.
+The last one you pick up must be the first one to be returned to the grave.`,
     },
     {
       text: `Move to the rhythm, bro!`,
