@@ -1022,14 +1022,12 @@ export class Skeleton extends Entity {
     this.getComponent(utils.TriggerComponent).enabled = false
     this.getComponent(OnPointerDown).hoverText = 'Stop Following'
 
-
-    if (followingSkeletons.length == 0) {
-      this.followingPoint = player.position
-    } else {
-      this.followingPoint = followingSkeletons[followingSkeletons.length - 1].getComponent(Transform).position
-    }
-    followingSkeletons.push(this)
-    log("FOLLOWING POSITION: " + this.followingPoint)
+    this.followingPoint = player.position
+    followingSkeletons.unshift(this)
+    if (followingSkeletons.length > 1) {
+      followingSkeletons[1].followingPoint = this.getComponent(Transform).position
+    } 
+   
 
     this.talk(this.script, 0, 2)
 
@@ -1279,7 +1277,7 @@ export function addMainGhostNPC(progression: HalloweenState) {
     },
     {
       portrait: { path: 'images/portraits/skeleton.png' },
-      reactDistance: 4,
+      reactDistance: 6,
       idleAnim: `idle1`
     },
 
