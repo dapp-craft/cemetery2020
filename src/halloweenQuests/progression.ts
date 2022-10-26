@@ -7,7 +7,7 @@ import { HalloweenState } from './quest/types'
 
 // import {PlayCloseSound} from '@dcl/ui-scene-utils'
 
-export let progression: HalloweenState = { data: null, day: 0 }
+export let progression: HalloweenState = { data: null, day: 0, progressionChanged: false }
 
 export let userData: UserData
 export let playerRealm: Realm
@@ -75,6 +75,7 @@ export async function checkProgression() {
   try {
     const response = await fetch(url)
     const curr_progression = await response.json()
+    progression.progressionChanged = true
     // progression = curr_progression
     return curr_progression
   } catch (e) {
@@ -115,6 +116,7 @@ export async function updateProgression(stage: string, onlyLocal?: boolean) {
     const data = await response.json()
     log('Player progression: ', data)
     if (data.success) {
+      progression.progressionChanged = true
       // progression.data[stage] = true
     }
     return data.success

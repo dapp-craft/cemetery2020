@@ -144,15 +144,9 @@ export class questUITasks{
                 coords: Coords.GenesisCoords
             },
             {
-                label: 'Visit the Castle', // TODO
+                label: 'Enter the Castle', 
                 checked: this.data.waypoint5,
                 visible: this.data.NPCIntroDay5,
-                coords: Coords.Secret
-            },
-            {
-                label: 'Follow the clues to the Castle',
-                checked: false,
-                visible: this.data.waypoint5,
                 coords: Coords.Secret
             },
             {

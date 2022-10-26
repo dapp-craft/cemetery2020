@@ -45,3 +45,5 @@ export const TESTQUESTSTATE: HalloweenState = {
   },
   day: 5
 }
+
+export const COLOR_GREEN = "#8DFF34FF";

@@ -3,7 +3,7 @@ import * as ui from '@dcl/ui-scene-utils'
 import { loot_models } from 'src/resources/model_paths'
 import { signedFetch } from '@decentraland/SignedFetch'
 import { COLOR_GREEN } from "../resources/theme/color";
-import {fireBaseServer, playerRealm, userData} from "./progression";
+import { fireBaseServer, playerRealm, userData } from "./progression";
 
 let particleGLTF = new GLTFShape(loot_models.particles)
 let starGLTF = new GLTFShape(loot_models.star)
@@ -155,7 +155,10 @@ export enum ClaimState {
   SUCCESS = 'success',
   SENDING = 'sending',
   REJECTED = 'rejected',
-  TROUBLE = 'trouble'
+  TROUBLE = 'trouble',
+  campaign_uninitiated = 'campaign_uninitiated',
+  campaign_finished = 'campaign_finished',
+  NO_STOCK = 'NO_STOCK'
 }
 
 export async function claimToken(
@@ -206,8 +209,47 @@ export async function claimToken(
           log('rejected')
           PlayOpenSound()
           openClaimUI(claimData, 'Rejected. Please try again', () => {
-            representation.vanish()
             PlayCloseSound()
+            representation.openUi = false
+          })
+          return false
+        case ClaimState.campaign_uninitiated:
+          log('campaign_uninitiated: ', claimData)
+
+          log('campaign_uninitiated')
+          PlayOpenSound()
+          openClaimUI(undefined, 'Event did not start', () => {
+            PlayCloseSound()
+            representation.openUi = false
+          })
+          return false
+        case ClaimState.campaign_finished:
+          log('campaign_finished: ', claimData)
+
+          log('campaign_finished')
+          PlayOpenSound()
+          openClaimUI(undefined, 'Event finished', () => {
+            PlayCloseSound()
+            representation.vanish()
+          })
+          return false
+        case ClaimState.TROUBLE:
+          log('troubles with rewards API: ', claimData)
+
+          log('troubles with rewards API: ')
+          PlayOpenSound()
+          openClaimUI(undefined, 'An unexpected error occurred,\n Please try again.', () => {
+            PlayCloseSound()
+            representation.openUi = false
+          })
+          return false
+        case ClaimState.NO_STOCK:
+          log('No stock: ', claimData)
+
+          PlayOpenSound()
+          openClaimUI(undefined, 'No Stock, please go next', () => {
+            PlayCloseSound()
+            representation.vanish()
           })
           return false
       }
@@ -215,7 +257,7 @@ export async function claimToken(
     if (claimData && claimData.claimState === undefined) {
       log('unkown error')
       PlayOpenSound()
-      openClaimUI(claimData, 'Event did not start or finished,\n or wearables no stock,\nor an unexpected error occurred,\n Please try again.', () => {
+      openClaimUI(claimData, 'An unexpected error occurred,\n Please try again.', () => {
         PlayCloseSound()
         representation.openUi = false
       })
@@ -223,7 +265,7 @@ export async function claimToken(
   } catch (error) {
     log('request error')
     PlayOpenSound()
-    openClaimUI(undefined, 'Event did not start or finished,\n or wearables no stock,\nor an unexpected error occurred,\n Please try again.', () => {
+    openClaimUI(undefined, 'An unexpected error occurred,\n Please try again.', () => {
       PlayCloseSound()
       representation.openUi = false
     })
@@ -263,7 +305,8 @@ export async function checkServer(
     id: userData.userId,
     stage: stage,
     realm: playerRealm.serverName,
-    island: playerRealm.room || 'without_room'
+    island: playerRealm.room || 'without_room',
+    catalyst: playerRealm.domain
   }
 
   log(body)
@@ -279,6 +322,7 @@ export async function checkServer(
     let text = response.text
     let json = JSON.parse(text)
     log('Claim state: ', text)
+    // let json = await response.json()
     return json
   } catch (e) {
     log(e.message)
@@ -325,10 +369,21 @@ export function openClaimUI(
   claimUI.addText(text, 0, 50, Color4.White(), 20) // wearable name
   if (response && response.image) {
     claimUI.addIcon(response.image, 0, -50, 128, 128, {
-      sourceHeight: 256,
-      sourceWidth: 256,
+      sourceHeight: 1024,
+      sourceWidth: 1024,
     })
   }
+
+  let myButton = claimUI.addButton(
+    'Ok',
+    0,
+    -160,
+    () => {
+      onClose()
+      claimUI.hide()
+    },
+    ui.ButtonStyles.E
+  )
 }
 
 

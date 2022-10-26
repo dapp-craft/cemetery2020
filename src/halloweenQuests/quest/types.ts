@@ -3,7 +3,7 @@ export enum Coords {
   CemeteryCoords = `-65,-55`,
   TempleCoords = `-55,-55`,
   FarmCoords = `-55,-60`,
-  Secret = `-55,-70`
+  Secret = `-56,-66`
 }
 
 export type QuestItem = {
@@ -58,4 +58,4 @@ export type HalloweenData = {
   egg5?: boolean
 }
 
-export type HalloweenState = { data: HalloweenData; day: number }
+export type HalloweenState = { data: HalloweenData; day: number, progressionChanged?: boolean }

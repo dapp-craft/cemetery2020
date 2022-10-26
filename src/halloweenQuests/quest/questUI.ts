@@ -71,7 +71,7 @@ export class QuestUI extends Entity {
       checked ? checked : null,
       teleportLocation
       //TODO && teleportLocation !== this.currentCoords
-      && teleportLocation !== Coords.Secret
+      //&& teleportLocation !== Coords.Secret
         ? teleportLocation
         : null
     )
