@@ -445,7 +445,8 @@ I believe you are the one who can HELP ME.`,
 export function missionBrief(ghostCounter: ui.UICounter, ghostUIBck: ui.LargeIcon, ghostsArray: Skeleton[]) {
   return [
     {
-      text: `Hey, dude! Check out these moves! I think they are fire!`,
+      text: `Hey, dude! Check out these moves! 
+I think they are fire!`,
     },
     {
       text: `We’ve got a dancing club with my brothers and sisters.`,
@@ -455,15 +456,18 @@ export function missionBrief(ghostCounter: ui.UICounter, ghostUIBck: ui.LargeIco
 and you’ll want to get your bones to move once in a while. `,
     },
     {
-      text: `Oh, I love to dance! I used to dislike dancing, but you know after death you look at a lot of things differently.`,
+      text: `Oh, I love to dance! 
+I used to dislike dancing, but you know after death you look at a lot of things differently.`,
     },
     {
       text: `My siblings got a bit carried away.`,
     },
     {
       text: `It's time for them to return.
-Please guide them back.
-BE CAREFUL if they are QUEUING. 
+Please, GUIDE THEM BACK to their graves. `,
+    },
+     {
+      text: `BE CAREFUL if they are QUEUING. 
 The last one you pick up must be the first one to be returned to the grave.`,
     },
     {
