@@ -1,10 +1,12 @@
 {
   "display": {
     "title": "Cemetery",
+    "description":"Full of deep and dark graves",
+    "navmapThumbnail": "images/thumbnail.png",
     "favicon": "favicon_asset"
   },
   "contact": {
-    "name": "Decentraland Foundation",
+    "name": "DAPPCRAFT",
     "email": ""
   },
   "owner": "",
