@@ -197,23 +197,10 @@ So if ya ain’t a cat — you better leave.
       },
     },
     {
-      text: `And you are obviously not a cat. Leave.`,
+      text: `And you are obviously not a cat. 
+Leave.`,
       triggeredByNext: () => {
         npc.playAnimation(`Annoyed_HeadShake`, true, 2.6)
-      },
-    },
-    {
-      text: `Wait!
-      Don’t go.
-      Lemme give ya somethin`,
-      triggeredByNext: () => {
-        npc.playAnimation(`Dismissing`, true, 3.3)
-      },
-    },
-    {
-      text: `And if you meet a cat on the streets, make sure to feed ‘em!`,
-      triggeredByNext: () => {
-        npc.playAnimation(`HeadShake_No`, true, 1.83)
       },
     },
     {
@@ -238,26 +225,24 @@ How about I just get my big gun and pepper your mug full of buckshot!`,
     },
     {
       text: `Ain’t that gonna be a nasty little trick!
-      Don’t you think?`,
+Don’t you think?`,
     },
     {
       text: `Alright, alright, I am just kidding around! Calm down!
-      It doesn’t even shoot anymore.`,
+It doesn’t even shoot anymore.`,
     },
     {
       text: `What, you got spooked?
-      He-he, the spirit of halloween as it is:
-      Friendly jokes, pranks and just a bit of that good ol’ pure horror!`,
+He-he, the spirit of halloween as it is:
+Friendly jokes, pranks and just a bit of that good ol’ pure horror!`,
     },
     {
       text: `I am actually a nice fellow.
-      I like to have fun, I like parties.
-      Especially when they feed you well.
-      Good food! — that is what defines a good party!`,
+I like to have fun!`,
     },
     {
       text: `Here, take this!
-      Don’t peek! And don’t get mad about the “mug full of buckshot” thing.`,
+Don’t peek! And don’t get mad about the “mug full of buckshot” thing.`,
       triggeredByNext: () => {
         doorHouse.close()
         let r = new Reward(npc, 'house1', {
@@ -274,25 +259,27 @@ How about I just get my big gun and pepper your mug full of buckshot!`,
 export function mayorGhostDialog(npc: NPC, doorHouse: TTHouse) {
   return [
     {
-      text: `Why are you looking at me like that? Yes, I am completely naked.`,
+      text: `Why are you looking at me like that? 
+Yes, I am completely naked.`,
     },
     {
       text: `And the omnipresent power of censorship can’t even do anything about me.
-      Because aside from being naked, I am also dead.`,
+Because aside from being naked, I am also dead.`,
     },
     {
       text: `Like what are they going to tell me? —
 Hey Fine Sir dead skeleton, would you mind at least using a towel?`,
     },
     {
-      text: `Oh no! If some smug fellow in a suit, from the DAO censorship department tries telling me something like that, he will get fired.
-      Because everyone at the DAO knows that the dead does not speak.`,
+      text: `Oh no! If some smug fellow in a suit, from the DAO CENSORSHIP Department tries telling me something like that, he will get fired.
+Because everyone at the DAO knows that the dead does not speak.`,
     },
     {
-      text: `And nothing, or no one is going to get in the way of that. No matter how hard they try.`,
+      text: `And nothing, or no one is going to get in the way of that. 
+No matter how hard they try.`,
     },
     {
-      text: `Ofcourse on the other side being a naked skeleton means it isn’t easy finding friends.`,
+      text: `On the other side being a naked skeleton means it isn’t easy finding friends.`,
     },
     {
       text: `My neighbor from that house over there, recently died, and by the rumors her spirit still lives there.
@@ -319,35 +306,34 @@ export function ghostControlDialog(npc: NPC, doorHouse: TTHouse) {
     },
     {
       text: `Mumbo jumbo, watch the hands...
-      Now, you have to blow.
-      If you don’t blow
-      nothing will happen...
+Now, you have to blow.
+If you don’t blow
+nothing will happen...
 
-    Bam!`,
+Bam!`,
     },
     {
       text: `Now check your wallet.
 
-      What do you mean you’ve still got it?
-      Oh well, i am loosing my grip...`,
+What do you mean you’ve still got it?
+Oh well, i am loosing my grip...`,
     },
     {
       text: `You know, i haven’t had the most honest way of life.
-      And then i decided to settle down here.
+And then i decided to settle down here.
 
-      I thought this was a fine calm place with good neighbors.`,
+I thought this was a fine calm place with good neighbors.`,
     },
     {
       text: ` But no!
-      See that house over there?
-      I thought – a fine lass lives there.
-      But she just keeps on screaming at night, with her lights on.`,
+See that house over there?
+I thought – a fine lass lives there.
+But she just keeps on screaming at night, with her lights on.`,
     },
     {
-      text: `Then it stopped.
-      
-      Someone must have finally
-      called the cops on her.`,
+      text: `Then it stopped...
+I have got something for you! 
+Take this, I don’t bite!`,
       triggeredByNext: () => {
 
         // give wearable
@@ -419,28 +405,27 @@ export function day1GirlDialog(callback: () => void) {
   const dialog: Dialog[] = [
     {
       text: `These dreams.
-      These horrible dreams.
-      They aren’t letting me rest.
-      Today i decied not to wake up, and sleep until the end.`,
+These horrible dreams.
+They aren’t letting me rest.
+Today I decided not to wake up, and sleep until the end.`,
     },
     {
       text: `Oh, how hard it was to stay asleep.
-      It was so horrifying... so horrifying ...
-       It all seemed so real...
-      And then i finally saw him.`,
+It was so horrifying... so horrifying ...
+It all seemed so real...
+And then i finally saw him.`,
     },
     {
       text: `He was right there. He was in the depths of my dream.
-      Right at the source.
-      He lives in my dreams and he twists them by his will.`,
+He lives in my dreams and he twists them by his will.`,
     },
     {
-      text: `Dear heavens, how scared I am. How tired I am.
-       But I am so scared that if I fall asleep, I will never wake up and he will take me away.`,
+      text: `Dear heavens,
+I am so scared that if I fall asleep, I will never wake up and he will take me away.`,
     },
     {
-      text: `If you are listening to this, come to the Glass Pavilion, near the ` + Coords.GenesisCoords + ` coordinates.
-      I believe you are the one who can help me.`,
+      text: `If you are listening to this, come to the GLASS PAVILLION, near the ` + Coords.GenesisCoords + ` coordinates.
+I believe you are the one who can HELP ME.`,
       triggeredByNext: () => {
         callback()
       },
@@ -467,8 +452,7 @@ export function missionBrief(ghostCounter: ui.UICounter, ghostUIBck: ui.LargeIco
     },
     {
       text: `If you lie in a coffin underground most of the time your body will get stiff,
-       and you’ll want to get your bones to move once in a while.
-       That’s why sometimes we gather around to dance.`,
+and you’ll want to get your bones to move once in a while. `,
     },
     {
       text: `Oh, I love to dance! I used to dislike dancing, but you know after death you look at a lot of things differently.`,
@@ -479,6 +463,7 @@ export function missionBrief(ghostCounter: ui.UICounter, ghostUIBck: ui.LargeIco
     {
       text: `It's time for them to return.
 Please guide them back.
+BE CAREFUL if they are QUEUING. 
 The last one you pick up must be the first one to be returned to the grave.`,
     },
     {
@@ -507,10 +492,11 @@ export const missionEnd: Dialog[] = [
     text: `Great job! You dealt with it, one might say, dancing!`,
   },
   {
-    text: `Oh, and by the way. My siblings didn’t get lost by themselves. Somone confused them, someone who isn’t from around here.`,
+    text: `My siblings didn’t get lost by themselves. 
+Someone confused them, someone who isn’t from around here.`,
   },
   {
-    text: `You have got to drive them off, or my skelleton brothers will keep getting lost.`,
+    text: `You have got to drive him off, or my skelleton brothers will keep getting lost.`,
   },
   {
     text: `Take this key. It’s from the crypt over there. Perhaps there, you’ll find something useful.`,
@@ -707,7 +693,7 @@ And fills the crypt with light.`,
 export const ghost6Talk: Dialog[] = [
   {
     text: `I know that I know nothing. I don't even know where my grave is.
-     Does being determine consciousness or consciousness determine being?`,
+Does being determine consciousness or consciousness determine being?`,
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
@@ -727,7 +713,8 @@ export const ghost6Talk: Dialog[] = [
     },
   },
   {
-    text: `A grave without books is like a body without a soul. Let’s get out of here.`,
+    text: `A grave without books is like a body without a soul. 
+Let’s get out of here.`,
     isEndOfDialog: true,
     isFixedScreen: true,
     portrait: {
