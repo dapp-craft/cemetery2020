@@ -394,9 +394,9 @@ export function castleGuyDialog(npc: NPC, doorHouse: TTHouse) {
       triggeredByNext: () => {
         doorHouse.close()
         // give wearable
-        let r = new Reward(npc, 'house3', {
-          position: new Vector3(0, 1.5, 2.5),
-        })
+        // let r = new Reward(npc, 'house3', {
+        //   position: new Vector3(0, 1.5, 2.5),
+        // })
       },
       isEndOfDialog: true,
     },
