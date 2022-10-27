@@ -1,6 +1,13 @@
 import { addGhostsAndCrypts, addMainGhostNPC } from './modules/grave'
 import { addClosedDoors, addHouses } from './modules/trickOrTreat'
-import { checkProgression, nextDay, progression, updateProgression } from './halloweenQuests/progression'
+import {
+  checkProgression,
+  nextDay,
+  playerRealm,
+  progression,
+  setRealm,
+  updateProgression
+} from './halloweenQuests/progression'
 import { addStaticStuff } from './modules/staticDecorations'
 import { doorHauntedHouse, getKey } from './modules/grave'
 import { Reward } from './halloweenQuests/loot'
@@ -98,6 +105,17 @@ onSceneReadyObservable.add(() => {
   updateSceneUI()
 })
 
+onRealmChangedObservable.add((realmChange) => {
+  log("PLAYER CHANGED ISLAND TO ", realmChange.room)
+  executeTask(async () => {
+    if (!playerRealm) {
+      await setRealm()
+      log('playerRealm', playerRealm)
+    }
+    playerRealm.room = realmChange.room
+    playerRealm.serverName = realmChange.serverName
+  })
+})
 
 // const input = Input.instance
 //
