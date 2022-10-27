@@ -157,7 +157,7 @@ export function addHouses(progression: HalloweenState) {
     funMusic1 = new Entity()
     funMusic1.addComponent(
       new AudioSource(new AudioClip('sounds/SpookyHouse1.mp3'))
-    )
+    ).volume = 0.5
     funMusic1.addComponent(
       new Transform({
         position: new Vector3(15, 0, 25),
@@ -172,7 +172,7 @@ export function addHouses(progression: HalloweenState) {
     funMusic2 = new Entity()
     funMusic2.addComponent(
       new AudioSource(new AudioClip('sounds/SpookyHouse5.mp3'))
-    )
+    ).volume = 0.5
     funMusic2.addComponent(
       new Transform({
         position: new Vector3(110, 0, 10),
