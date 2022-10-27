@@ -29,11 +29,15 @@ export function addEasterEgg() {
             log('eastered!')
 
             const rewardDummy = new Entity()
-            rewardDummy.addComponent(new Transform({ position: new Vector3(62.7, 0, 47)}))
+            rewardDummy.addComponent(new Transform({ position: new Vector3(62.7, 0, 47) }))
             engine.addEntity(rewardDummy)
             const reward = new Reward(rewardDummy, 'egg2', { position: new Vector3(0, 1, 0), scale: new Vector3(2, 2, 2) }, true, () => {
                 executeTask(async () => {
-                    await updateProgression('egg2')
+                    if (await updateProgression('egg2')) {
+                        progression.data['egg2'] = true
+                        progression.progressionChanged = true
+                        rewardDummy.getComponent(Transform).position.y = -4
+                    }
                 })
             })
 
