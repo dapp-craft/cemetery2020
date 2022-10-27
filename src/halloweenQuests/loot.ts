@@ -294,7 +294,7 @@ export async function checkServer(
       true
     )
     // representation.runOnFinished()
-
+    representation.openUi = false
     return
   }
   const url = fireBaseServer + 'startclaimhalloween'

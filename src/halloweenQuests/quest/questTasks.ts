@@ -28,13 +28,13 @@ export class questUITasks{
                 coords: Coords.CemeteryCoords
             },
             {
-                label: 'Meet mystic girl near '+Coords.GenesisCoords,
+                label: 'Meet Spooky girl near '+Coords.GenesisCoords,
                 checked: this.data.meetGirl,
                 visible: this.data.phone,
                 coords: Coords.GenesisCoords
             },
             {
-                label: 'Collect sweets for a Spooky Girl',
+                label: 'Collect sweets nearby',
                 checked: this.data.pumpkinDone,
                 visible: this.data.meetGirl,
                 coords: Coords.GenesisCoords
@@ -63,7 +63,7 @@ export class questUITasks{
                 coords: Coords.CemeteryCoords
             },
             {
-                label: 'Return skeletons to their graves',
+                label: 'Return skeletons to the graves',
                 checked: this.data.ghostsDone,
                 visible: this.data.ghostsDone,
                 coords: Coords.CemeteryCoords
@@ -86,13 +86,13 @@ export class questUITasks{
                 coords: Coords.GenesisCoords
             },
             {
-                label: 'Open the Castle gates',
+                label: 'Open the Castle Gates',
                 checked: this.data.puzzleDone, // TODO
                 visible: this.data.NPCIntroDay3,
                 coords: Coords.TempleCoords
             },
             {
-                label: 'Solve the Coffin puzzle',
+                label: 'Solve the Coffin Puzzle',
                 checked: this.data.puzzleDone,
                 visible: this.data.NPCIntroDay3,
                 coords: Coords.TempleCoords
@@ -121,13 +121,13 @@ export class questUITasks{
                 coords: Coords.FarmCoords
             },
             {
-                label: 'Return joker cards to the clown',
+                label: 'Throw a card to the Clown',
                 checked: this.data.monsterDefeated,
                 visible: this.data.monsterDefeated,
                 coords: Coords.FarmCoords
             },
             {
-                label: 'Say farewell to the Illusionist',
+                label: 'Return to the Illusionist',
                 checked: this.data.w4Found,
                 visible: this.data.monsterDefeated,
                 coords: Coords.FarmCoords
@@ -156,7 +156,7 @@ export class questUITasks{
                 coords: Coords.Secret
             },
             {
-                label: 'Talk to Hunter',
+                label: 'Talk to Van Helsing',
                 checked: false,
                 visible: this.data.ghostDefeated,
                 coords: Coords.Secret
