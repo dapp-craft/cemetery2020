@@ -25,7 +25,7 @@ export function setUpScene() {
   engine.addEntity(modArea)
 
   // dummy underground loot for faster loading
-  let dummyReward = new Reward(modArea, 'dummy', { position: new Vector3(0, -10, 0) }, true)
+  let dummyReward = new Reward(modArea, 'dummy', { position: new Vector3(0, -10, 0), scale: new Vector3(2, 2, 2) }, true)
 
   doorHauntedHouse()
 }
@@ -137,7 +137,7 @@ input.subscribe('BUTTON_DOWN', ActionButton.ACTION_4, false, (e) => {
     'w2',
     {
       position: new Vector3(0.2, 0.8, 0.5),
-      scale: new Vector3(0.8, 0.8, 0.8),
+      scale: new Vector3(2, 2, 2) 
     },
     false,
     () => {

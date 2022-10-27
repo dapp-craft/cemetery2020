@@ -94,7 +94,7 @@ export function doorHauntedHouse() {
         'w2',
         {
           position: new Vector3(0.2, 0.8, 0.5),
-          scale: new Vector3(0.8, 0.8, 0.8),
+          scale: new Vector3(2, 2, 2) 
         },
         false,
         () => {
