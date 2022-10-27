@@ -462,16 +462,17 @@ export function addHouses(progression: HalloweenState) {
       funMusic2.getComponent(AudioSource).playing = false
 
 
-      let phone = new GirlTalkEvent(
+      let girlEvent = new GirlTalkEvent(
         {
           position: new Vector3(10, 1.2, 36),
           rotation: Quaternion.Euler(0, 0, 0),
         },
         () => {
-
+          funMusic1.getComponent(AudioSource).playing = true
+          funMusic2.getComponent(AudioSource).playing = true
         }
       )
-      phone.ring()
+      girlEvent.startEvent()
     }
 
     // doorHouse10.unlock()

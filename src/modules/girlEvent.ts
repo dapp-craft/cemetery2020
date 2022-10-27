@@ -8,22 +8,20 @@ import { quest } from 'src/halloweenQuests/quest/questTasks'
 import { updateProgression } from 'src/halloweenQuests/progression'
 
 export class GirlTalkEvent extends Entity {
-  onPickup: () => void
+  onEndCallback: () => void
 
-  private ringing: boolean = true
   private ringSound: AudioClip = new AudioClip(`sounds/day1/creepy_girl.mp3`)
-  private picupSound: AudioClip
 
   private ghost_girl: Entity
 
-  constructor(position: TranformConstructorArgs, onPickup: () => void) {
+  constructor(position: TranformConstructorArgs, _onEndCallback: () => void) {
     super()
 
     this.addComponent(new Transform(position))
     this.addComponent(new Animator())
     engine.addEntity(this)
 
-    this.onPickup = onPickup
+    this.onEndCallback = _onEndCallback
 
 
     this.ringSound.loop = true
@@ -48,7 +46,7 @@ export class GirlTalkEvent extends Entity {
 
 
   
-  public ring() {
+  public startEvent() {
 
 
     this.ghost_girl.getComponent(Animator).getClip('walk').play(true)
@@ -81,7 +79,6 @@ export class GirlTalkEvent extends Entity {
     updateProgression('phone')
 
     this.getComponent(AudioSource).playing = false
-    this.ringing = false
-    this.onPickup()
+    this.onEndCallback()
   }
 }
