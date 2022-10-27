@@ -181,7 +181,7 @@ export async function claimToken(
       switch (claimData.claimState) {
         case ClaimState.SUCCESS:
           PlayOpenSound()
-          openClaimUI(claimData, 'You already claimed this item', () => {
+          openClaimUI(claimData, 'You already claimed this Reward', () => {
             representation.vanish()
             PlayCloseSound()
           })
@@ -189,7 +189,7 @@ export async function claimToken(
           return false
         case ClaimState.ASSIGNED:
           PlayOpenSound()
-          openClaimUI(claimData, 'Your item assigned for you.\n Please wait', () => {
+          openClaimUI(claimData, 'Your Reward assigned for you.\n Please wait', () => {
             representation.vanish()
             PlayCloseSound()
           })
@@ -197,7 +197,7 @@ export async function claimToken(
 
         case ClaimState.SENDING:
           PlayOpenSound()
-          openClaimUI(claimData, 'Your item already sending for you.\n Please wait', () => {
+          openClaimUI(claimData, 'Your Reward already sending for you.\n Please wait', () => {
             representation.vanish()
             PlayCloseSound()
           })
@@ -294,6 +294,7 @@ export async function checkServer(
       true
     )
     p.background.isPointerBlocker = true
+    p.text.isPointerBlocker = true
     // representation.runOnFinished()
     representation.openUi = false
     return
