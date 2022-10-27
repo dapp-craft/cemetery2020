@@ -293,6 +293,7 @@ export async function checkServer(
       'Ok',
       true
     )
+    p.background.isPointerBlocker = true
     // representation.runOnFinished()
     representation.openUi = false
     return

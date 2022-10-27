@@ -55,6 +55,10 @@ export class QuestUI extends Entity {
     }
   }
 
+  public isVisible() {
+    return questBackground.visible
+  }
+
   public addCheckbox(label: string, checked?: boolean, teleportLocation?: string) {
     const posX = X_OFFSET
     const posY = Y_OFFSET - this.visibleElements.length * ITEM_SPACING
