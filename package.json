@@ -14,7 +14,7 @@
     "lint:fix": "eslint . --ext .ts --fix"
   },
   "devDependencies": {
-    "decentraland-ecs": "^6.11.8"
+    "decentraland-ecs": "^6.11.9"
   },
   "dependencies": {
     "@dcl/crypto-scene-utils": "^1.1.1",
@@ -24,6 +24,13 @@
     "eth-connect": "^6.0.3"
   },
   "bundledDependencies": [
+    "@dcl/ecs-scene-utils",
+    "@dcl/npc-scene-utils",
+    "@dcl/ui-scene-utils",
+    "eth-connect",
+    "@dcl/crypto-scene-utils"
+  ],
+  "bundleDependencies": [
     "@dcl/ecs-scene-utils",
     "@dcl/npc-scene-utils",
     "@dcl/ui-scene-utils",
