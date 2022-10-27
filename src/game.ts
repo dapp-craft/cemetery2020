@@ -5,6 +5,7 @@ import { addStaticStuff } from './modules/staticDecorations'
 import { doorHauntedHouse, getKey } from './modules/grave'
 import { Reward } from './halloweenQuests/loot'
 import { updateQuestUI } from "./halloweenQuests/quest/questTasks";
+import { addEasterEgg } from './modules/easterEgg2'
 
 
 export function setUpScene() {
@@ -52,7 +53,7 @@ Input.instance.subscribe('BUTTON_DOWN', ActionButton.PRIMARY, false, (e) => {
 function updateSceneByProgression() {
 
   addHouses(progression)
-
+  addEasterEgg()
   // conditional elements depending on progression
   if (
     progression.data.w1Found &&
@@ -75,13 +76,6 @@ function updateSceneUI() {
     const curr_progression = await checkProgression()
     log('checkProgression', curr_progression)
     if (curr_progression == null) return
-    // curr_progression.data['talkBat'] = true
-    // curr_progression.data['meetGirl'] = true
-    // curr_progression.data['allHouses'] = true
-    // curr_progression.data['phone'] = true
-    // curr_progression.data['pumpkinDone'] = true
-    // curr_progression.data['w1found'] = true
-    // curr_progression.data['NPCIntroDay2'] = true
     // curr_progression.data['ghostsDone'] = true
     progression.data = curr_progression.data
     progression.day = curr_progression.day
@@ -90,6 +84,8 @@ function updateSceneUI() {
       log('updateQuestUI', progression.day, progression.data)
       updateQuestUI(progression.data, progression.day)
       updateSceneByProgression()
+
+
     }
   })
 }
@@ -100,7 +96,6 @@ onSceneReadyObservable.add(() => {
   addStaticStuff()
   addClosedDoors()
   setUpScene()
-
   updateSceneUI()
 })
 
@@ -110,12 +105,15 @@ const input = Input.instance
 const stages = [
   'talkBat',
   'meetGirl',
+
   'allHouses',
   'phone',
+  'pumpkinDone',
   'w1Found',
+
   'NPCIntroDay2',
-  'ghostsDone',
-  'w2Found'
+  // 'ghostsDone',
+  // 'w2Found'
 ]
 
 let stage_index = 0

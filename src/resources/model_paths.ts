@@ -12,7 +12,7 @@ export const npc_model_paths = {
     farmer: 'models/NPCs/hunter_villager.glb',
     ghostblaster: 'models/NPCs/illusionist_villager.glb',
     ghost1: 'models/NPCs/skeleton.glb',
-    girl:  'models/NPCs/girl.glb'
+    girl: 'models/NPCs/girl.glb'
 }
 
 
@@ -40,16 +40,16 @@ export const static_decoration_models = {
 }
 
 export const graveyard_models = {
-    
+
     motherGrave: 'models/graves/mother_grave.glb',
-    frenchGrave:'models/graves/french_grave.glb',
+    frenchGrave: 'models/graves/french_grave.glb',
     loveGrave: 'models/graves/love_grave.glb',
     hippieGrave: 'models/graves/hippie_grave.glb',
-    philoGrave:'models/graves/philo_grave.glb',
+    philoGrave: 'models/graves/philo_grave.glb',
     oldtimerGrave: 'models/graves/oldtimer_grave.glb'
-
-
 }
+
+export const eggTree: string = 'models/easter_egg_tree.glb'
 
 export const loot_models = {
     particles: 'models/Particles.glb',
