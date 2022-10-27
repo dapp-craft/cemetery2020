@@ -6,7 +6,7 @@
     "start": "dcl start",
     "build": "build-ecs",
     "watch": "build-ecs --watch",
-    "deploy": "build-ecs --production && dcl deploy",
+    "deploy": "build-ecs --production && dcl deploy -t linker-server.decentraland.org --skip-validations true",
     "deploy:test": "build-ecs && dcl deploy --target peer.decentraland.zone",
     "ecs:install": "npm install --save-dev decentraland-ecs@latest",
     "ecs:install-next": "npm install --save-dev decentraland-ecs@next",
