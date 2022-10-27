@@ -246,7 +246,8 @@ Don’t peek! And don’t get mad about the “mug full of buckshot” thing.`,
       triggeredByNext: () => {
         doorHouse.close()
         let r = new Reward(npc, 'house1', {
-          position: new Vector3(0, 1.5, 2.5),
+          position: new Vector3(0, 1.5, 2.5), 
+          scale: new Vector3(2, 2, 2) 
         })
       },
       isEndOfDialog: true,
@@ -339,6 +340,7 @@ Take this, I don’t bite!`,
         // give wearable
         let r = new Reward(npc, 'house2', {
           position: new Vector3(0, 1.5, 2.5),
+          scale: new Vector3(2, 2, 2) 
         })
 
         let dummyEnt = new Entity()
