@@ -76,7 +76,7 @@ function updateSceneUI() {
     const curr_progression = await checkProgression()
     log('checkProgression', curr_progression)
     if (curr_progression == null) return
-    // curr_progression.data['ghostsDone'] = true
+    curr_progression.data['NPCIntroDay2'] = true
     progression.data = curr_progression.data
     progression.day = curr_progression.day
 
