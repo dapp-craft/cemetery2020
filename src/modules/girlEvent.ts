@@ -38,8 +38,8 @@ export class GirlTalkEvent extends Entity {
       }
     ))
     girl.addComponentOrReplace(new Animator())
-    girl.getComponent(Animator).addClip(new AnimationState('walk', { looping: false }))
-    girl.getComponent(Animator).addClip(new AnimationState('stand', { looping: true }))
+    girl.getComponent(Animator).addClip(new AnimationState('walk', { looping: false, speed:1.5 }))
+    girl.getComponent(Animator).addClip(new AnimationState('stand', { looping: true}))
     engine.addEntity(girl)
     this.ghost_girl = girl
   }
@@ -50,7 +50,7 @@ export class GirlTalkEvent extends Entity {
 
 
     this.ghost_girl.getComponent(Animator).getClip('walk').play(true)
-    utils.setTimeout(17000, () => {
+    utils.setTimeout(12000, () => {
       
       this.getComponent(AudioSource).loop = true
       this.getComponent(AudioSource).playing = true
