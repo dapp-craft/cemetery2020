@@ -2,7 +2,7 @@ import * as utils from '@dcl/ecs-scene-utils'
 import * as ui from '@dcl/ui-scene-utils'
 import { loot_models } from 'src/resources/model_paths'
 import { signedFetch } from '@decentraland/SignedFetch'
-import { COLOR_GREEN } from "../resources/theme/color";
+import { COLOR_GREEN } from './config'  
 import { fireBaseServer, playerRealm, userData } from "./progression";
 
 let particleGLTF = new GLTFShape(loot_models.particles)
@@ -104,21 +104,23 @@ export class Reward extends Entity {
     playAnim.play()
     engine.addEntity(this.particles)
 
-    if (!onlyActivateWhenClicked) {
+    // if (!onlyActivateWhenClicked) {
       // this.activate()
       const spawnSource = new AudioSource(
         new AudioClip('sounds/star-spawn.mp3')
       )
+      log('star-spawn added')
       this.particles.addComponentOrReplace(spawnSource)
       spawnSource.loop = false
-      spawnSource.playing = true
+      // spawnSource.playing = true
 
       this.openUi = false
-    }
+    // }
   }
 
   async activate() {
     this.openUi = true
+    coinSound.getComponent(AudioSource).playOnce()
     let data = await claimToken(
       this.progressionStep,
       this)
@@ -127,6 +129,10 @@ export class Reward extends Entity {
     if (data) {
       this.storeData(data)
     }
+  }
+
+  spawnSound() {
+    this.particles.getComponent(AudioSource).playOnce()
   }
 
   storeData(claimData) {

@@ -106,6 +106,7 @@ export function doorHauntedHouse() {
           })
         }
       )
+      r.spawnSound()
 
       coffin.removeComponent(OnPointerDown)
     }, { hoverText: 'Open coffin' })
@@ -249,6 +250,7 @@ Don’t peek! And don’t get mad about the “mug full of buckshot” thing.`,
           position: new Vector3(0, 1.5, 2.5), 
           scale: new Vector3(2, 2, 2) 
         })
+        r.spawnSound()
       },
       isEndOfDialog: true,
     },
@@ -342,6 +344,7 @@ Take this, I don’t bite!`,
           position: new Vector3(0, 1.5, 2.5),
           scale: new Vector3(2, 2, 2) 
         })
+        r.spawnSound()
 
         let dummyEnt = new Entity()
         dummyEnt.addComponent(

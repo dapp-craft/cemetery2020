@@ -37,6 +37,7 @@ export function addEasterEgg() {
     easterEgg.addComponentOrReplace(new OnPointerDown(
         () => {
             log('eastered!')
+            reward.spawnSound()
             rewardEgg2.getComponent(Transform).position.y = 1
             easterEgg.removeComponent(OnPointerDown)
         },
