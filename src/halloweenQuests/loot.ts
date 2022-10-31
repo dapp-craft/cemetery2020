@@ -15,6 +15,7 @@ export class AlreadyFoundLoot {
 export class Reward extends Entity {
   progressionStep: string
   particles: Entity
+
   openUi: boolean
   onFinished: () => void
 
@@ -76,7 +77,7 @@ export class Reward extends Entity {
     const idleSource = new AudioSource(new AudioClip('sounds/star-idle.mp3'))
     this.addComponentOrReplace(idleSource)
     idleSource.loop = true
-    idleSource.playing = true
+    idleSource.playing = false
 
     this.particles = new Entity()
     this.particles.setParent(parent)
@@ -133,6 +134,7 @@ export class Reward extends Entity {
 
   spawnSound() {
     this.particles.getComponent(AudioSource).playOnce()
+    this.getComponent(AudioSource).playing = true
   }
 
   storeData(claimData) {
