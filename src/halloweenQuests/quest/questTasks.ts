@@ -144,7 +144,7 @@ export class questUITasks{
                 coords: Coords.GenesisCoords
             },
             {
-                label: 'Enter the Castle', 
+                label: 'Enter the Castle',
                 checked: this.data.waypoint5,
                 visible: this.data.NPCIntroDay5,
                 coords: Coords.Secret
@@ -156,10 +156,10 @@ export class questUITasks{
                 coords: Coords.Secret
             },
             {
-                label: 'Talk to Van Helsing',
+                label: 'Talk to ROCK STAR',
                 checked: false,
                 visible: this.data.ghostDefeated,
-                coords: Coords.Secret
+                coords: Coords.GenesisCoords
             }
         ];
     }

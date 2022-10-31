@@ -46,6 +46,7 @@ export type HalloweenData = {
   waypoint5: boolean
   ghostDefeated: boolean
   w5Found: false
+  talkStar:false
 
   // extra
   house1?: boolean
